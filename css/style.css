@@ -1,0 +1,56 @@
+body {
+    padding-top: 80px;
+}
+#nav-logo {
+    height: 2.3em;
+}
+#about img {
+    width: 300px;
+}
+@media(max-width: 753px) {
+    #about img {
+        display: none;
+    }
+}
+header nav a {
+    border-bottom: 2px solid;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+    margin-right: 5px;
+}
+header nav a:hover {
+    text-decoration: none;
+    border-bottom: 4px solid;
+}
+header .navbar-brand {
+    font-variant: petite-caps;
+}
+header {
+    background: rgba(0, 0, 0, 0.2);
+}
+section {
+    margin-bottom: 50px;
+}
+.ext-links {
+    display: block;
+    width: 200px;
+    margin: auto;
+}
+.ext-links li {
+    display: inline-block;
+}
+.ext-links a {
+    text-align: center;
+    vertical-align: text-bottom;
+    color: white;
+    background: rgba(1, 1, 1, 0.5);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 5px 0 0 0;
+    margin: 10px 15px;
+    text-decoration: none;
+}
+.ext-links a:hover {
+    text-decoration: none;
+    background: #0275D8;
+}
