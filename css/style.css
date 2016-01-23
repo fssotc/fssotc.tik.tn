@@ -1,14 +1,21 @@
 body {
-    padding-top: 80px;
+    padding-top: 70px;
 }
 #nav-logo {
     height: 2.3em;
 }
-#about img {
-    width: 300px;
+#about {
+    padding: 10px;
+}
+#about i {
+    color: white;
+    margin: 5px 0;
+}
+#about a:hover {
+    text-decoration: none;
 }
 @media(max-width: 753px) {
-    #about img {
+    #about i {
         display: none;
     }
 }
@@ -25,7 +32,7 @@ header .navbar-brand {
     font-variant: petite-caps;
 }
 header {
-    background: rgba(0, 0, 0, 0.2);
+    //background: rgba(0, 0, 0, 0.2);
 }
 section {
     margin-bottom: 50px;
@@ -38,7 +45,7 @@ section {
 .ext-links li {
     display: inline-block;
 }
-.ext-links a {
+.ext-links a{
     text-align: center;
     vertical-align: text-bottom;
     color: white;
@@ -53,4 +60,11 @@ section {
 .ext-links a:hover {
     text-decoration: none;
     background: #0275D8;
+}
+#about {
+	background: #6F5499;
+	color: #CDBFE3;
+}
+#about h4 {
+    color: white;
 }
