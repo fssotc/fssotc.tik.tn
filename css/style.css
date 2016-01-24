@@ -1,7 +1,14 @@
-body {
-    padding-top: 70px;
+html, body {
+    min-height: 100%;
+    box-sizing: border-box;
+      position: relative;
+        background: #2A2730;
 }
-#nav-logo {
+header, #articale {
+    background: white;
+}
+#nav-logo
+{
     height: 2.3em;
 }
 #about {
@@ -31,11 +38,34 @@ header nav a:hover {
 header .navbar-brand {
     font-variant: petite-caps;
 }
-header {
-    //background: rgba(0, 0, 0, 0.2);
-}
 section {
     margin-bottom: 50px;
+}
+
+#members {
+    margin-bottom: 0;
+    padding-bottom: 80px;
+}
+#about {
+	background: #6F5499;
+	color: #CDBFE3;
+}
+#about h4 {
+    color: white;
+}
+footer {
+    background: #2A2730;
+    text-align: center;
+    color: #99979C;
+    padding: 30px 10px !important;
+}
+
+footer a {
+    color: #99979C;
+}
+footer a:hover {
+    color: white;
+    text-decoration: none;
 }
 .ext-links {
     display: block;
@@ -49,22 +79,15 @@ section {
     text-align: center;
     vertical-align: text-bottom;
     color: white;
-    background: rgba(1, 1, 1, 0.5);
     border-radius: 50%;
     width: 30px;
     height: 30px;
     padding: 5px 0 0 0;
     margin: 10px 15px;
     text-decoration: none;
+     background: #0275D8;
 }
 .ext-links a:hover {
-    text-decoration: none;
-    background: #0275D8;
-}
-#about {
-	background: #6F5499;
-	color: #CDBFE3;
-}
-#about h4 {
-    color: white;
+    background: rgba(1, 1, 1, 0.5);
+    box-shadow: -1px -1px gray;
 }
