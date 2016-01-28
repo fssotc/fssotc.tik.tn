@@ -5,6 +5,9 @@ body {
     position: relative;
     background: #2A2730;
 }
+a:focus {
+    text-decoration: none !important;
+}
 header,
 #articale {
     background: white;
@@ -19,7 +22,8 @@ header,
     color: white;
     margin: 5px 0;
 }
-#about a:hover {
+#about a:hover,
+section > h4 > a:hover {
     text-decoration: none;
 }
 @media(max-width: 753px) {
