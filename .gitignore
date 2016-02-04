@@ -1,0 +1,16 @@
+env/
+__pycache__/
+*.py[cod]
+*.pot
+
+*.sqlite3
+
+
+pip-log.txt
+pip-delete-this-directory.txt
+
+*.log
+local_settings.py
+
+/static/
+.secret.txt
