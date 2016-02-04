@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from django.utils.crypto import get_random_string
 
 # Based on Django's SECRET_KEY hash generator
