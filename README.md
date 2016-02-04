@@ -33,4 +33,4 @@ and open http://0.0.0.0:8080 link on your browser
 - `runtime.txt`: Azure specific file to set python runtime version
 - `setup.py`: easy_install script
 - `web.3.4.config`: Azure (IIS) configuration file
-- `.deploymenet`: Azure (IIS) specific file to set `deploy.cmd` file path
+- `.deployment`: Azure (IIS) specific file to set `deploy.cmd` file path
