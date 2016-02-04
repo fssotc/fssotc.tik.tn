@@ -23,7 +23,7 @@ and open http://0.0.0.0:8080 link on your browser
 
 ## Work flow
 
-For project directory structure, read [Description](#Description) section.
+For project directory structure, read [Description](#description) section.
 
 All dev is done on master branch. Stable code is then merged to azure branch
 where the official deployed site is kept on sync.
