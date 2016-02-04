@@ -6,17 +6,18 @@
     <title>Microsoft Tech Club FSS</title>
     <meta name="description" content="MTCFSS: Microsoft Techincal Club on Faculty of Science of Sfax" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <script src="script.js"></script>
-    <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="css/bootstrap-v4.a2.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    {% load staticfiles %}
+    <!--<script src="script.js"></script>-->
+    <link href="{% static 'website/css/font-awesome.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'website/css/bootstrap-v4.a2.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'website/css/style.css' %}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <div id="articale">
         <header class="navbar navbar-light">
             <div class="navbar-header">
-                <img src="img/logo.jpg" alt="MTCFSS" id="nav-logo" class="navbar-brand" />
+              <img src="{% static 'website/img/logo.jpg' %}" alt="MTCFSS" id="nav-logo" class="navbar-brand" />
                 <span class="navbar-brand">
              Mtc-Fss
         </span>
