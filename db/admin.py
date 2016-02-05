@@ -22,5 +22,10 @@ class MemberAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     inlines = [EventLinkInline]
 
-admin.site.register(Inscription)  # TODO: use class instead
+@admin.register(Inscription)
+class InscriptionAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'member', 'confirmed',
+                    'dreamspark_key', 'member_card')
+    list_filter = ['course', 'confirmed', 'dreamspark_key', 'member_card']
+
 admin.site.register(EventLink)  # TODO: use class instead
