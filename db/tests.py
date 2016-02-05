@@ -1,21 +1,43 @@
 from django.test import TestCase
-from .models import Member
+from datetime import date
+from .models import Member, Inscription, Event, EventLink
 
 # Create your tests here.
 class MemberTestCase(TestCase):
 
     def setUp(self):
-        Member.objects.create(name='user1',
-                              family_name='family_name1',
-                              email='test1@example.com',
-                              course='lfi1',
-                              phone='1111',
-                              )
+        usr1 = Member.objects.create(name='user1',
+                                     family_name='family_name1',
+                                     email='test1@example.com',
+                                     phone='1111',)
 
     def test_members_default_values(self):
-        user1 = Member.objects.get(name='user1')
-        self.assertEqual(str(user1), 'user1 family_name1')
-        self.assertEqual(user1.new, True)
-        self.assertEqual(user1.confirmed, False)
-        self.assertEqual(user1.dreamspark_key, False)
-        self.assertEqual(user1.member_card, False)
+        usr1 = Member.objects.get(name='user1')
+        ins1 = Inscription.objects.create(session=date(2016, 8, 31),
+                                          course='lfi1',
+                                          member=usr1,)
+        ins2 = Inscription.objects.create(session=date(2016, 9, 1),
+                                          course='lfi2',
+                                          member=usr1,)
+        ins1 = usr1.inscription_set.get(course='lfi1')
+        ins2 = Inscription.objects.get(course='lfi2')
+        self.assertEqual(str(usr1), 'user1 family_name1')
+        self.assertEqual(str(ins1), '2015-2016')
+        self.assertEqual(str(ins2), '2016-2017')
+        self.assertEqual(ins1.confirmed, False)
+        self.assertEqual(ins1.dreamspark_key, False)
+        self.assertEqual(ins1.member_card, False)
+
+    def test_inscription_is_new(self):
+        _date = date.today()
+        usr1 = Member.objects.get(name='user1')
+        self.assertEqual(usr1.is_new(), True)
+        ins1 = Inscription.objects.create(session=_date,
+                                          course='lfi1',
+                                          member=usr1,)
+        self.assertEqual(usr1.is_new(), True)
+        _date = date(_date.year - 1, _date.month, _date.day)
+        ins2 = Inscription.objects.create(session=_date,
+                                          course='lfi2',
+                                          member=usr1,)
+        self.assertEqual(usr1.is_new(), False)
