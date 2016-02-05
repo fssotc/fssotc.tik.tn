@@ -1,0 +1,13 @@
+language: python
+python:
+- '3.4'
+- '3.5'
+- nightly
+intall:
+- pip install -q -r requirements.txt
+- pip install -q -e .
+script:
+- python manage.py test
+notifications:
+  slack:
+    secure: A6WF9Poj3M3IeGJzYnMsBtd2axFznAbgzgL5GkSb9GM2fS5vbM86xvcL+UtON4Z1x3FnahaGtE3/Yz1JNeV2KZPgdKMbxaLQrX8lqtCfjpSF/Nlv+6g+fs0YJcrGBfqxPhhWGnBTMRrfVIk8OP98EjRKTYut+/syj6iWi7WkXURjwQ3fMd+oa5TInj/KHztEcA72s7aiRfZaIiL93v3FKbuNc3SBZ2n67vPo7ys6Gtp6Vhw4fBPKUAFpVu0HYlhTfUEUqhp/X78LLDf71cuZTsT7H7PUTg2zLVlZpvTYab+16fgWOC7CMbIBnbty3lGaOcDL4zotAwHQ6b28X7FhyEy8iP95SWv88Yx4nmSxL+c6Kd2TkPU3pW8nO7TiD2JZKAxcvp5geOy+rcu/N1I2Z9lBuDQKSZ8kRha2WKwByu/rVzUDz9d+oLoNPF6DOJqc3KAhlWmSV1Mu1l9vOjyD/NVz/+Q+phXoHhkmdZO3oJ6pS2WjfRuJcqo822Cnk2dP/HRg/KJ7KW0ObJa4KXo/mQMIU/pcLKYjLFaSJG8XjjW96wMYl7ezFtfqxAqmoZqPp26e/45H+gxmV73gdvY5REzsdr8Y/PiTaNovS/9P4OYwK3PDABxsOEOykf37JpSE04eIlcAPT/YU2QUZk7xk4la/Yt89yspY8ZxKviEyPJo=

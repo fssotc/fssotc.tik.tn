@@ -1,5 +1,7 @@
 MTCFSS Website
 ===
+[![Build
+Status](https://travis-ci.org/MTCFss/website.svg?branch=master)](https://travis-ci.org/MTCFss/website)
 
 That's our official website. It's written on python using django and hosted on
 Azure.
@@ -20,6 +22,15 @@ To launch the server, run
 ```
 
 and open http://0.0.0.0:8080 link on your browser
+
+## Work flow
+
+For project directory structure, read [Description](#description) section.
+
+All dev is done on master branch. Stable code is then merged to azure branch
+where the official deployed site is kept on sync.
+
+Please send patches only to the master branch.
 
 ## Description
 - `project/`: django project folder
