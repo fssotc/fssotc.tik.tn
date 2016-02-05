@@ -1,5 +1,7 @@
 MTCFSS Website
 ===
+[![Build
+Status](https://travis-ci.org/MTCFss/website.svg?branch=master)](https://travis-ci.org/MTCFss/website)
 
 That's our official website. It's written on python using django and hosted on
 Azure.
