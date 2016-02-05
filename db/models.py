@@ -60,6 +60,8 @@ class Event(models.Model):
             end = self.start_date
         return end < date.today()
 
+    is_passed.boolean = True
+
     def __str__(self):
         return self.title
 
