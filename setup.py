@@ -14,11 +14,18 @@ setup(
     author_email='bmoez.j@gmail.com',
     license='GPLv3',
     url='http://mtcfss.azurewebsites.net/',
-    install_requires=[
-        'Django'
-    ],
-    setup_requires=['setuptools_git'],
     include_package_data=True,
+    install_requires=[
+        'Django',
+    ],
+    setup_requires=[
+        'setuptools_git',
+    ],
+    tests_require=[
+        'django-setuptest',
+    ],
+    test_suite='setuptest.setuptest.SetupTestSuite',
+    py_modules=['db', 'website'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Web Environment',

@@ -41,3 +41,35 @@ class MemberTestCase(TestCase):
                                           course='lfi2',
                                           member=usr1,)
         self.assertEqual(usr1.is_new(), False)
+
+    def test_event(self):
+        _date = date.today()
+        yesterday = date(_date.year, _date.month, _date.day - 1)
+        tomorrow = date(_date.year, _date.month, _date.day + 1)
+        evt1 = Event.objects.create(title='event1',
+                                    description='desc',
+                                    event_type='con',
+                                    start_date=yesterday,
+                                    is_ours=False,)
+        evt2 = Event.objects.create(title='event2',
+                                    description='desc',
+                                    event_type='cha',
+                                    start_date=yesterday,
+                                    end_date=yesterday,
+                                    is_ours=False,)
+        evt3 = Event.objects.create(title='event3',
+                                    description='desc',
+                                    event_type='tra',
+                                    start_date=yesterday,
+                                    end_date=tomorrow,
+                                    is_ours=False,)
+        evt4 = Event.objects.create(title='event4',
+                                    description='desc',
+                                    event_type='tlk',
+                                    start_date=tomorrow,
+                                    is_ours=False,)
+        self.assertEqual(evt1.place, 'FSS')
+        self.assertEqual(evt1.is_passed(), True)
+        self.assertEqual(evt2.is_passed(), True)
+        self.assertEqual(evt3.is_passed(), False)
+        self.assertEqual(evt4.is_passed(), False)

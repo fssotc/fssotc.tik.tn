@@ -53,6 +53,13 @@ class Event(models.Model):
     end_date = models.DateField(blank=True, null=True)
     is_ours = models.BooleanField()
 
+    def is_passed(self):
+        if self.end_date is not None:
+            end = self.end_date
+        else:
+            end = self.start_date
+        return end < date.today()
+
     def __str__(self):
         return self.title
 
