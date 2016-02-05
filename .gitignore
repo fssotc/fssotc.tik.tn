@@ -17,6 +17,7 @@ pip-delete-this-directory.txt
 local_settings.py
 
 /.coverage
+/coverage.xml
 
 /static/
 .secret.txt
