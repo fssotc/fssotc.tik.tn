@@ -28,7 +28,7 @@ class MemberTestCase(TestCase):
         self.assertEqual(ins1.dreamspark_key, False)
         self.assertEqual(ins1.member_card, False)
 
-    def test_inscription_is_new(self):
+    def test_member_is_new(self):
         _date = date.today()
         usr1 = Member.objects.get(name='user1')
         self.assertEqual(usr1.is_new(), True)
@@ -41,6 +41,19 @@ class MemberTestCase(TestCase):
                                           course='lfi2',
                                           member=usr1,)
         self.assertEqual(usr1.is_new(), False)
+
+    def test_inscription_is_current(self):
+        _date = date.today()
+        usr1 = Member.objects.get(name='user1')
+        ins1 = Inscription.objects.create(session=_date,
+                                          course='lfi1',
+                                          member=usr1,)
+        _date = date(_date.year - 1, _date.month, _date.day)
+        ins2 = Inscription.objects.create(session=_date,
+                                          course='lfi1',
+                                          member=usr1,)
+        self.assertEqual(ins1.is_current(), True)
+        self.assertEqual(ins2.is_current(), False)
 
     def test_event(self):
         _date = date.today()
