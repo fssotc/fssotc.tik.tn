@@ -19,6 +19,7 @@ class Member(models.Model):
             first_day_on_session = date(today.year, 9, 1)
         ins = self.inscription_set.filter(session__lt=first_day_on_session)
         return ins.count() == 0
+    is_new.boolean = True
 
     def __str__(self):
         return "%s %s" % (self.name, self.family_name)
@@ -30,6 +31,18 @@ class Inscription(models.Model):
     dreamspark_key = models.BooleanField(default=False)
     member_card = models.BooleanField(default=False)
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
+
+    def is_current(self):
+        _date = date.today()
+        if _date.month < 9:
+            _date = date(_date.year - 1, 9, 1)
+        else:
+            _date = date(_date.year, 9, 1)
+        if (self.session > _date and
+                self.session < date(_date.year + 1, _date.month, _date.day)):
+                return True
+        return False
+    is_current.boolean = True
 
     def __str__(self):
         if self.session.month < 9:
