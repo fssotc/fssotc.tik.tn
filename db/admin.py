@@ -15,9 +15,7 @@ class MemberAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'phone', 'email')
     inlines = [InscriptionInline]
     search_fields = ['name', 'family_name', 'inscription__course']
-    list_filter = ('inscription__course', InscriptionSessionFilter,
-                   'inscription__confirmed', 'inscription__dreamspark_key',
-                   'inscription__member_card')
+    list_filter = ('inscription__course', InscriptionSessionFilter,)
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
