@@ -2,6 +2,8 @@ MTCFSS Website
 ===
 [![Build
 Status](https://travis-ci.org/MTCFss/website.svg?branch=master)](https://travis-ci.org/MTCFss/website)
+[![Stories in
+Ready](https://badge.waffle.io/MTCFss/website.svg?label=ready&title=Ready)](http://waffle.io/MTCFss/website)
 
 That's our official website. It's written on python using django and hosted on
 Azure.
@@ -45,3 +47,5 @@ Please send patches only to the master branch.
 - `setup.py`: easy_install script
 - `web.3.4.config`: Azure (IIS) configuration file
 - `.deployment`: Azure (IIS) specific file to set `deploy.cmd` file path
+- `test_settings.py`: django-setuptest specific setting file for setuptools
+  testing support
