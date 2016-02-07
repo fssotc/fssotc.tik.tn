@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Member, Inscription, Event, EventLink
-from .filters import InscriptionSessionFilter
+from .filters import InscriptionSessionFilter, MemberInscriptionSessionFilter
 
 class InscriptionInline(admin.TabularInline):
     model = Inscription
@@ -15,7 +15,7 @@ class MemberAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'phone', 'email')
     inlines = [InscriptionInline]
     search_fields = ['name', 'family_name', 'inscription__course']
-    list_filter = ('inscription__course', InscriptionSessionFilter,)
+    list_filter = ('inscription__course', MemberInscriptionSessionFilter,)
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
@@ -28,6 +28,8 @@ class EventAdmin(admin.ModelAdmin):
 class InscriptionAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'member', 'confirmed',
                     'dreamspark_key', 'member_card', 'is_current')
-    list_filter = ('course', 'confirmed', 'dreamspark_key', 'member_card')
+    list_filter = ('course', 'confirmed', 'dreamspark_key', 'member_card',
+                   InscriptionSessionFilter)
+    list_editable = ('confirmed', 'dreamspark_key', 'member_card')
 
 admin.site.register(EventLink)  # TODO: use class instead
