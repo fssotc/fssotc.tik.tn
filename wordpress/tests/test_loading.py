@@ -12,7 +12,10 @@ from requests import Response
 from .. import loading
 from ..models import Post, Tag
 
+from unittest import skip
 
+
+@skip('')
 class WPAPIInitTest(TestCase):
 
     def setUp(self):
