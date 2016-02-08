@@ -26,6 +26,7 @@ setup(
     ],
     test_suite='setuptest.setuptest.SetupTestSuite',
     py_modules=['db', 'website'],
+    platforms=["any"],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Web Environment',
