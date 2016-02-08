@@ -35,8 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'after_response',
+    'wordpress',
     'db',
     'website',
+    'blog',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -124,3 +127,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('\\', '/')
 
 STATICFILES_DIRS = (
 )
+
+WP_API_SITE_ID = '106661952'

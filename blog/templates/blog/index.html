@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MTCFSS Blog</title>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+  {% for post in posts %}
+  <article>
+    <hgroup>
+  <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title }}</a></h2>
+  <h4>{{ post.modified | date:"D, j M"}}</h4>
+</hgroup>
+  <div>
+    {% autoescape off %}
+    {{ post.content }}
+    {% endautoescape %}
+  </div>
+  </article>
+  {% endfor %}
+
+</body>
+
+</html>
