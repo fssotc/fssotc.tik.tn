@@ -1,3 +1,4 @@
 Django==1.9.2
 django-wordpress-rest
+django-after-response>=0.2.2
 decorators
