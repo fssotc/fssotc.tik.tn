@@ -109,3 +109,15 @@ footer a:hover {
         ;
     }
 }
+blockquote {
+    /* FIXME: delete when implemented on bootstrap */
+
+    padding-left: 16px;
+    border-left: 2px solid gray;
+    line-height: 250%;
+}
+.aligncenter {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
