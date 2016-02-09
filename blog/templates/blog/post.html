@@ -1,24 +1,25 @@
-<!DOCTYPE html>
-<html>
+{% extends 'website/layout.html' %}
+{% block pagetitle %}MTCFSS Blog - {{ post.title }}{% endblock %}
+{% block content_section %}
+<section class="container">
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a>
+        </li>
+        <li><a href="/blog/">Blog</a>
+        </li>
+        <li class="active">{{ post.title }}</li>
+    </ol>
+    <article>
 
-<head>
-  <title>MTCFSS Blog - {{ post.title }}</title>
-    <meta charset="UTF-8" />
-</head>
-
-<body>
-  <article>
-    <hgroup>
-  <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title }}</a></h2>
-  <h4>{{ post.modified | date:"D, j M"}}</h4>
-</hgroup>
-  <div>
-    {% autoescape off %}
-    {{ post.content }}
-    {% endautoescape %}
-  </div>
-  </article>
-
-</body>
-
-</html>
+        <article class="container-fluid">
+            <hgroup>
+                <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title }}</a></h2>
+                <h4><small class="text-muted">{{ post.modified | date:"D, j M"}}</small></h4>
+            </hgroup>
+            <br />
+            <div>
+                {% autoescape off %} {{ post.content }} {% endautoescape %}
+            </div>
+        </article>
+</section>
+{% endblock %}

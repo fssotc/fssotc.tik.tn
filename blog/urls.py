@@ -5,5 +5,5 @@ from . import views
 app_name = 'blog'
 urlpatterns = [
     url(r'(?P<pk>[0-9]+)/?$', views.PostDetail.as_view(), name="post"),
-    url(r'$', views.posts_list, name="posts"),
+    url(r'$', views.PostList.as_view(), name="posts"),
 ]
