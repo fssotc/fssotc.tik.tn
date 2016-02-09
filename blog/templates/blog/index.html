@@ -7,7 +7,7 @@
         </li>
         <li class="active">Blog</li>
     </ol>
-    {% for post in posts %}
+    {% for post in post_list %}
     <article>
 
         <div class="card">
@@ -23,5 +23,21 @@
         </div>
     </article>
     {% endfor %}
+    {% if is_paginated %}
+    <nav>
+	<ul class="pager">
+	{% if page_obj.has_previous %}
+	   <li class="pager-prev"><a href="?page={{ page_obj.previous_page_number }}">Older</a></li>
+	{% else %}
+	   <li class="pager-prev disabled"><a href="#">Older</a></li>
+	{% endif %}
+	{% if page_obj.has_next %}
+	   <li class="pager-next"><a href="?page={{ page_obj.next_page_number }}">Newer</a></li>
+	{% else %}
+	   <li class="pager-next disabled"><a href="#">Newer</a></li>
+	{% endif %}
+	</ul>
+    </nav>
+    {% endif %}
 </section>
 {% endblock %}
