@@ -25,10 +25,10 @@ setup(
         'django-setuptest',
     ],
     test_suite='setuptest.setuptest.SetupTestSuite',
-    py_modules=['db', 'website'],
+    py_modules=['db', 'website', 'blog'],
     platforms=["any"],
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Framework :: Django :: 1.9',
