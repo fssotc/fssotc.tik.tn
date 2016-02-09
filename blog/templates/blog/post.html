@@ -1,5 +1,10 @@
 {% extends 'website/layout.html' %}
 {% block pagetitle %}MTCFSS Blog - {{ post.title }}{% endblock %}
+{% block scripts %}
+{% load staticfiles %}
+<script src="{% static 'blog/do_prettify.js' %}"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&skin=default"></script>
+{% endblock %}
 {% block content_section %}
 <section class="container">
     <ol class="breadcrumb">
