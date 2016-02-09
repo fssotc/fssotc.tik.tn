@@ -46,9 +46,6 @@ class AuthorAdmin(admin.ModelAdmin):
         models.CharField: {'widget': forms.TextInput(attrs={'size': '100'})},
     }
 
-    def view_on_site(self, obj):
-        return obj.get_absolute_url()
-
 admin.site.register(wp_models.Author, AuthorAdmin)
 
 
