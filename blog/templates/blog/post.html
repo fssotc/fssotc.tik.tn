@@ -18,15 +18,17 @@
 <section class="container">
     <article>
 
-        <article class="container-fluid">
+	{% autoescape off %}
+	<article class="container-fluid">
             <hgroup>
                 <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title }}</a></h2>
                 <h4><small class="text-muted">{{ post.modified | date:"D, j M"}}</small></h4>
             </hgroup>
             <br />
             <div>
-                {% autoescape off %} {{ post.content }} {% endautoescape %}
+                {{ post.content }}
             </div>
         </article>
+	{% endautoescape %}
 </section>
 {% endblock %}
