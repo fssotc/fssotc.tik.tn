@@ -14,6 +14,7 @@
     </ol>
 </nav>
 <section class="container">
+    {% autoescape off %}
     {% for post in post_list %}
     <article>
 
@@ -24,12 +25,13 @@
             </div>
             <div class="card-block">
                 <div class="card-text">
-                    {% autoescape off %} {{ post.content }} {% endautoescape %}
+                    {{ post.content }}
                 </div>
             </div>
         </div>
     </article>
     {% endfor %}
+    {% endautoescape %}
     {% if is_paginated %}
     <nav>
 	<ul class="pager">
