@@ -1,26 +1,43 @@
-<!DOCTYPE html>
-<html>
+{% extends 'website/layout.html' %}
+{% block pagetitle %}MTCFSS Blog{% endblock %}
+{% block content_section %}
+<section class="container">
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a>
+        </li>
+        <li class="active">Blog</li>
+    </ol>
+    {% for post in post_list %}
+    <article>
 
-<head>
-    <title>MTCFSS Blog</title>
-    <meta charset="UTF-8" />
-</head>
-
-<body>
-  {% for post in posts %}
-  <article>
-    <hgroup>
-  <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title }}</a></h2>
-  <h4>{{ post.modified | date:"D, j M"}}</h4>
-</hgroup>
-  <div>
-    {% autoescape off %}
-    {{ post.content }}
-    {% endautoescape %}
-  </div>
-  </article>
-  {% endfor %}
-
-</body>
-
-</html>
+        <div class="card">
+            <div class="card-block">
+                <h3 class="card-title"><a href="{% url 'blog:post' post.pk %}">{{ post.title }}</a></h3>
+                <h6 class="card-subtitle text-muted">{{ post.modified | date:"D, j M"}}</h6>
+            </div>
+            <div class="card-block">
+                <div class="card-text">
+                    {% autoescape off %} {{ post.content }} {% endautoescape %}
+                </div>
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+    {% if is_paginated %}
+    <nav>
+	<ul class="pager">
+	{% if page_obj.has_previous %}
+	   <li class="pager-prev"><a href="?page={{ page_obj.previous_page_number }}">Older</a></li>
+	{% else %}
+	   <li class="pager-prev disabled"><a href="#">Older</a></li>
+	{% endif %}
+	{% if page_obj.has_next %}
+	   <li class="pager-next"><a href="?page={{ page_obj.next_page_number }}">Newer</a></li>
+	{% else %}
+	   <li class="pager-next disabled"><a href="#">Newer</a></li>
+	{% endif %}
+	</ul>
+    </nav>
+    {% endif %}
+</section>
+{% endblock %}
