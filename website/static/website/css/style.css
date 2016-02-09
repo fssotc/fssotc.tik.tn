@@ -50,9 +50,15 @@ header .navbar-brand {
 section {
     margin-bottom: 50px;
 }
-#members {
+#articale > section:last-child {
     margin-bottom: 0;
     padding-bottom: 80px;
+}
+#articale > section:first-of-type {
+      margin-top: 50px;
+}
+#about {
+  margin-top: 0 !important;
 }
 #about {
     background: #6F5499;
@@ -76,7 +82,7 @@ footer a:hover {
 }
 .ext-links {
     display: block;
-    width: 200px;
+    width: 310px;
     margin: auto;
 }
 .ext-links li {
@@ -111,7 +117,7 @@ footer a:hover {
 }
 blockquote {
     /* FIXME: delete when implemented on bootstrap */
-
+    
     padding-left: 16px;
     border-left: 2px solid gray;
     line-height: 250%;

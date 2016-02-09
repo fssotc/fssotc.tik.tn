@@ -1,0 +1,31 @@
+{% extends 'website/layout.html' %}
+{% block pagetitle %}MTCFSS Members{% endblock %}
+{% block content_section %}
+<section class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for member in member_list %}
+      <tr>
+      	<th scope="row">{{ forloop.counter }}</th>
+        <td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
+        <td>{{ member.email}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+<section class="container">
+	<h3>Admins</h3>
+	<pre class="lang-sh"><code class="language-sh" lang="sh">
+$ ls Admins
+ls: Admins: not found
+	</code></pre>
+</section>
+{%endblock %}

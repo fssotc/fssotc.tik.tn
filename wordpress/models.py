@@ -56,9 +56,6 @@ class Tag(WordPressIDs, DateTracking, models.Model):
     description = models.TextField(blank=True, null=False)
     post_count = models.IntegerField(blank=False, null=False)
 
-    def get_absolute_url(self):
-        return reverse('tag', kwargs={"tag_slug": self.slug})
-
     def __unicode__(self):
         return "{}: {}".format(self.pk, self.name)
 
@@ -74,9 +71,6 @@ class Author(WordPressIDs, DateTracking, models.Model):
     url = models.CharField(max_length=1000, blank=False, null=False)
     avatar_url = models.CharField(max_length=1000, blank=False, null=False)
     profile_url = models.CharField(max_length=1000, blank=False, null=False)
-
-    def get_absolute_url(self):
-        return reverse('author', kwargs={"pk": self.pk})
 
     def __unicode__(self):
         return self.name
