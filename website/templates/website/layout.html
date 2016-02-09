@@ -8,6 +8,7 @@
     <title>{% block pagetitle %}Microsoft Tech Club FSS{% endblock %}</title>
     <meta name="description" content="MTCFSS: Microsoft Techincal Club on Faculty of Science of Sfax" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="alternate" type="application/rss+xml" title="MTCFSS Blog Feed" href="{% url 'blog:rss' %}" />
     <!--<script src="script.js"></script>-->
     <link href="{% static 'website/css/font-awesome.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'website/css/bootstrap-v4.a2.css' %}" rel="stylesheet" type="text/css" />
@@ -52,6 +53,9 @@
             </li>
             <li>
                 <a href="mailto:mtcfss@outlook.com" class="fa fa-envelope"></a>
+            </li>
+            <li>
+		<a href="{% url 'blog:rss' %}" class="fa fa-rss"></a>
             </li>
         </ul>
         <ul class="nav">
