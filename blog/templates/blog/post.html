@@ -12,7 +12,7 @@
         </li>
         <li><a href="/blog/">Blog</a>
         </li>
-        <li class="active">{{ post.title }}</li>
+	<li class="active">{% autoescape off %}{{ post.title }}{% endautoescape %}</li>
     </ol>
 </nav>
 <section class="container">

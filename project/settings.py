@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'after_response',
+    'django_csv_exports',
     'wordpress',
     'db',
     'website',
