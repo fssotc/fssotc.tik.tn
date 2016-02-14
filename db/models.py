@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.query_utils import Q
 from datetime import date
 
 # Create your models here.
@@ -50,6 +51,12 @@ class Inscription(models.Model):
         else:
             return "%d-%d" % (self.session.year, self.session.year + 1)
 
+class EventManager(models.Manager):
+
+    def comming(self):
+        return self.get_queryset().filter(Q(start_date__gte=date.today()) |
+                                          Q(end_date__gte=date.today()))
+
 class Event(models.Model):
     EVENT_TYPES = (
         ('con', 'conference'),
@@ -65,6 +72,8 @@ class Event(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     is_ours = models.BooleanField()
+
+    objects = EventManager()
 
     def is_passed(self):
         if self.end_date is not None:
