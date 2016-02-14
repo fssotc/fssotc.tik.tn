@@ -19,16 +19,19 @@
         </section>
         <section id="events" class="container">
             <h4>Events<a href="https://www.facebook.com/MTCFss/events" class="pull-xs-right"><small class="text-muted">more »</small></a></h4>
+	    {% for evt in events %}
+	    <!-- {% cycle 0 1 2 as mod %} -->
+	    {% if mod == 0 %}
             <div class="card-deck-wrapper">
-                <div class="card-deck">
-		   {% for evt in events %}
-                    <div class="card card-block">
+		    <div class="card-deck">
+	    {% endif %}
+		   <div class="card card-block {% if evt.is_ours %}card-primary card-inverse{% endif %}">
 			    <h4 class="card-title">{{ evt.title }}</h4>
 			    <p class="card-text">{{ evt.description }}</p>
 			    {% for lnk in evt.eventlink_set.all %}
 			    <a href="{{ lnk.link }}" class="card-link">{{ lnk.title }}</a>
 			{% endfor %}
-			<p class="card-text"><small class="text-muted">
+			<p class="card-text"><small {% if not evt.is_ours %}class="text-muted"{% endif %}>
 			{% if evt.end_date %}
 			{{ evt.start_date|date:"F j" }} - {{ evt.end_date|date:"F j" }}
 			{% else %}
@@ -37,9 +40,12 @@
 			</small>
                         </p>
                     </div>
-		    {% endfor %}
+	    {% if mod == 2 or forloop.last %}
                 </div>
-            </div>
+	    </div>
+	    <br />
+	    {% endif %}
+            {% endfor %}
         </section>
         <section id="projects" class="container">
             <h4>Projects<a href="https://github.com/mtcfss" class="pull-xs-right"><small class="text-muted">more »</small></a></h4>
