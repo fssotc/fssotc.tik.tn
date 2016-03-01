@@ -1,6 +1,7 @@
+from datetime import date
+
 from django.db import models
 from django.db.models.query_utils import Q
-from datetime import date
 
 # Create your models here.
 class Member(models.Model):
@@ -10,6 +11,7 @@ class Member(models.Model):
     phone = models.CommaSeparatedIntegerField(max_length=20)
     address = models.CharField(max_length=400, blank=True, null=True)
     email = models.EmailField()
+    is_official = models.BooleanField(default=False)
     # new = models.BooleanField(default=True)  # is new if now inscription on old session
 
     def is_new(self):

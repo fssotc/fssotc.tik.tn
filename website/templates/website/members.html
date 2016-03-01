@@ -7,27 +7,48 @@
   <table class="table table-hover table-sm">
     <thead>
       <tr>
-        <th>#</th>
         <th>Name</th>
         <th>Email</th>
       </tr>
     </thead>
     <tbody>
       {% for member in member_list %}
+      {% if not member.is_official %}
       <tr>
-      	<th scope="row">{{ forloop.counter }}</th>
         <td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
         <td>{{ member.email}}</td>
       </tr>
+      {% endif %}
       {% endfor %}
     </tbody>
   </table>
 </section>
 <section class="container">
 	<h3>Admins</h3>
+  <br />
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for member in member_list %}
+      {% if member.is_official %}
+      <tr>
+        <td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
+        <td>{{ member.email}}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+<!--
 	<pre class="lang-sh"><code class="language-sh" lang="sh">
 $ ls Admins
 ls: Admins: not found
 	</code></pre>
+-->
 </section>
 {%endblock %}
