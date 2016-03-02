@@ -7,6 +7,7 @@ from django.db.models.query_utils import Q
 class Member(models.Model):
     name = models.CharField(max_length=40)
     family_name = models.CharField(max_length=40)
+    username = models.CharField(max_length=20, blank=True)
     birthday = models.DateField(blank=True, null=True)
     phone = models.CommaSeparatedIntegerField(max_length=20)
     address = models.CharField(max_length=400, blank=True, null=True)
