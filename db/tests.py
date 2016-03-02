@@ -1,5 +1,5 @@
 from django.test import TestCase
-from datetime import date
+from datetime import date, timedelta
 from .models import Member, Inscription, Event, EventLink
 
 # Create your tests here.

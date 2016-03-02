@@ -9,6 +9,7 @@
       <tr>
         <th>Name</th>
         <th>Email</th>
+        <th width=30px>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -16,7 +17,12 @@
       {% if not member.is_official %}
       <tr>
         <td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
-        <td>{{ member.email}}</td>
+	<td>{{ member.email}}</td>
+	{% if member.username %}
+	<td><a href="https://github.com/{{ member.username }}" class="fa fa-github"></a></td>
+	{% else %}
+	<td>&nbsp;</td>
+	{% endif %}
       </tr>
       {% endif %}
       {% endfor %}
@@ -31,6 +37,7 @@
       <tr>
         <th>Name</th>
         <th>Email</th>
+        <th width=30px>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -39,6 +46,11 @@
       <tr>
         <td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
         <td>{{ member.email}}</td>
+	{% if member.username %}
+	<td><a href="https://github.com/{{ member.username }}" class="fa fa-github"></a></td>
+	{% else %}
+	<td>&nbsp;</td>
+	{% endif %}
       </tr>
       {% endif %}
       {% endfor %}
