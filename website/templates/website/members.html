@@ -14,7 +14,6 @@
     </thead>
     <tbody>
       {% for member in member_list %}
-      {% if not member.is_official %}
       <tr>
         <td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
 	<td>{{ member.email}}</td>
@@ -24,7 +23,6 @@
 	<td>&nbsp;</td>
 	{% endif %}
       </tr>
-      {% endif %}
       {% endfor %}
     </tbody>
   </table>
@@ -36,15 +34,16 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Role</th>
         <th>Email</th>
         <th width=30px>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
-      {% for member in member_list %}
-      {% if member.is_official %}
+      {% for member in admin_list %}
       <tr>
-        <td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
+	<td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
+	<td>{{ member.get_role_display }}</td>
         <td>{{ member.email}}</td>
 	{% if member.username %}
 	<td><a href="https://github.com/{{ member.username }}" class="fa fa-github"></a></td>
@@ -52,7 +51,6 @@
 	<td>&nbsp;</td>
 	{% endif %}
       </tr>
-      {% endif %}
       {% endfor %}
     </tbody>
   </table>

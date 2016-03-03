@@ -5,14 +5,24 @@ from django.db.models.query_utils import Q
 
 # Create your models here.
 class Member(models.Model):
+    ROLE = (
+        ('a', 'President'),
+        ('b', 'Vice President'),
+        ('c', 'Secretary'),
+        ('e', 'Tech Leader'),
+        ('g', 'Treasurer'),
+        ('k', 'Media Manager'),
+        ('z', 'Admin'),
+        ('', 'Member'),
+    )
     name = models.CharField(max_length=40)
     family_name = models.CharField(max_length=40)
-    username = models.CharField(max_length=20, blank=True)
+    username = models.CharField(max_length=20, blank=True, unique=True)
     birthday = models.DateField(blank=True, null=True)
     phone = models.CommaSeparatedIntegerField(max_length=20)
     address = models.CharField(max_length=400, blank=True, null=True)
-    email = models.EmailField()
-    is_official = models.BooleanField(default=False)
+    email = models.EmailField(unique=True)
+    role = models.CharField(max_length=1, choices=ROLE, default='', blank=True)
     # new = models.BooleanField(default=True)  # is new if now inscription on old session
 
     def is_new(self):

@@ -15,3 +15,9 @@ class MemberList(ListView):
     model = Member
     template_name = 'website/members.html'
     ordering = ['name', 'family_name']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['member_list'] = self.model.objects.filter(role__exact='')
+        context['admin_list'] = self.model.objects.exclude(role__exact='').order_by('role', 'name', 'family_name')
+        return context
