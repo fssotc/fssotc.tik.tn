@@ -2,6 +2,7 @@ from datetime import date
 
 from django.db import models
 from django.db.models.query_utils import Q
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Member(models.Model):
@@ -17,7 +18,7 @@ class Member(models.Model):
     )
     name = models.CharField(max_length=40)
     family_name = models.CharField(max_length=40)
-    username = models.CharField(max_length=20, blank=True, null=True)  # unique=True
+    username = models.CharField(max_length=20, blank=True)
     birthday = models.DateField(blank=True, null=True)
     phone = models.CommaSeparatedIntegerField(max_length=20)
     address = models.CharField(max_length=400, blank=True, null=True)
@@ -34,6 +35,15 @@ class Member(models.Model):
         ins = self.inscription_set.filter(session__lt=first_day_on_session)
         return ins.count() == 0
     is_new.boolean = True
+
+    def clean(self):
+        # username is unique if not empty
+        if self.username:
+            m = Member.objects.filter(username__iexact=self.username)
+            if self.id:
+                m = m.exclude(id=self.id)
+            if len(m):
+                raise ValidationError("Username should be uniqe")
 
     def __str__(self):
         return "%s %s" % (self.name, self.family_name)
