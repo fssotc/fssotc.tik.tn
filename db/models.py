@@ -5,6 +5,8 @@ from django.db.models.query_utils import Q
 from django.core.exceptions import ValidationError
 
 # Create your models here.
+
+
 class Member(models.Model):
     ROLE = (
         ('a', 'President'),
@@ -48,6 +50,7 @@ class Member(models.Model):
     def __str__(self):
         return "%s %s" % (self.name, self.family_name)
 
+
 class Inscription(models.Model):
     session = models.DateField()  # auto_now_add=True
     course = models.CharField(max_length=10)
@@ -74,11 +77,13 @@ class Inscription(models.Model):
         else:
             return "%d-%d" % (self.session.year, self.session.year + 1)
 
+
 class EventManager(models.Manager):
 
     def comming(self):
         return self.get_queryset().filter(Q(start_date__gte=date.today()) |
                                           Q(end_date__gte=date.today()))
+
 
 class Event(models.Model):
     EVENT_TYPES = (
@@ -109,6 +114,7 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class EventLink(models.Model):
     title = models.CharField(max_length=40)

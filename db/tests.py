@@ -3,6 +3,8 @@ from datetime import date, timedelta
 from .models import Member, Inscription, Event, EventLink
 
 # Create your tests here.
+
+
 class MemberTestCase(TestCase):
 
     def setUp(self):

@@ -2,6 +2,7 @@ from datetime import date
 from django.contrib import admin
 from .models import Inscription
 
+
 class InscriptionSessionFilter(admin.SimpleListFilter):
     title = 'session'
     parameter_name = 'session'
@@ -16,6 +17,7 @@ class InscriptionSessionFilter(admin.SimpleListFilter):
             return queryset.filter(
                 session__gte=date(int(years[0]), 9, 1),
                 session__lt=date(int(years[1]), 9, 1))
+
 
 class MemberInscriptionSessionFilter(InscriptionSessionFilter):
     parameter_name = 'inscription'

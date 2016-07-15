@@ -2,13 +2,16 @@ from django.contrib import admin
 from .models import Member, Inscription, Event, EventLink
 from .filters import InscriptionSessionFilter, MemberInscriptionSessionFilter
 
+
 class InscriptionInline(admin.TabularInline):
     model = Inscription
     extra = 1
 
+
 class EventLinkInline(admin.TabularInline):
     model = EventLink
     extra = 2
+
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
@@ -17,12 +20,14 @@ class MemberAdmin(admin.ModelAdmin):
     search_fields = ['name', 'family_name', 'inscription__course']
     list_filter = ('inscription__course', MemberInscriptionSessionFilter,)
 
+
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     inlines = [EventLinkInline]
     list_display = ('title', 'start_date', 'end_date', 'place', 'is_passed')
     search_fields = ['title', 'place', 'start_date', 'end_date']
     list_filter = ('is_ours', 'event_type', 'place')
+
 
 @admin.register(Inscription)
 class InscriptionAdmin(admin.ModelAdmin):
