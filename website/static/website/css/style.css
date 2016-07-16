@@ -17,17 +17,48 @@ header,
 }
 #about {
     padding: 10px;
+    position: relative;
+    margin-top: 0 !important;
+    overflow: hidden;
+    background: #3698e3;
+    color: #CDBFE3;
 }
-#about i {
+#about h4 {
     color: white;
-    margin: 5px 0;
+}
+#about-bg {
+    background: url(../img/blue-coding-programming.jpg) center no-repeat;
+    background-size: auto 130%;
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    background-color: #3698e3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.6), inset 0px -5px 5px rgba(0, 0, 0, 0.6);
+}
+#about .media-left img {
+    width: 150px;
+}
+#about .container {
+    position: relative;
+    color: white;
+    text-shadow: 1px 1px rgba(0, 0, 0, 1);
+}
+#about .media-heading {
+    color: #174157;
+    font-weight: bold;
+    text-shadow: 3px 3px rgba(0, 0, 0, 0.2);
 }
 #about a:hover,
 section > h4 > a:hover {
     text-decoration: none;
 }
 @media(max-width: 753px) {
-    #about i {
+    #about .media-left {
         display: none;
     }
 }
@@ -36,8 +67,9 @@ header .nav li {
 }
 header .navbar-link {
     border-bottom: 2px solid;
-    color: #563D7C;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+    border-color: #174157;
+    color: #174157;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     margin-right: 5px;
 }
 header .nav a:hover {
@@ -45,7 +77,9 @@ header .nav a:hover {
     border-bottom: 4px solid;
 }
 header .navbar-brand {
-    font-variant: petite-caps;
+      letter-spacing: 4.2px;
+      line-height: 1.5;
+      text-transform: uppercase
 }
 section {
     margin-bottom: 50px;
@@ -55,17 +89,7 @@ section {
     padding-bottom: 80px;
 }
 #articale > section:first-of-type {
-      margin-top: 50px;
-}
-#about {
-  margin-top: 0 !important;
-}
-#about {
-    background: #6F5499;
-    color: #CDBFE3;
-}
-#about h4 {
-    color: white;
+    margin-top: 50px;
 }
 footer {
     background: #2A2730;
