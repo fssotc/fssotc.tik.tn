@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'', include('website.urls'), name='website'),
     url(r'blog/', include('blog.urls'), name='blog'),
+    url(r'inscription/', include('inscription.urls'), name='inscription'),
     url(r'^wordpress/', include('wordpress.urls')),
 ]
