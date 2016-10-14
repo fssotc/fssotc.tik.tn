@@ -21,6 +21,6 @@ class MemberList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['member_list'] = self.model.objects.filter(role__exact='')
-        context['admin_list'] = self.model.objects.exclude(role__exact='').order_by('role', 'name', 'family_name')
+        context['member_list'] = self.model.objects.filter(inscription__role__exact='')
+        context['admin_list'] = self.model.objects.exclude(inscription__role__exact='').order_by('inscription__role', 'name', 'family_name')
         return context

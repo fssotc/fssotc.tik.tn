@@ -8,24 +8,13 @@ from django.core.exceptions import ValidationError
 
 
 class Member(models.Model):
-    ROLE = (
-        ('a', 'President'),
-        ('b', 'Vice President'),
-        ('c', 'Secretary'),
-        ('e', 'Tech Leader'),
-        ('g', 'Treasurer'),
-        ('k', 'Media Manager'),
-        ('z', 'Admin'),
-        ('', 'Member'),
-    )
-    name = models.CharField(max_length=40)
-    family_name = models.CharField(max_length=40)
-    username = models.CharField(max_length=20, blank=True)
-    birthday = models.DateField(blank=True, null=True)
-    phone = models.CommaSeparatedIntegerField(max_length=20)
-    address = models.CharField(max_length=400, blank=True, null=True)
-    email = models.EmailField(unique=True)
-    role = models.CharField(max_length=1, choices=ROLE, default='', blank=True)
+    name = models.CharField(max_length=40, help_text="Prénom / Name")
+    family_name = models.CharField(max_length=40, help_text="Nom / Family Name")
+    email = models.EmailField(unique=True, help_text="E-mail")
+    phone = models.DecimalField(max_digits=8, decimal_places=0, help_text="Phone")
+    address = models.CharField(max_length=400, blank=True, null=True, help_text="Addresse")
+    username = models.CharField(max_length=20, blank=True, help_text="GitHub username")
+    birthday = models.DateField(blank=True, null=True, help_text="Date de naissance / Birthday")
     # new = models.BooleanField(default=True)  # is new if now inscription on old session
 
     def is_new(self):
@@ -52,12 +41,50 @@ class Member(models.Model):
 
 
 class Inscription(models.Model):
+    ROLE = (
+        ('a', 'President'),
+        ('b', 'Vice President'),
+        ('c', 'Secretary'),
+        ('e', 'Tech Leader'),
+        ('g', 'Treasurer'),
+        ('k', 'Media Manager'),
+        ('z', 'Admin'),
+        ('', 'Member'),
+    )
+    UNIVERSITY_CHOICES = (
+        ("FSS", "Faculté des Sciences de Sfax"),
+        ("ENIS", "Ecole Nationale des Ingénieurs de Sfax"),
+        ("ISIMS", "Institut Supérieur d'Informatique et de Multimédia de Sfax"),
+        ("ENETCOM", "Ecole Nationale d'electronique et de télécommunications de Sfax"),
+        ("FSEGS", "Faculté des Sciences Economiques et de Gestion de Sfax"),
+        ("IPEIS", "Institut Préparatoire aux Etudes d'Ingénieurs de Sfax"),
+        ("", "Autre..."),
+    )
+    EDUCATION_CHOICES = (
+        ("LF", "Licence Fondamentale"),
+        ("LA", "Licence Appliqué"),
+        ("P", "Préparatoire"),
+        ("ENG", "Ingéniorat"),
+        ("MR", "Master de Recherche"),
+        ("MP", "Master Professionnel"),
+        ("PHD", "Doctorat"),
+        ("", "Autre..."),
+    )
+    YEAR_CHOICES = (
+        ('1', 1),
+        ('2', 2),
+        ('3', 3),
+    )
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    role = models.CharField(max_length=1, choices=ROLE, default='', blank=True)
     session = models.DateField()  # auto_now_add=True
-    course = models.CharField(max_length=10)
+    inscription_num = models.DecimalField(help_text="Inscription Num", null=True, blank=True, max_digits=10, decimal_places=0)
+    university = models.CharField(help_text="Institution / University", choices=UNIVERSITY_CHOICES, default='FSS', max_length=7)
+    education = models.CharField(help_text="Cycle", choices=EDUCATION_CHOICES, default='LF', max_length=3)
+    year = models.CharField(help_text="Année", choices=YEAR_CHOICES, default='1', max_length=1)
     confirmed = models.BooleanField(default=False)
     dreamspark_key = models.BooleanField(default=False)
     member_card = models.BooleanField(default=False)
-    member = models.ForeignKey(Member, on_delete=models.CASCADE)
 
     def is_current(self):
         _date = date.today()

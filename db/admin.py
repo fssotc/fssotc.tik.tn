@@ -17,8 +17,8 @@ class EventLinkInline(admin.TabularInline):
 class MemberAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'phone', 'email')
     inlines = [InscriptionInline]
-    search_fields = ['name', 'family_name', 'inscription__course']
-    list_filter = ('inscription__course', MemberInscriptionSessionFilter,)
+    search_fields = ['name', 'family_name', 'inscription__education', 'inscription__university']
+    list_filter = ('inscription__education', MemberInscriptionSessionFilter,)
 
 
 @admin.register(Event)
@@ -33,8 +33,8 @@ class EventAdmin(admin.ModelAdmin):
 class InscriptionAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'member', 'confirmed',
                     'dreamspark_key', 'member_card', 'is_current')
-    list_filter = ('course', 'confirmed', 'dreamspark_key', 'member_card',
-                   InscriptionSessionFilter)
+    list_filter = ('university', 'education', 'year', 'confirmed',
+                   'dreamspark_key', 'member_card', InscriptionSessionFilter)
     list_editable = ('confirmed', 'dreamspark_key', 'member_card')
 
 admin.site.register(EventLink)  # TODO: use class instead
