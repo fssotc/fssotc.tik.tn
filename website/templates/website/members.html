@@ -13,12 +13,12 @@
       </tr>
     </thead>
     <tbody>
-      {% for member in member_list %}
+      {% for insc in member_list %}
       <tr>
-        <td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
-	<td>{{ member.email}}</td>
-	{% if member.username %}
-	<td><a href="https://github.com/{{ member.username }}" class="fa fa-github"></a></td>
+        <td class="text-capitalize">{{ insc.member.name }} {{ insc.member.family_name}}</td>
+	<td>{{ insc.member.email}}</td>
+	{% if insc.member.username %}
+	<td><a href="https://github.com/{{ insc.member.username }}" class="fa fa-github"></a></td>
 	{% else %}
 	<td>&nbsp;</td>
 	{% endif %}
@@ -40,13 +40,13 @@
       </tr>
     </thead>
     <tbody>
-      {% for member in admin_list %}
+      {% for insc in admin_list %}
       <tr>
-	<td class="text-capitalize">{{ member.name }} {{ member.family_name}}</td>
-	<td>{{ member.get_role_display }}</td>
-        <td>{{ member.email}}</td>
-	{% if member.username %}
-	<td><a href="https://github.com/{{ member.username }}" class="fa fa-github"></a></td>
+	<td class="text-capitalize">{{ insc.member.name }} {{ insc.member.family_name}}</td>
+	<td>{{ insc.get_role_display }}</td>
+        <td>{{ insc.member.email}}</td>
+	{% if insc.member.username %}
+	<td><a href="https://github.com/{{ insc.member.username }}" class="fa fa-github"></a></td>
 	{% else %}
 	<td>&nbsp;</td>
 	{% endif %}
