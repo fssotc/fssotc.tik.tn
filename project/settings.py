@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'db',
     'website',
     'blog',
+    'inscription',
 ]
 
 MIDDLEWARE_CLASSES = [
