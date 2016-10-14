@@ -8,13 +8,13 @@ from django.core.exceptions import ValidationError
 
 
 class Member(models.Model):
-    name = models.CharField(max_length=40, help_text="Prénom / Name")
-    family_name = models.CharField(max_length=40, help_text="Nom / Family Name")
-    email = models.EmailField(unique=True, help_text="E-mail")
-    phone = models.DecimalField(max_digits=8, decimal_places=0, help_text="Phone")
-    address = models.CharField(max_length=400, blank=True, null=True, help_text="Addresse")
-    username = models.CharField(max_length=20, blank=True, help_text="GitHub username")
-    birthday = models.DateField(blank=True, null=True, help_text="Date de naissance / Birthday")
+    name = models.CharField(max_length=40, verbose_name="Prénom / Name")
+    family_name = models.CharField(max_length=40, verbose_name="Nom / Family Name")
+    email = models.EmailField(unique=True, verbose_name="E-mail")
+    phone = models.DecimalField(max_digits=8, decimal_places=0, verbose_name="Phone")
+    address = models.CharField(max_length=400, blank=True, null=True, verbose_name="Addresse")
+    username = models.CharField(max_length=20, blank=True, verbose_name="GitHub username")
+    birthday = models.DateField(blank=True, null=True, verbose_name="Date de naissance / Birthday")
     # new = models.BooleanField(default=True)  # is new if now inscription on old session
 
     def is_new(self):
@@ -78,10 +78,13 @@ class Inscription(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     role = models.CharField(max_length=1, choices=ROLE, default='', blank=True)
     session = models.DateField()  # auto_now_add=True
-    inscription_num = models.DecimalField(help_text="Inscription Num", null=True, blank=True, max_digits=10, decimal_places=0)
-    university = models.CharField(help_text="Institution / University", choices=UNIVERSITY_CHOICES, default='FSS', max_length=7)
-    education = models.CharField(help_text="Cycle", choices=EDUCATION_CHOICES, default='LF', max_length=3)
-    year = models.CharField(help_text="Année", choices=YEAR_CHOICES, default='1', max_length=1)
+    inscription_num = models.DecimalField(verbose_name="Inscription Num",
+                                          null=True, blank=True, max_digits=10,
+                                          decimal_places=0,
+                                          help_text="Seulement pour les étudiants du FSS pour le service culturel de la faculté.")
+    university = models.CharField(verbose_name="Institution / University", choices=UNIVERSITY_CHOICES, default='FSS', max_length=7)
+    education = models.CharField(verbose_name="Cycle", choices=EDUCATION_CHOICES, default='LF', max_length=3)
+    year = models.CharField(verbose_name="Année", choices=YEAR_CHOICES, default='1', max_length=1)
     confirmed = models.BooleanField(default=False)
     dreamspark_key = models.BooleanField(default=False)
     member_card = models.BooleanField(default=False)
