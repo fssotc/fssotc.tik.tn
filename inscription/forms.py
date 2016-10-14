@@ -10,6 +10,7 @@ class InscriptionForm(forms.ModelForm):
 
 
 class MemberForm(forms.ModelForm):
+    birthday = forms.DateField(widget=forms.SelectDateWidget(), required=False, label="Date de naissance", localize=True)
 
     class Meta:
         model = Member

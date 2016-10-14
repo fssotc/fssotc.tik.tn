@@ -5,16 +5,20 @@ body {
     position: relative;
     background: #2A2730;
 }
+
 a:focus {
     text-decoration: none !important;
 }
+
 header,
 #articale {
     background: white;
 }
+
 #nav-logo {
     height: 2.3em;
 }
+
 #about {
     padding: 10px;
     position: relative;
@@ -23,9 +27,11 @@ header,
     background: #3698e3;
     color: #CDBFE3;
 }
+
 #about h4 {
     color: white;
 }
+
 #about-bg {
     background: url(../img/blue-coding-programming.jpg) center no-repeat;
     background-size: auto 130%;
@@ -40,31 +46,38 @@ header,
     z-index: 0;
     box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.6), inset 0px -5px 5px rgba(0, 0, 0, 0.6);
 }
+
 #about .media-left img {
     width: 150px;
 }
+
 #about .container {
     position: relative;
     color: white;
     text-shadow: 1px 1px rgba(0, 0, 0, 1);
 }
+
 #about .media-heading {
     color: #174157;
     font-weight: bold;
     text-shadow: 3px 3px rgba(0, 0, 0, 0.2);
 }
+
 #about a:hover,
-section > h4 > a:hover {
+section> h4> a:hover {
     text-decoration: none;
 }
+
 @media(max-width: 753px) {
     #about .media-left {
         display: none;
     }
 }
+
 header .nav li {
     display: inline-block;
 }
+
 header .navbar-link {
     border-bottom: 2px solid;
     border-color: #174157;
@@ -72,46 +85,57 @@ header .navbar-link {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     margin-right: 5px;
 }
+
 header .nav a:hover {
     text-decoration: none;
     border-bottom: 4px solid;
 }
+
 header .navbar-brand {
-      letter-spacing: 4.2px;
-      line-height: 1.5;
-      text-transform: uppercase
+    letter-spacing: 4.2px;
+    line-height: 1.5;
+    text-transform: uppercase
 }
+
 section {
     margin-bottom: 50px;
 }
-#articale > section:last-child {
+
+#articale> section:last-child {
     margin-bottom: 0;
     padding-bottom: 80px;
 }
-#articale > section:first-of-type {
+
+#articale> section:first-of-type {
     margin-top: 50px;
 }
+
 footer {
     background: #2A2730;
     text-align: center;
     color: #99979C;
     padding: 30px 10px !important;
 }
+
 footer a {
     color: #99979C;
 }
+
 footer a:hover {
     color: white;
     text-decoration: none;
 }
+
 .ext-links {
     display: block;
     width: 310px;
     margin: auto;
 }
+
 .ext-links li {
     display: inline-block;
 }
+
 .ext-links a {
     text-align: center;
     vertical-align: text-bottom;
@@ -124,10 +148,12 @@ footer a:hover {
     text-decoration: none;
     background: #0275D8;
 }
+
 .ext-links a:hover {
     background: rgba(1, 1, 1, 0.5);
     box-shadow: -1px -1px gray;
 }
+
 @media (max-width: 600px) {
     header .navbar-nav {
         margin: 15px 0px 10px 0px;
@@ -139,15 +165,47 @@ footer a:hover {
         ;
     }
 }
+
 blockquote {
     /* FIXME: delete when implemented on bootstrap */
-    
     padding-left: 16px;
     border-left: 2px solid gray;
     line-height: 250%;
 }
+
 .aligncenter {
     display: block;
     margin-right: auto;
     margin-left: auto;
+}
+
+.inscription_form {
+    padding: 50px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.inscription_form label {
+    min-width: 150px;
+}
+
+.inscription_form input {
+    min-width: 250px;
+}
+
+.inscription_form .helptext {
+    display: block;
+    font-width: 500;
+    font-size: 90%;
+    color: silver;
+}
+
+.inscription_form .helptext:before {
+    content: '*';
+}
+
+.errorlist,
+.msglist {
+    margin: 10px;
+    border: solid 2px;
 }

@@ -2,9 +2,13 @@
 {% load staticfiles%}
 {% block pagetitle %}Inscription | Microsoft Tech Club FSS{% endblock %}
 {% block content_section %}
-  <form action="" method="post">{% csrf_token %}
+<form action="" method="post" class="inscription_form">
+    {% if msg %}
+    <p class="msglist">{{ msg }}</p>
+    {% endif %}
+    {% csrf_token %}
     {{ member_form.as_p }}
     {{ inscription_form.as_p }}
     <input type="submit" value="Submit" />
-  </form> 
+</form>
 {% endblock %}

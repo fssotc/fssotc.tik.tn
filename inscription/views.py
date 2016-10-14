@@ -17,26 +17,35 @@ class InscriptionView(FormView):
 
 
 def inscription(request):
+    msg = ''
     if request.method == 'POST':
         try:
             member = Member.objects.get(email=request.POST['email'])
+            msg = 'Account inscription updated!'
         except:
             member = Member()
+            msg = 'New Account created!'
         member_form = MemberForm(request.POST, instance=member)
-        member = member_form.save()
         inscription_form = InscriptionForm(request.POST)
-        inscription = inscription_form.save(commit=False)
-        inscription.member = member
-        inscription.session = datetime.date.today()
-        inscription.save()
-        return render(request, 'inscription/success.html')
+        if any(insc.is_current() for insc in Inscription.objects.filter(member=member)):
+            msg = 'User already inscripted for current session!'
+        elif member_form.is_valid() and inscription_form.is_valid():
+            member = member_form.save()
+            inscription = inscription_form.save(commit=False)
+            inscription.member = member
+            inscription.session = datetime.date.today()
+            inscription.save()
+        else:
+            msg = 'Error when creating inscription!'
     else:
         member_form = MemberForm()
         inscription_form = InscriptionForm()
 
     return render(request, 'inscription/index.html', {
         'member_form': member_form,
-        'inscription_form': inscription_form})
+        'inscription_form': inscription_form,
+        'msg': msg
+    })
 
 
 def success(request):

@@ -14,7 +14,7 @@ class Member(models.Model):
     phone = models.DecimalField(max_digits=8, decimal_places=0, verbose_name="Phone")
     address = models.CharField(max_length=400, blank=True, null=True, verbose_name="Addresse")
     username = models.CharField(max_length=20, blank=True, verbose_name="GitHub username")
-    birthday = models.DateField(blank=True, null=True, verbose_name="Date de naissance / Birthday")
+    birthday = models.DateField(blank=True, null=True, verbose_name="Date de naissance")
     # new = models.BooleanField(default=True)  # is new if now inscription on old session
 
     def is_new(self):
