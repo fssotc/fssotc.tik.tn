@@ -1,4 +1,10 @@
+decorators==0.1
 Django==1.9.10
-django-wordpress-rest
-django-after-response>=0.2.2
-decorators
+django-after-response==0.2.2
+django-wordpress-rest==0.1.3
+jsonfield==1.0.3
+mock==2.0.0
+pbr==1.10.0
+python-dateutil==2.5.3
+requests==2.11.1
+six==1.10.0

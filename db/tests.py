@@ -16,13 +16,17 @@ class MemberTestCase(TestCase):
     def test_members_default_values(self):
         usr1 = Member.objects.get(name='user1')
         ins1 = Inscription.objects.create(session=date(2016, 8, 31),
-                                          course='lfi1',
+                                          university='FSS',
+                                          education='LF',
+                                          year='1',
                                           member=usr1,)
         ins2 = Inscription.objects.create(session=date(2016, 9, 1),
-                                          course='lfi2',
+                                          university='FSS',
+                                          education='LF',
+                                          year='2',
                                           member=usr1,)
-        ins1 = usr1.inscription_set.get(course='lfi1')
-        ins2 = Inscription.objects.get(course='lfi2')
+        ins1 = usr1.inscription_set.get(education='LF', year='1')
+        ins2 = Inscription.objects.get(education='LF', year='2')
         self.assertEqual(str(usr1), 'user1 family_name1')
         self.assertEqual(str(ins1), '2015-2016')
         self.assertEqual(str(ins2), '2016-2017')
@@ -35,12 +39,10 @@ class MemberTestCase(TestCase):
         usr1 = Member.objects.get(name='user1')
         self.assertEqual(usr1.is_new(), True)
         ins1 = Inscription.objects.create(session=_date,
-                                          course='lfi1',
                                           member=usr1,)
         self.assertEqual(usr1.is_new(), True)
         _date = date(_date.year - 1, _date.month, _date.day)
         ins2 = Inscription.objects.create(session=_date,
-                                          course='lfi2',
                                           member=usr1,)
         self.assertEqual(usr1.is_new(), False)
 
@@ -48,11 +50,9 @@ class MemberTestCase(TestCase):
         _date = date.today()
         usr1 = Member.objects.get(name='user1')
         ins1 = Inscription.objects.create(session=_date,
-                                          course='lfi1',
                                           member=usr1,)
         _date = date(_date.year - 1, _date.month, _date.day)
         ins2 = Inscription.objects.create(session=_date,
-                                          course='lfi1',
                                           member=usr1,)
         self.assertEqual(ins1.is_current(), True)
         self.assertEqual(ins2.is_current(), False)
