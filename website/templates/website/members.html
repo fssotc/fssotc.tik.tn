@@ -1,33 +1,39 @@
 {% extends 'website/layout.html' %}
 {% block pagetitle %}MTCFSS Members{% endblock %}
 {% block content_section %}
-<section class="container">
+<section class="container members">
   <h3>Members</h3>
   <br />
   <table class="table table-hover table-sm">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th width=30px>&nbsp;</th>
+        <th class="name">Name</th>
+        <th class="email">Email</th>
+        <th class="github" width=30px>&nbsp;</th>
+        <th class="university">&nbsp;</th>
+        <th class="education">&nbsp;</th>
+        <th class="year">&nbsp;</th>
       </tr>
     </thead>
     <tbody>
       {% for insc in member_list %}
       <tr>
-        <td class="text-capitalize">{{ insc.member.name }} {{ insc.member.family_name}}</td>
-	<td>{{ insc.member.email}}</td>
+        <td class="name text-capitalize">{{ insc.member.name }} {{ insc.member.family_name}}</td>
+	<td class="email">{{ insc.member.email}}</td>
 	{% if insc.member.username %}
-	<td><a href="https://github.com/{{ insc.member.username }}" class="fa fa-github"></a></td>
+	<td class="github"><a href="https://github.com/{{ insc.member.username }}" class="fa fa-github"></a></td>
 	{% else %}
-	<td>&nbsp;</td>
+	<td class="github">&nbsp;</td>
 	{% endif %}
+	<td class="university">{{ insc.university }}</td>
+	<td class="education">{{ insc.education }}</td>
+	<td class="year">{{ insc.year }}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 </section>
-<section class="container">
+<section class="container admins">
 	<h3>Admins</h3>
   <br />
   <table class="table table-hover table-sm">
@@ -42,14 +48,17 @@
     <tbody>
       {% for insc in admin_list %}
       <tr>
-	<td class="text-capitalize">{{ insc.member.name }} {{ insc.member.family_name}}</td>
-	<td>{{ insc.get_role_display }}</td>
-        <td>{{ insc.member.email}}</td>
+	<td class="name text-capitalize">{{ insc.member.name }} {{ insc.member.family_name}}</td>
+	<td class="role">{{ insc.get_role_display }}</td>
+        <td class="email">{{ insc.member.email}}</td>
 	{% if insc.member.username %}
-	<td><a href="https://github.com/{{ insc.member.username }}" class="fa fa-github"></a></td>
+	<td class="github"><a href="https://github.com/{{ insc.member.username }}" class="fa fa-github"></a></td>
 	{% else %}
-	<td>&nbsp;</td>
+	<td class="github">&nbsp;</td>
 	{% endif %}
+	<td class="university">{{ insc.university }}</td>
+	<td class="education">{{ insc.education }}</td>
+	<td class="year">{{ insc.year }}</td>
       </tr>
       {% endfor %}
     </tbody>

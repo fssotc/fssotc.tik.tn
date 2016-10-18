@@ -6,6 +6,24 @@ body {
     background: #2A2730;
 }
 
+@media screen {
+    .education,
+    .university,
+    .year {
+        display: none;
+    }
+}
+
+@media print {
+    html,
+    body {
+        background: white;
+    }
+    .github {
+        display: none;
+    }
+}
+
 a:focus {
     text-decoration: none !important;
 }
