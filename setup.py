@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name='mtcfss-website',
-    version='0.1',
+    version='0.2',
     description='MTCFSS Website',
     long_description=read('README.md'),
     author='Moez Bouhlel',
