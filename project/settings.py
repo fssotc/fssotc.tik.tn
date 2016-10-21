@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'after_response',
     'django_csv_exports',
+    'csvimport',
     'wordpress',
     'db',
     'website',
