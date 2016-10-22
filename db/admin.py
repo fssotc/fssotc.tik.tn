@@ -34,7 +34,8 @@ class InscriptionAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'member', 'confirmed',
                     'dreamspark_key', 'member_card', 'is_current')
     list_filter = ('university', 'education', 'year', 'confirmed',
-                   'dreamspark_key', 'member_card', InscriptionSessionFilter)
+                   'dreamspark_key', 'member_card', InscriptionSessionFilter,
+                   'role')
     list_editable = ('confirmed', 'dreamspark_key', 'member_card')
 
 admin.site.register(EventLink)  # TODO: use class instead
