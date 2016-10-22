@@ -26,3 +26,7 @@ class MemberList(ListView):
         admin_insc = self.model.objects.exclude(role__exact='').order_by('role', 'member__name', 'member__family_name')
         context['admin_list'] = [insc for insc in admin_insc if insc.is_current()]
         return context
+
+
+def wpad(request):
+    return render(request, 'website/wpad.dat')
