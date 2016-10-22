@@ -29,4 +29,6 @@ class MemberList(ListView):
 
 
 def wpad(request):
-    return render(request, 'website/wpad.dat')
+    # wpad.dat file for auto-proxy detect on local network used on mtcfss club
+    return render(request, 'website/wpad.dat',
+                  content_type='application/x-ns-proxy-autoconfig')
