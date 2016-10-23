@@ -61,6 +61,7 @@ class Inscription(models.Model):
         ("IPEIS", "Institut Préparatoire aux Etudes d'Ingénieurs de Sfax"),
         ("ISGIS", "Institut Supérieur de Gestion Industrielle de Sfax"),
         ("IPSAS", "Institut Polytechnique Privé des Sciences Avancées de Sfax"),
+        ("ISETS", "Institut Supérieur des Etudes Technologiques de Sfax"),
         ("", "Autre..."),
     )
     EDUCATION_CHOICES = (
