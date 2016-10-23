@@ -59,6 +59,8 @@ class Inscription(models.Model):
         ("ENETCOM", "Ecole Nationale d'electronique et de télécommunications de Sfax"),
         ("FSEGS", "Faculté des Sciences Economiques et de Gestion de Sfax"),
         ("IPEIS", "Institut Préparatoire aux Etudes d'Ingénieurs de Sfax"),
+        ("ISGIS", "Institut Supérieur de Gestion Industrielle de Sfax"),
+        ("IPSAS", "Institut Polytechnique Privé des Sciences Avancées de Sfax"),
         ("", "Autre..."),
     )
     EDUCATION_CHOICES = (
