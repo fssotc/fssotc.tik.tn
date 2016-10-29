@@ -83,13 +83,13 @@ class Inscription(models.Model):
     )
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     role = models.CharField(max_length=1, choices=ROLE, default='', blank=True)
-    session = models.DateField()  # auto_now_add=True
+    session = models.DateField(default=date.today)
     inscription_num = models.DecimalField(verbose_name="Inscription Num",
                                           null=True, blank=True, max_digits=10,
                                           decimal_places=0,
                                           help_text="Seulement pour les étudiants du FSS pour le service culturel de la faculté.")
     university = models.CharField(verbose_name="Institution / University", choices=UNIVERSITY_CHOICES, default='FSS', max_length=7, blank=True)
-    education = models.CharField(verbose_name="Cycle", choices=EDUCATION_CHOICES, default='LF', max_length=3, blank=True)
+    education = models.CharField(verbose_name="Diplome courant", choices=EDUCATION_CHOICES, default='LF', max_length=3, blank=True)
     year = models.CharField(verbose_name="Année", choices=YEAR_CHOICES, default='1', max_length=1, blank=True)
     confirmed = models.BooleanField(default=False)
     dreamspark_key = models.BooleanField(default=False)
