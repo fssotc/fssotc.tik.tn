@@ -12,7 +12,24 @@ def email(request):
         if form.is_valid():
             form.send_email()
     else:
-        form = EmailForm(request.GET)
+        data = request.GET.dict()
+        if "body" not in data:
+            data["body"] = """Cher membre,
+
+On a le plaisir de vous ....
+
+Cordialement,
+
+---
+Microsoft Tech Club Fss
+
+Phone: (+216) 28 204 299
+Website: mtcfss.azurewebsites.net
+Facebook: fb.me/MTCFss
+E-mail: mtcfss@outlook.com
+GitHub: github.com/mtcfss"""
+        print(data)
+        form = EmailForm(data)
 
     return render(request, 'db/email.html', {
         'form': form,

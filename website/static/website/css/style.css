@@ -197,28 +197,32 @@ blockquote {
     margin-left: auto;
 }
 
-.inscription_form {
+form {
     padding: 50px;
     max-width: 1000px;
     margin: auto;
 }
 
-.inscription_form label {
+form label {
     min-width: 150px;
 }
 
-.inscription_form input {
+form input {
     min-width: 250px;
 }
 
-.inscription_form .helptext {
+.mail_form textarea, .mail_form input {
+    width: 100%;
+}
+
+form .helptext {
     display: block;
     font-width: 500;
     font-size: 90%;
     color: silver;
 }
 
-.inscription_form .helptext:before {
+form .helptext:before {
     content: '*';
 }
 
