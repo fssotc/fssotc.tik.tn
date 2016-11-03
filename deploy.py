@@ -19,5 +19,11 @@ def get_key():
             return f.read().strip()
     except IOError:
         return gen_key()
+
+
+def get_email_password():
+    with open(".email_password.txt") as f:
+        return f.read().strip()
+
 if __name__ == '__main__':
     print(get_key())

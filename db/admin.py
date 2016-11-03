@@ -39,3 +39,18 @@ class InscriptionAdmin(admin.ModelAdmin):
     list_editable = ('confirmed', 'dreamspark_key', 'member_card')
 
 admin.site.register(EventLink)  # TODO: use class instead
+
+
+def email_members(admin_model, request, queryset):
+    from django.http import HttpResponseRedirect, HttpResponseForbidden
+    from django.urls import reverse
+    if isinstance(admin_model, MemberAdmin):
+        emails = [m.email for m in queryset]
+    elif isinstance(admin_model, InscriptionAdmin):
+        emails = [insc.member.email for insc in queryset]
+    else:
+        return HttpResponseForbidden()
+    return HttpResponseRedirect(reverse('send_mail') + '?to=' +
+                                ','.join(emails))
+email_members.short_description = "Email Members"
+admin.site.add_action(email_members)

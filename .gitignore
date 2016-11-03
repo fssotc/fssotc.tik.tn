@@ -21,3 +21,4 @@ local_settings.py
 
 /static/
 .secret.txt
+.email_password.txt

@@ -4,29 +4,23 @@ import deploy
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = deploy.get_key()
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
+    '127.0.0.1',
+    'mtcfss.azurewebsites.net',
 ]
 
 ADMINS = (
     ('lejenome', 'bmoez.j@gmail.com'),
 )
 
-# DEFAULT_FROM_EMAIL ='mtcfss@outlok.com'
+DEFAULT_FROM_EMAIL = 'mtcfss@outlook.com'
 
 MANAGERS = ADMINS
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -106,9 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.9/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -127,7 +118,13 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('\\', '/')
 
-STATICFILES_DIRS = (
-)
+# STATICFILES_DIRS = (
+# )
 
 WP_API_SITE_ID = '106661952'
+
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mtcfss@outlook.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST_PASSWORD = deploy.get_email_password()
