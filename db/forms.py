@@ -28,11 +28,9 @@ class MassMailThread(threading.Thread):
             try:
                 insc = m.inscription_set.get(session=Inscription.current_session())
                 ctxt.update({"inscription": insc})
-            except Exception as e:
-                print(e)
+            except:
                 pass
-        except Exception as e:
-            print(e, mail)
+        except:
             ctxt = Context()
         return tmpl.render(ctxt)
 
@@ -41,8 +39,6 @@ class MassMailThread(threading.Thread):
         mails = ((self.subject, self.render(tmpl, mail),
                   django.conf.settings.DEFAULT_FROM_EMAIL, [mail])
                  for mail in self.to)
-        import pprint
-        pprint.pprint(list(mails))
         send_mass_mail(mails, fail_silently=self.fail_silently)
 
 
