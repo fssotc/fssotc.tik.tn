@@ -207,7 +207,8 @@ form label {
     min-width: 150px;
 }
 
-form input {
+form input:not([type="checkbox"])
+{
     min-width: 250px;
 }
 
@@ -230,4 +231,89 @@ form .helptext:before {
 .msglist {
     margin: 10px;
     border: solid 2px;
+}
+.quiz label p {
+    display: inline;
+}
+.quiz ul {
+    list-style: none;
+    padding-left: 0;
+}
+.quiz .fieldWrapper li {
+    padding: 2px 0 2px 0;
+}
+
+.quiz .fieldLabel {
+    font-size: 20px;
+     line-height: 135%;
+     width: 100%;
+    color: black;
+}
+
+code,
+pre,
+.docutils.literal {
+    padding: 0 3px 2px;
+    color: #333;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    border-radius: 3px;
+}
+
+code,
+.docutils.literal {
+    padding: 2px 4px;
+    color: #d75701;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+}
+
+pre {
+    display: block;
+    padding: 8px;
+    margin: 0 0 9px;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    background-color: #f5f5f5;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+pre code,
+blockquote code {
+    padding: 0;
+    color: inherit;
+    background-color: transparent;
+    border: 0;
+}
+
+
+ol.linenums {
+    margin: 0;
+}
+
+ol.linenums li,
+.code .ln {
+    padding-left: 12px;
+    color: #bebec5;
+    line-height: 18px;
+    text-shadow: 0 1px 0 #fff;
+}
+
+ol.linenums li> span.codeline {
+    color: #333;
+}
+
+.code .ln {
+    padding-right: 10px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+pre,
+code {
+    font-family: "Source Code Pro";
 }
