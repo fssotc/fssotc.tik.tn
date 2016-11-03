@@ -4,7 +4,7 @@ import django.conf
 
 
 class EmailForm(forms.Form):
-    subject = forms.CharField(default="""Cher membre,
+    subject = forms.CharField(initial="""Cher membre,
 
 On a le plaisir de vous ....
 
