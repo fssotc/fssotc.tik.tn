@@ -4,7 +4,20 @@ import django.conf
 
 
 class EmailForm(forms.Form):
-    subject = forms.CharField()
+    subject = forms.CharField(default="""Cher membre,
+
+On a le plaisir de vous ....
+
+Cordialement,
+
+---
+Microsoft Tech Club Fss
+
+Phone: (+216) 28 204 299
+Website: mtcfss.azurewebsites.net
+Facebook: fb.me/MTCFss
+E-mail: mtcfss@outlook.com
+GitHub: github.com/mtcfss""")
     content = forms.CharField(widget=forms.Textarea)
     to = forms.CharField(widget=forms.Textarea)
 
@@ -15,4 +28,4 @@ class EmailForm(forms.Form):
         content = self.cleaned_data["content"]
         mails = ((subject, content, django.conf.settings.DEFAULT_FROM_EMAIL,
                   [m]) for m in to)
-        send_mass_mail(mails)
+        send_mass_mail(mails, fail_silently=True)
