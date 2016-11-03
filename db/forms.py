@@ -4,7 +4,7 @@ from django.template import Context, Template
 import django.conf
 import threading
 
-from .models import Member
+from .models import Member, Inscription
 
 
 class MassMailThread(threading.Thread):
@@ -25,6 +25,12 @@ class MassMailThread(threading.Thread):
                             "phone": m.phone,
                             "username": m.username,
                             })
+            try:
+                insc = m.inscription_set.get(session=Inscription.current_session())
+                ctxt.update({"inscription": insc})
+            except Exception as e:
+                print(e)
+                pass
         except Exception as e:
             print(e, mail)
             ctxt = Context()
@@ -42,7 +48,8 @@ class MassMailThread(threading.Thread):
 
 class EmailForm(forms.Form):
     subject = forms.CharField()
-    body = forms.CharField(widget=forms.Textarea)
+    body = forms.CharField(widget=forms.Textarea,
+                           help_text="Template body. Available context: name, family_name, email, phone, username, inscription.{year,session,education,university,role,confirmed}")
     to = forms.CharField(widget=forms.Textarea)
 
     def send_email(self):

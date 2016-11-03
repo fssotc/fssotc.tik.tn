@@ -81,9 +81,15 @@ class Inscription(models.Model):
         ('3', 3),
         ('', 'Autre...'),
     )
+    SESSIONS = (
+        ('2015-2016', '2015-2016'),
+        ('2016-2017', '2016-2017'),
+    )
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     role = models.CharField(max_length=1, choices=ROLE, default='', blank=True)
-    session = models.DateField(default=date.today)
+    date = models.DateField(auto_now_add=True)
+    session = models.CharField(choices=SESSIONS, default=SESSIONS[-1][1],
+                               max_length=9)
     inscription_num = models.DecimalField(verbose_name="Inscription Num",
                                           null=True, blank=True, max_digits=10,
                                           decimal_places=0,
@@ -95,23 +101,23 @@ class Inscription(models.Model):
     dreamspark_key = models.BooleanField(default=False)
     member_card = models.BooleanField(default=False)
 
+    class Meta:
+        unique_together = ("member", "session")
+
     def is_current(self):
-        _date = date.today()
-        if _date.month < 9:
-            _date = date(_date.year - 1, 9, 1)
-        else:
-            _date = date(_date.year, 9, 1)
-        if (self.session > _date and
-                self.session < date(_date.year + 1, _date.month, _date.day)):
-                return True
-        return False
+        return self.get_session_display() == self.current_session()
     is_current.boolean = True
 
-    def __str__(self):
-        if self.session.month < 9:
-            return "%d-%d" % (self.session.year - 1, self.session.year)
+    @staticmethod
+    def current_session():
+        today = date.today()
+        if today.month < 9:
+            return "%d-%d" % (today.year - 1, today.year)
         else:
-            return "%d-%d" % (self.session.year, self.session.year + 1)
+            return "%d-%d" % (today.year, today.year + 1)
+
+    def __str__(self):
+        return self.get_session_display()
 
 
 class EventManager(models.Manager):
