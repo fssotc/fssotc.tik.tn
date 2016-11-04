@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = deploy.get_key()
 
-DEBUG = False
+DEBUG = deploy.is_dev_env()
 
 ALLOWED_HOSTS = [
     'localhost',

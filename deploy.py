@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from django.utils.crypto import get_random_string
+import os
 
 # Based on Django's SECRET_KEY hash generator
 # https://github.com/django/django/blob/9893fa12b735f3f47b35d4063d86dddf3145cb25/django/core/management/commands/startproject.py
@@ -24,6 +25,10 @@ def get_key():
 def get_email_password():
     with open(".email_password.txt") as f:
         return f.read().strip()
+
+
+def is_dev_env():
+    return os.path.exists('.dev.txt')
 
 if __name__ == '__main__':
     print(get_key())
