@@ -17,7 +17,8 @@ class EventLinkInline(admin.TabularInline):
 class MemberAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'phone', 'email')
     inlines = [InscriptionInline]
-    search_fields = ['name', 'family_name', 'inscription__education', 'inscription__university']
+    search_fields = ['name', 'family_name', 'inscription__education',
+                     'inscription__university']
     list_filter = ('inscription__education', MemberInscriptionSessionFilter,)
 
 

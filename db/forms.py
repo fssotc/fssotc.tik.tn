@@ -26,7 +26,8 @@ class MassMailThread(threading.Thread):
                             "username": m.username,
                             })
             try:
-                insc = m.inscription_set.get(session=Inscription.current_session())
+                insc = m.inscription_set.get(
+                    session=Inscription.current_session())
                 ctxt.update({"inscription": insc})
             except:
                 pass
@@ -44,8 +45,11 @@ class MassMailThread(threading.Thread):
 
 class EmailForm(forms.Form):
     subject = forms.CharField()
-    body = forms.CharField(widget=forms.Textarea,
-                           help_text="Template body. Available context: name, family_name, email, phone, username, inscription.{year,session,education,university,role,confirmed}")
+    body = forms.CharField(
+        widget=forms.Textarea,
+        help_text="Template body. Available context: name, family_name, "
+        "email, phone, username, inscription.{year,session,education,"
+        "university,role,confirmed}")
     to = forms.CharField(widget=forms.Textarea)
 
     def send_email(self):

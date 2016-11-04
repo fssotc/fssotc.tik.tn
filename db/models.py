@@ -9,14 +9,18 @@ from django.core.exceptions import ValidationError
 
 class Member(models.Model):
     name = models.CharField(max_length=40, verbose_name="Prénom / Name")
-    family_name = models.CharField(max_length=40, verbose_name="Nom / Family Name")
+    family_name = models.CharField(max_length=40,
+                                   verbose_name="Nom / Family Name")
     email = models.EmailField(unique=True, verbose_name="E-mail")
-    phone = models.DecimalField(max_digits=8, decimal_places=0, verbose_name="Phone", blank=True, null=True)
-    address = models.CharField(max_length=400, blank=True, null=True, verbose_name="Addresse",
-                               help_text="Juste la Route (e.g: Rt Matar, Rt Sokra)")
-    username = models.CharField(max_length=20, blank=True, verbose_name="GitHub username")
-    birthday = models.DateField(blank=True, null=True, verbose_name="Date de naissance")
-    # new = models.BooleanField(default=True)  # is new if now inscription on old session
+    phone = models.DecimalField(max_digits=8, decimal_places=0,
+                                verbose_name="Phone", blank=True, null=True)
+    address = models.CharField(
+        max_length=400, blank=True, null=True, verbose_name="Addresse",
+        help_text="Juste la Route (e.g: Rt Matar, Rt Sokra)")
+    username = models.CharField(max_length=20, blank=True,
+                                verbose_name="GitHub username")
+    birthday = models.DateField(blank=True, null=True,
+                                verbose_name="Date de naissance")
 
     def is_new(self):
         today = date.today()
@@ -55,12 +59,15 @@ class Inscription(models.Model):
     UNIVERSITY_CHOICES = (
         ("FSS", "Faculté des Sciences de Sfax"),
         ("ENIS", "Ecole Nationale des Ingénieurs de Sfax"),
-        ("ISIMS", "Institut Supérieur d'Informatique et de Multimédia de Sfax"),
-        ("ENETCOM", "Ecole Nationale d'electronique et de télécommunications de Sfax"),
+        ("ISIMS",
+         "Institut Supérieur d'Informatique et de Multimédia de Sfax"),
+        ("ENETCOM",
+         "Ecole Nationale d'electronique et de télécommunications de Sfax"),
         ("FSEGS", "Faculté des Sciences Economiques et de Gestion de Sfax"),
         ("IPEIS", "Institut Préparatoire aux Etudes d'Ingénieurs de Sfax"),
         ("ISGIS", "Institut Supérieur de Gestion Industrielle de Sfax"),
-        ("IPSAS", "Institut Polytechnique Privé des Sciences Avancées de Sfax"),
+        ("IPSAS",
+         "Institut Polytechnique Privé des Sciences Avancées de Sfax"),
         ("ISETS", "Institut Supérieur des Etudes Technologiques de Sfax"),
         ("IIT", "Institut International de Technologie Sfax"),
         ("", "Autre..."),
@@ -91,13 +98,18 @@ class Inscription(models.Model):
     date = models.DateField(auto_now_add=True)
     session = models.CharField(choices=SESSIONS, default=SESSIONS[-1][1],
                                max_length=9)
-    inscription_num = models.DecimalField(verbose_name="Inscription Num",
-                                          null=True, blank=True, max_digits=10,
-                                          decimal_places=0,
-                                          help_text="Seulement pour les étudiants du FSS pour le service culturel de la faculté.")
-    university = models.CharField(verbose_name="Institution / University", choices=UNIVERSITY_CHOICES, default='FSS', max_length=7, blank=True)
-    education = models.CharField(verbose_name="Diplome courant", choices=EDUCATION_CHOICES, default='LF', max_length=3, blank=True)
-    year = models.CharField(verbose_name="Année", choices=YEAR_CHOICES, default='1', max_length=1, blank=True)
+    inscription_num = models.DecimalField(
+        verbose_name="Inscription Num", null=True, blank=True, max_digits=10,
+        decimal_places=0, help_text="Seulement pour les étudiants du FSS pour "
+        "le service culturel de la faculté.")
+    university = models.CharField(verbose_name="Institution / University",
+                                  choices=UNIVERSITY_CHOICES, default='FSS',
+                                  max_length=7, blank=True)
+    education = models.CharField(verbose_name="Diplome courant",
+                                 choices=EDUCATION_CHOICES, default='LF',
+                                 max_length=3, blank=True)
+    year = models.CharField(verbose_name="Année", choices=YEAR_CHOICES,
+                            default='1', max_length=1, blank=True)
     confirmed = models.BooleanField(default=False)
     dreamspark_key = models.BooleanField(default=False)
     member_card = models.BooleanField(default=False)
