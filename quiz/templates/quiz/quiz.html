@@ -1,13 +1,13 @@
 {% extends 'website/layout.html' %}
 {% load staticfiles%}
 {% load shuffle %}
-{% block pagetitle %}Python Quiz | Microsoft Tech Club FSS{% endblock %}
+{% block pagetitle %}{{ form.instance.quiz.title.capitalize}} Quiz | Microsoft Tech Club FSS{% endblock %}
 {% block content_section %}
 <form method="post" action="" class="quiz">
     {% csrf_token %}
 
     <p>
-	    <span class="tag tag-pill tag-primary float-xs-right">Score: {{ score }}/ {{ max_score }}</span>
+         <span class="tag tag-pill tag-primary float-xs-right">Score: {{ score }} / {{ form.max_score }}</span>
     </p>
 
     {% for field in form %}

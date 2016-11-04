@@ -1,7 +1,10 @@
 from django.conf.urls import url
 
-from .views import python_quiz
+from .views import quiz
 
 urlpatterns = [
-    url(r'^python$', python_quiz),
+    url(r'^(?P<quiz_pk>\d+)$', quiz),
+    url(r'^(?P<quiz_title>\w+)$', quiz),
+    url(r'^(?P<quiz_pk>\d+)/(?P<member_pk>\d+)$', quiz),
+    url(r'^(?P<quiz_title>\w+)/(?P<member_pk>\d+)$', quiz),
 ]

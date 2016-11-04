@@ -4,23 +4,13 @@ import django.forms
 import docutils.core
 import docutils.io
 
+from .models import Quiz, Question, Choice, Question, Submission
+
 
 class _html(str):
 
     def __html__(self):
         return self
-
-
-class _yes(_html):
-
-    def __bool__(self):
-        return True
-
-
-class _not(_html):
-
-    def __bool__(self):
-        return False
 
 
 def _rst(text):
@@ -34,113 +24,33 @@ def _rst(text):
     pub.set_source(source=text, source_path=None)
     pub.set_destination(None, None)
     pub.publish()
-    html = ''.join(pub.writer.body)
-    return _yes(html) if text else _not(html)
+    return _html(''.join(pub.writer.body))
 
 
-def _q(question, choices):
-    choices = [(str(e[0]), _rst(e[1])) for e in enumerate(choices)]
-    return forms.MultipleChoiceField(choices=choices, label=_rst(question),
-                                     widget=forms.CheckboxSelectMultiple,
-                                     required=False, label_suffix='')
+class QuizForm(forms.Form):
 
+    def __init__(self, *args, instance=None, **kwargs):
+        super(QuizForm, self).__init__(*args, **kwargs)
+        self.instance = instance
+        self.max_score = 0
+        for q in self.instance.quiz.question_set.all():
+            self.fields[str(q.pk)] = self.to_field(q)
+            self.max_score += q.score if not q.bonus else 0
 
-class PythonQuizForm(forms.Form):
-    q1 = _q('Python est une langue', (
-        _yes('Dynamique'),
-        _not('Typée'),
-        _yes('Non typée'),
-        _not("Statique"),
-        _yes("Interprétée"),
-        _not("Compilée"),
-    ))
-    q2 = _q('Extension du fichier source en Python', (
-        _yes('``.py``'),
-        _not('``.pyo``'),
-        _not('``.pys``'),
-        _not('``.python``'),
-    ))
-    q3 = _q('String multi-lignes peut être exprimé sans ``\\n`` avec', (
-        _not("Single quotes"),
-        _not("Double quotes"),
-        _yes("Triple quotes"),
-    ))
-    q4 = _q('``//`` en python est', (
-        _not("Commentaire"),
-        _not("Commentaire multi-lignes"),
-        _yes("Opérateur du division Int"),
-        _not("Opérateur du division Float"),
-        _not("Opérateur du division Double"),
-    ))
-    q5 = _q('''L'output de
-
-.. code:: python
-
-   print(r"""\\n1\\n2""")''', (
-        _yes("``\\n1\\n2``"),
-        _not("``12``"),
-        _not("Aucune Correcte"),
-    ))
-    q6 = _q("On peut séparer multiple statements en même ligne en python avec", (
-        _yes("``;``"),
-        _not("``,``"),
-        _not("``\\``"),
-        _not("Non supporté"),
-    ))
-
-    q7 = _q("La fin d'un block est indiqué par le caractère", (
-        _not("``;``"),
-        _not("``\\``"),
-        _not("``,``"),
-        _yes("Aucun"),
-    ))
-
-    q8 = _q("``__str__`` est", (
-        _yes("une méthode qui retourne une chaine représentant l'objet"),
-        _not("une méthode qui affiche une chaine représentant  l'objet"),
-        _not("une méthode qui converte l'objet à une chaine"),
-        _yes("équivalant à ``toString()`` on Java"),
-    ))
-
-    q9 = _q("Pour vérifier le type d'un objet, on peut utiliser la fonction", (
-        _yes("``type()``"),
-        _not("``typeof()``"),
-        _not("``instanceof()``"),
-        _yes("``isinstance()``"),
-        _not("``belongs()``"),
-    ))
-
-    q10 = _q('``pass`` est utiliser', (
-        _yes("pour définir un block vide"),
-        _not("pour retourner ``True``"),
-        _not("pour retourner ``False``"),
-        _not('comme équivalant du ``continue``'),
-        _not('comme équivalant du ``break``'),
-    ))
-
-    q11 = _q("""Quelle est la valeur finale de la variable b
-
-.. code:: python
-
-    a = 7
-    b = 12
-    if a > 5:
-        b = b - 4
-    if b >= 10:
-        b = b + 1""", (
-        _not("``8``"),
-        _not("``9``"),
-        _not("``12``"),
-        _yes("``13``"),
-    ))
+    def to_field(self, q):
+        return forms.MultipleChoiceField(
+            label=_rst(q.title),
+            choices=[(str(c.pk), _rst(c.title)) for c in q.choice_set.all()],
+            widget=forms.CheckboxSelectMultiple,
+            required=False, label_suffix='')
 
     def score(self):
         _sc = 0
-        for f in self.cleaned_data:
-            if f not in self.changed_data:
-                continue
-            correct = all(k in self.cleaned_data[f] if w
-                          else k not in self.cleaned_data[f]
-                          for k, w in self.fields[f].choices)
-            _sc += 2 if correct else -2
+        for f in self.changed_data:
+            q = self.instance.quiz.question_set.get(pk=f)
+            correct = all(str(c.pk) in self.cleaned_data[f]
+                          if c.correct
+                          else str(c.pk) not in self.cleaned_data[f]
+                          for c in q.choice_set.all())
+            _sc += q.score if correct else - q.score
         return _sc
