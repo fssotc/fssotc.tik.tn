@@ -963,7 +963,7 @@ class WPAPILoader(object):
         existing_IDs = set(Post.objects.filter(site_id=self.site_id,
                                                post_type="attachment",
                                                parent__icontains='"ID":{}'.format(api_post["ID"]))
-                                       .values_list("wp_id", flat=True))
+                           .values_list("wp_id", flat=True))
 
         # can't delete what we don't have
         if existing_IDs:

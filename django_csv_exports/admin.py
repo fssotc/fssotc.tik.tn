@@ -44,6 +44,7 @@ export_as_csv.short_description = "Export selected objects as csv file"
 
 
 class CSVExportAdmin(admin.ModelAdmin):
+
     def get_actions(self, request):
         actions = super(CSVExportAdmin, self).get_actions(request)
         if self.has_csv_permission(request):
