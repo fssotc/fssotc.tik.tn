@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'website',
     'blog',
     'inscription',
+    'quiz',
 ]
 
 MIDDLEWARE_CLASSES = [

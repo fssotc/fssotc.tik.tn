@@ -1,0 +1,44 @@
+{% extends 'website/layout.html' %}
+{% load staticfiles%}
+{% load shuffle %}
+{% block pagetitle %}Python Quiz | Microsoft Tech Club FSS{% endblock %}
+{% block content_section %}
+<form method="post" action="" class="quiz">
+    {% csrf_token %}
+
+    <p>
+	    <span class="tag tag-pill tag-primary float-xs-right">Score: {{ score }}/ {{ max_score }}</span>
+    </p>
+
+    {% for field in form %}
+    <div class="fieldWrapper form-group">
+
+        {{ field.errors }}
+
+        <div class="fieldLabel">{{ field.label }}</div>
+
+        {% for check in field|shuffle %}
+        <div class="form-check">
+            <label class="custom-control custom-checkbox" for="{{ check.id_for_label }}">
+              <input type="checkbox" class="custom-control-input"
+                id="{{ check.id_for_label }}"
+                {% if check.is_checked %} checked="checked" {% endif %}
+                name="{{ check.name }}"
+                value="{{ check.choice_value }}">
+                <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">{{ check.choice_label }}</span>
+            </label>
+          </div>
+        {% endfor %}
+
+        {% if field.help_text %}
+        <p class="help form-text text-muted">{{ field.help_text|safe }}</p>
+        {% endif %}
+
+    </div>
+    <hr />
+    {% endfor %}
+
+    <input type="submit" value="submit" class="btn btn-primary" />
+</form>
+{% endblock %}
