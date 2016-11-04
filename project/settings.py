@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = deploy.get_key()
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -23,6 +23,7 @@ DEFAULT_FROM_EMAIL = 'mtcfss@outlook.com'
 MANAGERS = ADMINS
 
 INSTALLED_APPS = [
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'blog',
     'inscription',
     'quiz',
+    'nested_admin',
 ]
 
 MIDDLEWARE_CLASSES = [

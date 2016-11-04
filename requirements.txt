@@ -1,6 +1,8 @@
 decorators==0.1
 Django==1.10.3
 django-after-response==0.2.2
+django-grappelli==2.8.2
+django-nested-admin==3.0.12
 django-wordpress-rest==0.1.3
 docutils==0.12
 jsonfield==1.0.3
@@ -8,5 +10,6 @@ mock==2.0.0
 pbr==1.10.0
 Pygments==2.1.3
 python-dateutil==2.5.3
+python-monkey-business==1.0.0
 requests==2.11.1
 six==1.10.0
