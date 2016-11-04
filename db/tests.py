@@ -15,12 +15,12 @@ class MemberTestCase(TestCase):
 
     def test_members_default_values(self):
         usr1 = Member.objects.get(name='user1')
-        ins1 = Inscription.objects.create(session=date(2016, 8, 31),
+        ins1 = Inscription.objects.create(session='2015-2016',
                                           university='FSS',
                                           education='LF',
                                           year='1',
                                           member=usr1,)
-        ins2 = Inscription.objects.create(session=date(2016, 9, 1),
+        ins2 = Inscription.objects.create(session='2016-2017',
                                           university='FSS',
                                           education='LF',
                                           year='2',
@@ -47,12 +47,9 @@ class MemberTestCase(TestCase):
         self.assertEqual(usr1.is_new(), False)
 
     def test_inscription_is_current(self):
-        _date = date.today()
         usr1 = Member.objects.get(name='user1')
-        ins1 = Inscription.objects.create(session=_date,
-                                          member=usr1,)
-        _date = date(_date.year - 1, _date.month, _date.day)
-        ins2 = Inscription.objects.create(session=_date,
+        ins1 = Inscription.objects.create(member=usr1,)
+        ins2 = Inscription.objects.create(session='2015-2016',
                                           member=usr1,)
         self.assertEqual(ins1.is_current(), True)
         self.assertEqual(ins2.is_current(), False)
