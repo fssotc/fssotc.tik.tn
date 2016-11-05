@@ -32,7 +32,7 @@ class CandidatForm(forms.ModelForm):
 
     class Meta:
         model = Member
-        fields = ('name', 'family_name', 'email', 'phone')
+        fields = ('email', 'username')
 
 
 class QuizForm(forms.Form):

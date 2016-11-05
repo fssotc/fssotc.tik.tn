@@ -6,7 +6,14 @@
 <form method="post" action="" class="quiz">
     {% csrf_token %}
 
-    {{ candidat_form.as_p }}
+    {% for field in candidat_form %}
+    <p>
+        {% if field.field.required %}<strong>{% endif %}
+            {{ field.label_tag }}
+        {% if field.field.required %}</strong>{% endif %}
+        {{ field }}
+    </p>
+    {% endfor %}
 
     <p>
          <span class="tag tag-pill tag-primary float-xs-right">Score: {{ score }} / {{ form.max_score }}</span>
