@@ -40,6 +40,21 @@ class Submission(models.Model):
     def __str__(self):
         return "{} - {}".format(self.quiz, self.member)
 
+    def score(self):
+        sc = 0
+        for q in self.quiz.question_set.all():
+            answered = False
+            correct = True
+            for c in q.choice_set.all():
+                a = self.answer_set.get(choice=c)
+                if a.value:
+                    answered = True
+                if a.value != c.correct:
+                    correct = False
+            if answered:
+                sc += q.score if correct else - q.score
+        return sc
+
 
 class Answer(models.Model):
     submission = models.ForeignKey(Submission, on_delete=models.CASCADE)

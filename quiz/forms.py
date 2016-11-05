@@ -4,7 +4,8 @@ import django.forms
 import docutils.core
 import docutils.io
 
-from .models import Quiz, Question, Choice, Question, Submission
+from .models import Quiz, Question, Choice, Question, Submission, Answer
+from db.models import Member
 
 
 class _html(str):
@@ -27,6 +28,13 @@ def _rst(text):
     return _html(''.join(pub.writer.body))
 
 
+class CandidatForm(forms.ModelForm):
+
+    class Meta:
+        model = Member
+        fields = ('name', 'family_name', 'email', 'phone')
+
+
 class QuizForm(forms.Form):
 
     def __init__(self, *args, instance=None, **kwargs):
@@ -38,19 +46,29 @@ class QuizForm(forms.Form):
             self.max_score += q.score if not q.bonus else 0
 
     def to_field(self, q):
+        initial = []
+        choices = []
+        for c in q.choice_set.all():
+            choices.append((str(c.pk), _rst(c.title)))
+            try:
+                a = self.instance.answer_set.get(choice=c)
+                if a.value:
+                    initial.append(c.pk)
+            except:
+                pass
         return forms.MultipleChoiceField(
             label=_rst(q.title),
-            choices=[(str(c.pk), _rst(c.title)) for c in q.choice_set.all()],
+            choices=choices, initial=initial,
             widget=forms.CheckboxSelectMultiple,
             required=False, label_suffix='')
 
-    def score(self):
-        _sc = 0
-        for f in self.changed_data:
-            q = self.instance.quiz.question_set.get(pk=f)
-            correct = all(str(c.pk) in self.cleaned_data[f]
-                          if c.correct
-                          else str(c.pk) not in self.cleaned_data[f]
-                          for c in q.choice_set.all())
-            _sc += q.score if correct else - q.score
-        return _sc
+    def save(self):
+        for q in self.instance.quiz.question_set.all():
+            for c in q.choice_set.all():
+                v = str(c.pk) in self.cleaned_data[str(q.pk)]
+                try:
+                    a = self.instance.answer_set.get(choice__pk=c.pk)
+                except:
+                    a = Answer(submission=self.instance, choice=c)
+                a.value = v
+                a.save()
