@@ -41,3 +41,4 @@ class QuizAdmin(nested_admin.NestedModelAdmin):
 @admin.register(Submission)
 class Submission(admin.ModelAdmin):
     inlines = [AnswerInline]
+    list_display = ('__str__', 'score')
