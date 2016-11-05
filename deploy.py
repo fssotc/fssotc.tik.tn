@@ -23,8 +23,12 @@ def get_key():
 
 
 def get_email_password():
-    with open(".email_password.txt") as f:
-        return f.read().strip()
+    try:
+        with open(".email_password.txt") as f:
+            return f.read().strip()
+    except:
+        print("ERROR: .email_password.txt Not Found")
+        return None
 
 
 def is_dev_env():
