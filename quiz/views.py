@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.views.generic.edit import FormView
 
 from .forms import QuizForm, CandidatForm
@@ -20,7 +20,10 @@ def quiz(request, quiz_pk=None, quiz_title=None, member_pk=None,
     elif member_email:
         member = get_object_or_404(Member, email=member_email)
     elif request.method == 'POST':
-        member = get_object_or_404(Member, email=request.POST['email'])
+        try:
+            member = Member.object.get(email=request.POST['email'])
+        except:
+            return HttpResponseForbidden()
     else:
         member = Member()
 
