@@ -1,6 +1,7 @@
 {% extends 'website/layout.html' %}
 {% load staticfiles%}
 {% load shuffle %}
+{% load cache %}
 {% block pagetitle %}{{ form.instance.quiz.title.capitalize}} Quiz | Microsoft Tech Club FSS{% endblock %}
 {% block content_section %}
 <form method="post" action="" class="quiz">
@@ -24,7 +25,9 @@
 
         {{ field.errors }}
 
-        <div class="fieldLabel">{{ field.label }}</div>
+	{% cache 3600 question field.auto_id %}
+	<div class="fieldLabel">{{ field.label }}</div>
+	{% endcache %}
 
         {% for check in field|shuffle %}
         <div class="form-check">
@@ -35,7 +38,9 @@
                 name="{{ check.name }}"
                 value="{{ check.choice_value }}">
                 <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">{{ check.choice_label }}</span>
+		{% cache 3600 choice check.id_for_label %}
+		<span class="custom-control-description">{{ check.choice_label }}</span>
+		{% endcache %}
             </label>
           </div>
         {% endfor %}

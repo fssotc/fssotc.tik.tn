@@ -9,24 +9,20 @@ from .models import Quiz, Question, Choice, Question, Submission, Answer
 from db.models import Member
 
 
-class _html(str):
-
-    def __html__(self):
-        return self
-
-
-def _rst(text):
-    pub = docutils.core.Publisher(
+class _rst(str):
+    _pub = docutils.core.Publisher(
         source_class=docutils.io.StringInput,
         destination_class=docutils.io.StringOutput,
     )
-    pub.set_components(parser_name="rst", reader_name="standalone",
-                       writer_name="html4css1")
-    pub.get_settings(traceback=True, syntax_highlight='short')
-    pub.set_source(source=text, source_path=None)
-    pub.set_destination(None, None)
-    pub.publish()
-    return _html(''.join(pub.writer.body))
+    _pub.set_components(parser_name="rst", reader_name="standalone",
+                        writer_name="html4css1")
+    _pub.get_settings(traceback=True, syntax_highlight='short')
+    _pub.set_destination(None, None)
+
+    def __html__(self):
+        self._pub.set_source(source=self, source_path=None)
+        self._pub.publish()
+        return ''.join(self._pub.writer.body)
 
 
 class CandidatForm(forms.ModelForm):
