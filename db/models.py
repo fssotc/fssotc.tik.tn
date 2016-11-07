@@ -11,7 +11,8 @@ class Member(models.Model):
     name = models.CharField(max_length=40, verbose_name="Prénom / Name")
     family_name = models.CharField(max_length=40,
                                    verbose_name="Nom / Family Name")
-    email = models.EmailField(unique=True, verbose_name="E-mail")
+    email = models.EmailField(unique=True, verbose_name="E-mail",
+                              db_index=True)
     phone = models.DecimalField(max_digits=8, decimal_places=0,
                                 verbose_name="Phone", blank=True, null=True)
     address = models.CharField(
