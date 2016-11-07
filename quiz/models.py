@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from db.models import Member
 
@@ -8,6 +9,9 @@ class Quiz(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('quiz', kwargs={'quiz_pk': self.pk})
 
 
 class Question(models.Model):
@@ -42,21 +46,31 @@ class Submission(models.Model):
 
     def score(self):
         sc = 0
-        for q in self.quiz.question_set.all():
+        qs = self.quiz.question_set.all()[::1]
+        answers = self.answer_set.select_related('choice').all()[::1]
+        for q in qs:
             answered = False
             correct = True
-            for c in q.choice_set.all():
-                a = self.answer_set.get(choice=c)
+            ans = [a for a in answers if a.choice.question_id == q.id]
+            for a in ans:
                 if a.value:
                     answered = True
-                if a.value != c.correct:
+                if a.value != a.choice.correct:
                     correct = False
             if answered:
                 sc += q.score if correct else - q.score
         return sc
+
+    def get_absolute_url(self):
+        return reverse('submission', kwargs={
+            'quiz_title': self.quiz.title,
+            'member_email': self.member.email})
 
 
 class Answer(models.Model):
     submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
     value = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{}:{}".format(self.value, self.choice)

@@ -39,7 +39,7 @@ class Member(models.Model):
             m = Member.objects.filter(username__iexact=self.username)
             if self.id:
                 m = m.exclude(id=self.id)
-            if len(m):
+            if m.exists():
                 raise ValidationError("Username should be uniqe")
 
     def __str__(self):

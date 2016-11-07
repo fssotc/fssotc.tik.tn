@@ -19,32 +19,34 @@ def quiz(request, quiz_pk=None, quiz_title=None, member_pk=None,
         member = get_object_or_404(Member, email=member_email)
     elif request.method == 'POST':
         try:
-            member = Member.object.get(email=request.POST['email'])
+            member = Member.objects.get(email=request.POST['email'])
         except:
             return HttpResponseForbidden()
     else:
         member = Member()
 
+    score = 0
     try:
         instance = Submission.objects.get(quiz=quiz, member=member)
-        score = instance.score()
+        if request.method == "GET":
+            score = instance.score()
+        submission_is_new = False
     except:
         instance = Submission(quiz=quiz, member=member)
-        score = 0
+        submission_is_new = True
 
     if request.method == 'POST':
         candidat_form = CandidatForm(request.POST, instance=member)
-        form = QuizForm(request.POST, instance=instance)
+        form = QuizForm(request.POST, instance=instance,
+                        is_new=submission_is_new)
         if candidat_form.is_valid() and form.is_valid():
             candidat_form.save()
             instance.save()
             form.save()
-            return HttpResponseRedirect(reverse('submission', kwargs={
-                "quiz_title": quiz.title,
-                "member_email": member.email}))
+            score = instance.score()
     else:
         candidat_form = CandidatForm(instance=member)
-        form = QuizForm(instance=instance)
+        form = QuizForm(instance=instance, is_new=submission_is_new)
 
     return render(request, 'quiz/quiz.html', {
         'candidat_form': candidat_form,
