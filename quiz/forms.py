@@ -41,14 +41,16 @@ class QuizForm(forms.Form):
         super(QuizForm, self).__init__(*args, **kwargs)
         self.instance = instance
         self.max_score = 0
+        choices = Choice.objects.filter(question__quiz=self.instance.quiz)[::1]
         for q in self.instance.quiz.question_set.all():
-            self.fields[str(q.pk)] = self.to_field(q)
+            cs = [c for c in choices if c.question_id == q.id]
+            self.fields[str(q.pk)] = self.to_field(q, cs)
             self.max_score += q.score if not q.bonus else 0
 
-    def to_field(self, q):
+    def to_field(self, q, cs):
         initial = []
         choices = []
-        for c in q.choice_set.all():
+        for c in cs:
             choices.append((str(c.pk), _rst(c.title)))
             try:
                 a = self.instance.answer_set.get(choice=c)
