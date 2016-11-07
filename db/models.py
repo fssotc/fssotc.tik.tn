@@ -3,6 +3,8 @@ from datetime import date
 from django.db import models
 from django.db.models.query_utils import Q
 from django.core.exceptions import ValidationError
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -132,6 +134,34 @@ class Inscription(models.Model):
 
     def __str__(self):
         return self.get_session_display()
+
+
+@receiver(post_save, sender=Inscription)
+def inscription_confirmation(sender, instance, created, raw, using,
+                             update_fields, **kwargs):
+    if created and instance.member:
+        from .email import send_mails
+        send_mails([instance.member.email],
+                   "Welcome to Microsoft Tech Club FSS!",
+                   """Welcome MTCFSS member,
+
+- You need to create an account at github.com to access MTCFSS projects.
+- Please confirm your email address and your GitHub account by sending your
+GitHub username to mtcfss@outlook.com.
+
+Sincerely,
+
+---
+Microsoft Tech Club Fss
+
+Phone: (+216) 28 204 299
+Website: mtcfss.azurewebsites.net
+Facebook: fb.me/MTCFss
+E-mail: mtcfss@outlook.com
+GitHub: github.com/mtcfss""")
+
+    # if "dreamspark_key" in update_fields:
+    # FIXME: email dreamspark key
 
 
 class EventManager(models.Manager):
