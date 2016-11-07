@@ -11,8 +11,12 @@ DEBUG = deploy.is_dev_env()
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    '192.168.20.1',
     'mtcfss.azurewebsites.net',
+    '.mtcfss.lan',
+    'wpad',
 ]
+INTERNAL_IPS = ('127.0.0.1',)
 
 ADMINS = (
     ('lejenome', 'bmoez.j@gmail.com'),
@@ -39,15 +43,16 @@ INSTALLED_APPS = [
     'inscription',
     'quiz',
     'nested_admin',
+    'debug_toolbar',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]

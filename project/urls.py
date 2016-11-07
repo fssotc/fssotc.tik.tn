@@ -1,4 +1,5 @@
 from django.conf.urls import url, include
+from django.conf import settings
 from django.contrib import admin
 from website.views import index
 
@@ -14,3 +15,9 @@ urlpatterns = [
     url(r'^quiz/', include('quiz.urls')),
     url(r'', include('db.urls')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

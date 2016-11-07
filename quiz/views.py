@@ -6,8 +6,6 @@ from .forms import QuizForm, CandidatForm
 from .models import Submission, Quiz
 from db.models import Member
 
-# Create your views here.
-
 
 def quiz(request, quiz_pk=None, quiz_title=None, member_pk=None,
          member_email=None):
