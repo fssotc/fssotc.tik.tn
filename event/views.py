@@ -10,6 +10,8 @@ from .models import Register
 def register(request, event_id):
     msg = ''
     event = get_object_or_404(Event, pk=event_id)
+    if event.end_date and event.end_date < datetime.date.today():
+        return render(request, 'event/ended.html', {'event': event})
     if request.method == 'POST':
         try:
             member = Member.objects.get(email=request.POST['email'])
