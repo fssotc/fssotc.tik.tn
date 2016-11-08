@@ -18,7 +18,7 @@
            {{ field.errors }}
         </div>
 
-        <label class="col-sm-3 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <label class="col-sm-3 col-form-label {% if field.field.required %}required{% endif %}" for="{{ field.id_for_label }}">{{ field.label }}</label>
         <div class="col-sm-9">{{ field }}</div>
 
         {% if field.help_text %}

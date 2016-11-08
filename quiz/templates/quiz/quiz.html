@@ -9,9 +9,7 @@
 
     {% for field in candidat_form %}
     <p>
-        {% if field.field.required %}<strong>{% endif %}
-            {{ field.label_tag }}
-        {% if field.field.required %}</strong>{% endif %}
+        <label class="{% if field.field.required %}required{% endif %}" for="{{ field.id_for_label }}">{{ field.label }}</label>
         {{ field }}
     </p>
     {% endfor %}

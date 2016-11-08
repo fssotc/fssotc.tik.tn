@@ -242,6 +242,12 @@ form .helptext:before {
     color: black;
 }
 
+form label.required:after {
+    content: ' *';
+    font-weight: 900;
+    color: red;
+}
+
 code,
 pre,
 .docutils.literal {
