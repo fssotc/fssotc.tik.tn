@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.views.generic.edit import FormView
+from django.utils import timezone
 
 from .forms import QuizForm, CandidatForm
 from .models import Submission, Quiz
@@ -13,6 +14,10 @@ def quiz(request, quiz_pk=None, quiz_title=None, member_pk=None,
         quiz = get_object_or_404(Quiz, pk=quiz_pk)
     else:
         quiz = get_object_or_404(Quiz, title=quiz_title)
+    if (quiz.start and quiz.start > timezone.now()) or (
+            quiz.end and quiz.end < timezone.now()):
+        return render(request, "quiz/inactive.html", {"quiz": quiz})
+
     if member_pk:
         member = get_object_or_404(Member, pk=member_pk)
     elif member_email:

@@ -1,0 +1,12 @@
+{% extends 'website/layout.html' %}
+{% load staticfiles%}
+{% block pagetitle %}{{ quiz.title.capitalize}} Quiz | Microsoft Tech Club FSS{% endblock %}
+{% block content_section %}
+<h3>Quiz is closed</h3>
+{% if quiz.start %}
+<p>Start Date: {{ quiz.start | date:"D, d M Y H:i (e)" }}</p>
+{% endif %}
+{% if quiz.end %}
+<p>End Date: {{ quiz.end | date:"D, d M Y H:i (e)" }}</p>
+{% endif %}
+{% endblock %}

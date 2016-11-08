@@ -16,9 +16,12 @@
     </p>
     {% endfor %}
 
-    <p>
+    <div class="info-bar">
+	    {% if form.instance.quiz.end %}
+	    <span class="tag tag-pill tag-danger float-xs-left">End: {{ form.instance.quiz.end | date:"D, d M Y H:i (e)" }}</span>
+	    {% endif %}
          <span class="tag tag-pill tag-primary float-xs-right">Score: {{ score }} / {{ form.max_score }}</span>
-    </p>
+    </div>
 
     {% for field in form %}
     <div class="fieldWrapper form-group">
