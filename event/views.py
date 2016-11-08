@@ -2,6 +2,7 @@ import datetime
 
 from .forms import InscriptionForm, MemberForm
 from db.models import Member, Inscription, Event
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormView
 from django.shortcuts import render, get_object_or_404
 from .models import Register
@@ -50,5 +51,12 @@ def register(request, event_id):
     })
 
 
-def success(request):
-    return render(request, 'inscription/success.html')
+class EventList(ListView):
+    model = Event
+    template_name = 'event/event_list.html'
+    queryset = Event.objects.order_by('-start_date')
+
+
+class EventDetail(DetailView):
+    model = Event
+    template_name = 'event/event_detail.html'

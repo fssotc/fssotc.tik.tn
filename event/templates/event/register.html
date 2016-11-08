@@ -1,11 +1,11 @@
 {% extends 'website/layout.html' %}
 {% load staticfiles%}
-{% block pagetitle %}Event Registeration | Microsoft Tech Club FSS{% endblock %}
+{% block pagetitle %}Event Registration | Microsoft Tech Club FSS{% endblock %}
 {% block content_section %}
 <div>
 <form action="" method="post">
 <fieldset class="form-group">
-    <legend class="my-2">{{ event.title }}</legend>
+	<legend class="my-2">Inscription Form: <a href="{% url 'event' event.pk %}">{{ event.title }}</a></legend>
     {% if msg %}
     <p class="msglist">{{ msg }}</p>
     {% endif %}

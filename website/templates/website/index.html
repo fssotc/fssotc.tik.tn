@@ -16,20 +16,24 @@
             </div>
         </section>
         <section id="events" class="container">
-            <h4>Events<a href="https://www.facebook.com/MTCFss/events" class="pull-xs-right float-xs-right"><small class="text-muted">more »</small></a></h4>
+		<h4>Events<a href="{% url 'events' %}" class="pull-xs-right float-xs-right"><small class="text-muted">more »</small></a></h4>
 	    {% for evt in events %}
 	    <!-- {% cycle 0 1 2 as mod %} -->
 	    {% if mod == 0 %}
             <div class="card-deck-wrapper">
 		    <div class="card-deck">
 	    {% endif %}
-		   <div class="card card-block {% if evt.is_ours %}card-primary card-inverse{% endif %}">
-			    <h4 class="card-title">{{ evt.title }}</h4>
+		   <div class="card card-block {% if evt.is_ours %}card-outline-info{% endif %}">
+               <h4 class="card-title"><a href="{% url 'event' evt.pk %}">{{ evt.title }}</a></h4>
 			    <p class="card-text">{{ evt.description }}</p>
+            {% if not evt.is_passed %}
+            <a href="{% url 'register' evt.pk %}" class="btn btn-outline-success btn-sm card-link">Register</a>
+            {% endif %}
 			    {% for lnk in evt.eventlink_set.all %}
 			    <a href="{{ lnk.link }}" class="card-link">{{ lnk.title }}</a>
 			{% endfor %}
-			<p class="card-text"><small {% if not evt.is_ours %}class="text-muted"{% endif %}>
+			<p class="card-text"><small>
+                    {% if evt.is_passed %}<span class="text-danger">Ended</span> - {% endif %}
 			{% if evt.end_date %}
 			{{ evt.start_date|date:"F j" }} - {{ evt.end_date|date:"F j" }}
 			{% else %}
@@ -47,6 +51,8 @@
         </section>
         <section id="projects" class="container">
             <h4>Projects<a href="https://github.com/mtcfss" class="pull-xs-right float-xs-right"><small class="text-muted">more »</small></a></h4>
-            <p>Coming soon...</p>
+	    <blockquote class="blockquote mt-2">
+		    <p class="mb-0">All our projects are available on our <a href="https://github.com/mtcfss"><i class="fa fa-github"></i> GitHub account</a>.</p>
+            </blockquote>
         </section>
 {% endblock %}

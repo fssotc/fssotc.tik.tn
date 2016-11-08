@@ -24,21 +24,21 @@
     <div id="articale">
         <header class="navbar navbar-light">
             <div class="navbar-header">
-              <a href="/"><img src="{% static 'website/img/logo.png' %}" alt="MTCFSS" id="nav-logo" class="navbar-brand" /></a>
+                <a href="{% url 'website:index' %}"><img src="{% static 'website/img/logo.png' %}" alt="MTCFSS" id="nav-logo" class="navbar-brand" /></a>
                 <span class="navbar-brand">
              MTCFSS
         </span>
             </div>
             <ul class="pull-xs-right navbar-nav nav float-xs-right">
-                <li><a href="/#about" class="navbar-link">About Us</a>
+                <li><a href="{% url 'website:index' %}#about" class="navbar-link">About Us</a>
                 </li>
-                <li><a href="/#events" class="navbar-link">Events</a>
+                <li><a href="{% url 'events' %}" class="navbar-link">Events</a>
                 </li>
-                <li><a href="/#projects" class="navbar-link">Projects</a>
+                <li><a href="https://github.com/mtcfss" class="navbar-link">Projects</a>
                 </li>
-                <li><a href="/members" class="navbar-link">Members</a>
+                <li><a href="{% url 'website:members' %}" class="navbar-link">Members</a>
                 </li>
-                <li><a href="/blog" class="navbar-link">Blog</a>
+                <li><a href="{% url 'blog:posts' %}" class="navbar-link">Blog</a>
                 </li>
                 <li><a href="#contact" class="navbar-link">Contact</a>
                 </li>
