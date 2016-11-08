@@ -16,7 +16,7 @@
     </p>
     {% endfor %}
 
-    <div class="info-bar">
+    <div class="my-2 clearfix">
 	    {% if form.instance.quiz.end %}
 	    <span class="tag tag-pill tag-danger float-xs-left">End: {{ form.instance.quiz.end | date:"D, d M Y H:i (e)" }}</span>
 	    {% endif %}

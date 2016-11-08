@@ -242,10 +242,6 @@ form .helptext:before {
     color: black;
 }
 
-.info-bar {
-    height: 40px;
-}
-
 code,
 pre,
 .docutils.literal {
