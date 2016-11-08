@@ -33,7 +33,7 @@ def inscription(request):
             member = member_form.save()
             inscription = inscription_form.save(commit=False)
             inscription.member = member
-            inscription.session = datetime.date.today()
+            inscription.session = Inscription.current_session()
             inscription.save()
         else:
             msg = 'Error when creating inscription!'

@@ -73,7 +73,6 @@ class Inscription(models.Model):
          "Institut Polytechnique Privé des Sciences Avancées de Sfax"),
         ("ISETS", "Institut Supérieur des Etudes Technologiques de Sfax"),
         ("IIT", "Institut International de Technologie Sfax"),
-        ("", "Autre..."),
     )
     EDUCATION_CHOICES = (
         ("LF", "Licence Fondamentale"),
@@ -83,13 +82,11 @@ class Inscription(models.Model):
         ("MR", "Master de Recherche"),
         ("MP", "Master Professionnel"),
         ("PHD", "Doctorat"),
-        ("", "Autre..."),
     )
     YEAR_CHOICES = (
         ('1', 1),
         ('2', 2),
         ('3', 3),
-        ('', 'Autre...'),
     )
     SESSIONS = (
         ('2014-2015', '2014-2015'),
@@ -106,13 +103,13 @@ class Inscription(models.Model):
         decimal_places=0, help_text="Seulement pour les étudiants du FSS pour "
         "le service culturel de la faculté.")
     university = models.CharField(verbose_name="Institution / University",
-                                  choices=UNIVERSITY_CHOICES, default='FSS',
+                                  choices=UNIVERSITY_CHOICES,
                                   max_length=7, blank=True)
     education = models.CharField(verbose_name="Diplome courant",
-                                 choices=EDUCATION_CHOICES, default='LF',
+                                 choices=EDUCATION_CHOICES,
                                  max_length=3, blank=True)
     year = models.CharField(verbose_name="Année", choices=YEAR_CHOICES,
-                            default='1', max_length=1, blank=True)
+                            max_length=1, blank=True)
     confirmed = models.BooleanField(default=False)
     dreamspark_key = models.BooleanField(default=False)
     member_card = models.BooleanField(default=False)
@@ -180,12 +177,15 @@ class Event(models.Model):
         ('unk', 'other'),
     )
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=300)
+    description = models.TextField()
     event_type = models.CharField(max_length=3, choices=EVENT_TYPES)
     place = models.CharField(max_length=80, default='FSS')
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     is_ours = models.BooleanField()
+    price = models.PositiveSmallIntegerField(
+        default=0,
+        verbose_name="Price (-5 for members)")
 
     objects = EventManager()
 
