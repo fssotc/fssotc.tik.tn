@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'inscription',
     'quiz',
+    'event',
     'nested_admin',
     'debug_toolbar',
 ]

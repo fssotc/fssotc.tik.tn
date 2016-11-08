@@ -1,0 +1,52 @@
+{% extends 'website/layout.html' %}
+{% load staticfiles%}
+{% block pagetitle %}Event Registeration | Microsoft Tech Club FSS{% endblock %}
+{% block content_section %}
+<div>
+<form action="" method="post">
+<fieldset class="form-group">
+    <legend class="my-2">{{ event.title }}</legend>
+    {% if msg %}
+    <p class="msglist">{{ msg }}</p>
+    {% endif %}
+    {% csrf_token %}
+
+    {% for form in forms %}
+    {% for field in form %}
+    <div class="fieldWrapper form-group row {%if field.errors %}has-danger{%endif%}">
+        <div class="form-control-feedback">
+           {{ field.errors }}
+        </div>
+
+        <label class="col-sm-3 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <div class="col-sm-9">{{ field }}</div>
+
+        {% if field.help_text %}
+        <small class="help form-text text-muted">{{ field.help_text|safe }}</small>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+    {% endfor %}
+
+    {% if event.price %}
+    <div class="form-group row">
+    <div class="offset-sm-3 col-sm-9 form-check">
+        <label class="form-check-label">
+            <input type="checkbox" required checked disabled class="form-check-input" />
+            I confirm I will pay {{ event.price }} DT
+            <small class="help form-text text-muted">* {{ event.price|add:-5 }} DT for members</small>
+       </label>
+    </div>
+    </div>
+    {% endif %}
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <input type="submit" value="Register" class="btn btn-primary" />
+      </div>
+    </div>
+
+</fieldset>
+</form>
+</div>
+{% endblock %}
