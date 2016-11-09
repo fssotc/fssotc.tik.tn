@@ -1,12 +1,12 @@
 {% extends 'website/layout.html' %}
 {% load staticfiles%}
-{% block pagetitle %}Microsoft Tech Club FSS{% endblock %}
+{% block pagetitle %}Open Tech Club, Faculty of Sciences of Sfax{% endblock %}
 {% block content_section %}
         <section id="about" class="container-fluid">
             <div id="about-bg"></div>
             <div class="container media">
                 <a class="media-left media-middle" href="#">
-			<img src="{% static 'website/img/mtcfss-transparent-white.png' %}" />
+			<img src="{% static 'website/img/logo.png' %}" />
                 </a>
                 <div class="media-body media-middle">
                     <h4 class="media-heading">About Us</h4>
@@ -50,9 +50,9 @@
             {% endfor %}
         </section>
         <section id="projects" class="container">
-            <h4>Projects<a href="https://github.com/mtcfss" class="pull-xs-right float-xs-right"><small class="text-muted">more »</small></a></h4>
+            <h4>Projects<a href="https://github.com/fssotc" class="pull-xs-right float-xs-right"><small class="text-muted">more »</small></a></h4>
 	    <blockquote class="blockquote mt-2">
-		    <p class="mb-0">All our projects are available on our <a href="https://github.com/mtcfss"><i class="fa fa-github"></i> GitHub account</a>.</p>
+		    <p class="mb-0">All our projects are available on our <a href="https://github.com/fssotc"><i class="fa fa-github"></i> GitHub account</a>.</p>
             </blockquote>
         </section>
 {% endblock %}

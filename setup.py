@@ -6,10 +6,11 @@ from setuptools import setup
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+
 setup(
-    name='mtcfss-website',
+    name='fssotc-website',
     version='0.2',
-    description='MTCFSS Website',
+    description='Fss Open Tech Club Website',
     long_description=read('README.md'),
     author='Moez Bouhlel',
     author_email='bmoez.j@gmail.com',

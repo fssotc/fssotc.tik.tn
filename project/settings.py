@@ -14,6 +14,7 @@ ALLOWED_HOSTS = [
     '192.168.20.1',
     'mtcfss.azurewebsites.net',
     '.mtcfss.lan',
+    '.fssotc.lan',
     'wpad',
 ]
 INTERNAL_IPS = ('127.0.0.1',)
@@ -22,7 +23,7 @@ ADMINS = (
     ('lejenome', 'bmoez.j@gmail.com'),
 )
 
-DEFAULT_FROM_EMAIL = 'mtcfss@outlook.com'
+DEFAULT_FROM_EMAIL = 'fssotc@gmail.com'
 
 MANAGERS = ADMINS
 
@@ -140,8 +141,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('\\', '/')
 
 WP_API_SITE_ID = '106661952'
 
-EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'mtcfss@outlook.com'
+EMAIL_HOST_USER = 'fssotc@gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD = deploy.get_email_password()

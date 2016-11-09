@@ -5,14 +5,14 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{% block pagetitle %}Microsoft Tech Club FSS{% endblock %}</title>
-    <meta name="description" content="MTCFSS: Microsoft Techincal Club on Faculty of Science of Sfax" />
+    <title>{% block pagetitle %}Open Tech Club, Faculty of Sciences of Sfax{% endblock %}</title>
+    <meta name="description" content="Fss OTC: Open Tech Club Faculty of Science of Sfax" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width, minimum-scale=1" />
     <meta name="author" content="Moez Bouhlel" itemprop="creator" />
-    <meta name="copyright" content="MTCFss 2016, All Rights Reserved." />
+    <meta name="copyright" content="Fss OTC 2016, All Rights Reserved." />
     <link rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
-    <link rel="alternate" type="application/rss+xml" title="MTCFSS Blog Feed" href="{% url 'blog:rss' %}" />
+    <link rel="alternate" type="application/rss+xml" title="Fss OTC Blog Feed" href="{% url 'blog:rss' %}" />
     <!--<script src="script.js"></script>-->
     <link href="{% static 'website/css/font-awesome.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
@@ -24,9 +24,9 @@
     <div id="articale">
         <header class="navbar navbar-light">
             <div class="navbar-header">
-                <a href="{% url 'website:index' %}"><img src="{% static 'website/img/logo.png' %}" alt="MTCFSS" id="nav-logo" class="navbar-brand" /></a>
+                <a href="{% url 'website:index' %}"><img src="{% static 'website/img/logo.png' %}" alt="Fss Open Tech Club" id="nav-logo" class="navbar-brand" /></a>
                 <span class="navbar-brand">
-             MTCFSS
+             Fss Open Tech Club
         </span>
             </div>
             <ul class="pull-xs-right navbar-nav nav float-xs-right">
@@ -34,7 +34,7 @@
                 </li>
                 <li><a href="{% url 'events' %}" class="navbar-link">Events</a>
                 </li>
-                <li><a href="https://github.com/mtcfss" class="navbar-link">Projects</a>
+                <li><a href="https://github.com/fssotc" class="navbar-link">Projects</a>
                 </li>
                 <li><a href="{% url 'website:members' %}" class="navbar-link">Members</a>
                 </li>
@@ -51,13 +51,13 @@
     <footer id="contact" class="container-fuild navbar">
         <ul class="nav nav-inline ext-links">
             <li>
-                <a href="https://github.com/mtcfss/" class="fa fa-github-alt"></a>
+                <a href="https://github.com/fssotc" class="fa fa-github-alt"></a>
             </li>
             <li>
-                <a href="https://www.facebook.com/MTCFss/" class="fa fa-facebook-square"></a>
+                <a href="https://www.facebook.com/fssotc" class="fa fa-facebook-square"></a>
             </li>
             <li>
-                <a href="mailto:mtcfss@outlook.com" class="fa fa-envelope"></a>
+                <a href="mailto:fssotc@gmail.com" class="fa fa-envelope"></a>
             </li>
             <li>
 		<a href="{% url 'blog:rss' %}" class="fa fa-rss"></a>

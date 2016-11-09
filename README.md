@@ -1,9 +1,9 @@
-MTCFSS Website
+Fss Open Tech Club Website
 ===
 [![Build
-Status](https://travis-ci.org/MTCFss/website.svg?branch=master)](https://travis-ci.org/MTCFss/website)
+Status](https://travis-ci.org/fssotc/website.svg?branch=master)](https://travis-ci.org/fssotc/website)
 [![Stories in
-Ready](https://badge.waffle.io/MTCFss/website.svg?label=ready&title=Ready)](http://waffle.io/MTCFss/website)
+Ready](https://badge.waffle.io/fssotc/website.svg?label=ready&title=Ready)](http://waffle.io/fssotc/website)
 
 That's our official website. It's written on python using django and hosted on
 Azure.

@@ -21,13 +21,13 @@ On a le plaisir de vous ....
 Cordialement,
 
 ---
-Microsoft Tech Club Fss
+Open Tech Club - Faculty of Sciences of Sfax
 
 Phone: (+216) 28 204 299
 Website: mtcfss.azurewebsites.net
-Facebook: fb.me/MTCFss
-E-mail: mtcfss@outlook.com
-GitHub: github.com/mtcfss"""
+Facebook: fb.me/fssotc
+E-mail: fssotc@gmail.com
+GitHub: github.com/fssotc"""
         print(data)
         form = EmailForm(data)
 

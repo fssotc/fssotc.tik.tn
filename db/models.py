@@ -139,23 +139,23 @@ def inscription_confirmation(sender, instance, created, raw, using,
     if created and instance.member:
         from .email import send_mails
         send_mails([instance.member.email],
-                   "Welcome to Microsoft Tech Club FSS!",
-                   """Welcome MTCFSS member,
+                   "Welcome to Fss Open Tech Club!",
+                   """Welcome Fss Open Tech Club member,
 
-- You need to create an account at github.com to access MTCFSS projects.
+- You need to create an account at github.com to access Fss OTC projects.
 - Please confirm your email address and your GitHub account by sending your
-GitHub username to mtcfss@outlook.com.
+GitHub username to fssotc@gmail.com.
 
 Sincerely,
 
 ---
-Microsoft Tech Club Fss
+Open Tech Club - Faculty of Sciences of Sfax
 
 Phone: (+216) 28 204 299
 Website: mtcfss.azurewebsites.net
-Facebook: fb.me/MTCFss
-E-mail: mtcfss@outlook.com
-GitHub: github.com/mtcfss""")
+Facebook: fb.me/fssotc
+E-mail: fssotc@gmail.com
+GitHub: github.com/fssotc""")
 
     # if "dreamspark_key" in update_fields:
     # FIXME: email dreamspark key

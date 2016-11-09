@@ -18,7 +18,7 @@ class PostList(ListView):
 
 
 class PostFeed(Feed):
-    title = "MTCFSS News"
+    title = "Fss Open Tech Club News"
     link = "/blog/"
 
     def items(self):
