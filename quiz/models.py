@@ -15,6 +15,13 @@ class Quiz(models.Model):
     def get_absolute_url(self):
         return reverse('quiz', kwargs={'quiz_pk': self.pk})
 
+    def max_score(self):
+        return self.question_set.aggregate(
+            models.Sum(models.F('score')))['score__sum']
+
+    def questions_count(self):
+        return self.question_set.count()
+
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)

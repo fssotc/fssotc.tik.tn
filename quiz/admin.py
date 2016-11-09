@@ -35,10 +35,12 @@ class AnswerInline(admin.TabularInline):
 
 @admin.register(Quiz)
 class QuizAdmin(nested_admin.NestedModelAdmin):
+    list_display = ('__str__', 'questions_count', 'max_score')
     inlines = [QuestionInline]
 
 
 @admin.register(Submission)
-class Submission(admin.ModelAdmin):
+class SubmissionAdmin(admin.ModelAdmin):
+    list_display = ('quiz', 'member', 'score')
+    list_filter = ('quiz', 'member')
     inlines = [AnswerInline]
-    list_display = ('__str__', 'score')
