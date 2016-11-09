@@ -1,8 +1,10 @@
 from django.test import TestCase
 from datetime import date, timedelta
-from .models import Member, Inscription, Event, EventLink
-
-# Create your tests here.
+from .models import (
+    Member, Inscription, Event, EventLink, inscription_confirmation
+)
+from django.utils import timezone
+from django.db.models.signals import post_save
 
 
 class MemberTestCase(TestCase):
@@ -12,6 +14,8 @@ class MemberTestCase(TestCase):
                                      family_name='family_name1',
                                      email='test1@example.com',
                                      phone='1111',)
+        post_save.disconnect(receiver=inscription_confirmation,
+                             sender=Inscription)
 
     def test_members_default_values(self):
         usr1 = Member.objects.get(name='user1')
@@ -55,32 +59,33 @@ class MemberTestCase(TestCase):
         self.assertEqual(ins2.is_current(), False)
 
     def test_event(self):
-        _date = date.today()
-        yesterday = date(_date.year, _date.month, _date.day - 1)
-        tomorrow = date(_date.year, _date.month, _date.day + 1)
+        _time = timezone.now()
+        yesterday = timezone.make_aware(
+            timezone.datetime(_time.year, _time.month, _time.day - 1))
+        tomorrow = timezone.make_aware(
+            timezone.datetime(_time.year, _time.month, _time.day + 1))
         evt1 = Event.objects.create(title='event1',
                                     description='desc',
                                     event_type='con',
-                                    start_date=yesterday,
+                                    start=yesterday,
                                     is_ours=False,)
         evt2 = Event.objects.create(title='event2',
                                     description='desc',
                                     event_type='cha',
-                                    start_date=yesterday,
-                                    end_date=yesterday,
+                                    start=yesterday,
+                                    end=yesterday,
                                     is_ours=False,)
         evt3 = Event.objects.create(title='event3',
                                     description='desc',
                                     event_type='tra',
-                                    start_date=yesterday,
-                                    end_date=tomorrow,
+                                    start=yesterday,
+                                    end=tomorrow,
                                     is_ours=False,)
         evt4 = Event.objects.create(title='event4',
                                     description='desc',
                                     event_type='tlk',
-                                    start_date=tomorrow,
+                                    start=tomorrow,
                                     is_ours=False,)
-        self.assertEqual(evt1.place, 'FSS')
         self.assertEqual(evt1.is_passed(), True)
         self.assertEqual(evt2.is_passed(), True)
         self.assertEqual(evt3.is_passed(), False)

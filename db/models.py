@@ -1,4 +1,5 @@
 from datetime import date
+from django.utils import timezone
 
 from django.db import models
 from django.db.models.query_utils import Q
@@ -164,8 +165,8 @@ GitHub: github.com/fssotc""")
 class EventManager(models.Manager):
 
     def comming(self):
-        return self.get_queryset().filter(Q(start_date__gte=date.today()) |
-                                          Q(end_date__gte=date.today()))
+        return self.get_queryset().filter(Q(start__gte=date.today()) |
+                                          Q(end__gte=date.today()))
 
 
 class Event(models.Model):
@@ -174,14 +175,15 @@ class Event(models.Model):
         ('cha', 'challenge'),
         ('tra', 'training'),
         ('tlk', 'talk'),
-        ('unk', 'other'),
     )
     title = models.CharField(max_length=100)
     description = models.TextField()
-    event_type = models.CharField(max_length=3, choices=EVENT_TYPES)
-    place = models.CharField(max_length=80, default='FSS')
-    start_date = models.DateField()
-    end_date = models.DateField(blank=True, null=True)
+    event_type = models.CharField(max_length=3, choices=EVENT_TYPES,
+                                  blank=True)
+    place = models.CharField(max_length=80,
+                             default='Faculty of Sciences of Sfax, Amphi A9')
+    start = models.DateTimeField()
+    end = models.DateTimeField(blank=True, null=True)
     is_ours = models.BooleanField()
     price = models.PositiveSmallIntegerField(
         default=0,
@@ -190,11 +192,11 @@ class Event(models.Model):
     objects = EventManager()
 
     def is_passed(self):
-        if self.end_date is not None:
-            end = self.end_date
+        if self.end is not None:
+            end = self.end
         else:
-            end = self.start_date
-        return end < date.today()
+            end = self.start
+        return end < timezone.now()
 
     is_passed.boolean = True
 
@@ -209,5 +211,3 @@ class EventLink(models.Model):
 
     def __str__(self):
         return self.title
-
-# TODO: add Project model

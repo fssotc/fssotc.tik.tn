@@ -7,11 +7,11 @@
 		<strong>Oops!</strong> Event has passed.
 	</div>
 	<p><strong>Name:</strong> {{ event.title }}</p>
-	{% if event.start_date %}
-	<p><strong>Start Date:</strong> {{ event.start_date | date:"D, d M Y" }}</p>
+	{% if event.start %}
+	<p><strong>Start Date:</strong> {{ event.start | date:"D, d M Y" }}</p>
 	{% endif %}
-	{% if event.end_date %}
-	<p><strong>End Date:</strong> {{ event.end_date | date:"D, d M Y" }}</p>
+	{% if event.end %}
+	<p><strong>End Date:</strong> {{ event.end | date:"D, d M Y" }}</p>
 </div>
 {% endif %}
 {% endblock %}

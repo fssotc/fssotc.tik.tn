@@ -7,7 +7,7 @@ from db.models import Event, Member, Inscription
 
 def index(request):
     # FIXME: only no passed events
-    events = Event.objects.comming().order_by('start_date')
+    events = Event.objects.comming().order_by('start')
     print(events.count())
     return render(request, 'website/index.html', {
         'events': events

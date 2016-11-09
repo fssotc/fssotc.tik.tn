@@ -21,10 +21,10 @@
 			{% endfor %}
 			<p class="card-text"><small>
                     {% if evt.is_passed %}<span class="text-danger">Ended</span> - {% endif %}
-			{% if evt.end_date %}
-			{{ evt.start_date|date:"F j" }} - {{ evt.end_date|date:"F j" }}
+			{% if evt.end %}
+			{{ evt.start|date:"j F H:m" }} - {{ evt.end|date:"j F H:m" }}
 			{% else %}
-			{{ evt.start_date|date:"l, F j" }}
+			{{ evt.start|date:"l, j M H:m" }}
 			{% endif %}
 			</small>
                         </p>

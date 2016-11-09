@@ -54,7 +54,7 @@ def register(request, event_id):
 class EventList(ListView):
     model = Event
     template_name = 'event/event_list.html'
-    queryset = Event.objects.order_by('-start_date')
+    queryset = Event.objects.order_by('-start')
 
 
 class EventDetail(DetailView):

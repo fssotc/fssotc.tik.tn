@@ -1,5 +1,4 @@
 from django import forms
-import django.conf
 
 from .models import Member, Inscription
 from .email import send_mails

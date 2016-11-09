@@ -27,8 +27,8 @@ class MemberAdmin(admin.ModelAdmin):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     inlines = [EventLinkInline]
-    list_display = ('title', 'start_date', 'end_date', 'place', 'is_passed')
-    search_fields = ['title', 'place', 'start_date', 'end_date']
+    list_display = ('title', 'start', 'end', 'place', 'is_passed')
+    search_fields = ['title', 'place', 'start', 'end']
     list_filter = ('is_ours', 'event_type', 'place')
 
 

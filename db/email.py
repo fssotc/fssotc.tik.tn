@@ -1,4 +1,5 @@
 import threading
+import django.conf
 from django.core.mail import send_mass_mail
 from django.template import Context, Template
 
