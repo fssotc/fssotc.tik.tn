@@ -37,8 +37,11 @@ class Member(models.Model):
     is_new.boolean = True
 
     def clean(self):
-        # username is unique if not empty
+        self.email = self.email.lower()
+        self.name = self.name.lower()
+        self.family_name = self.family_name.lower()
         if self.username:
+            # username is unique if not empty
             m = Member.objects.filter(username__iexact=self.username)
             if self.id:
                 m = m.exclude(id=self.id)
