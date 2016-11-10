@@ -8,10 +8,22 @@
     <p class="lead">{{ event.description }}</p>
     <p><strong>Address:</strong> <i class="fa fa-map-marker"></i> {{ event.place }}</p>
     {% if event.start %}
-    <p><strong>Start Date:</strong> <i class="fa fa-clock-o"></i> {{ event.start | date:"D, d M Y H:i (e)" }}</p>
+    <p><strong>Start Date:</strong> <i class="fa fa-clock-o"></i>
+	    {% if event.start.hour == 23 and event.start.minute == 0 %}
+	    {{ event.start | date:"D, d M Y (e)" }}
+	    {% else %}
+	    {{ event.start | date:"D, d M Y H:i (e)" }}
+	    {% endif %}
+    </p>
     {% endif %}
     {% if event.end %}
-    <p><strong>End Date:</strong> <i class="fa fa-clock-o"></i> {{ event.end | date:"D, d M Y H:i (e)" }}</p>
+    <p><strong>End Date:</strong> <i class="fa fa-clock-o"></i>
+	    {% if event.end.hour == 23 and event.end.minute == 0 %}
+	    {{ event.end | date:"D, d M Y (e)" }}
+	    {% else %}
+	    {{ event.end | date:"D, d M Y H:i (e)" }}
+	    {% endif %}
+    </p>
     {% endif %}
     {% if event.price %}
     <p><strong>Price:</strong> <i class="fa fa-money"></i> {{ event.price }} DT
