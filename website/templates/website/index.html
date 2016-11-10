@@ -35,9 +35,9 @@
 			<p class="card-text"><small>
                     {% if evt.is_passed %}<span class="text-danger">Ended</span> - {% endif %}
 			{% if evt.end %}
-			{{ evt.start|date:"j F H:m" }} - {{ evt.end|date:"j F H:m" }}
+			{{ evt.start|date:"j F H:i" }} - {{ evt.end|date:"j F H:i" }}
 			{% else %}
-			{{ evt.start|date:"l, j M H:m" }}
+			{{ evt.start|date:"l, j M H:i" }}
 			{% endif %}
 			</small>
                         </p>
