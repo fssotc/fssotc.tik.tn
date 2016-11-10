@@ -3,14 +3,12 @@
 {% block pagetitle %}{{ quiz.title.capitalize}} Quiz | Fss Open Tech Club{% endblock %}
 {% block content_section %}
 <div class="container">
-	<div class="alert alert-danger" role="alert">
-		<strong>Oops!</strong> Quiz is closed.
-	</div>
+	<h1 class="text-capitalize">{{ quiz.title }}</h1>
 	{% if quiz.start %}
-	<p><strong>Start Date:</strong> {{ quiz.start | date:"D, d M Y H:i" }}</p>
+	<p><strong>Start Date:</strong> <i class="fa fa-clock-o"></i> {{ quiz.start | date:"D, d M Y H:i" }}</p>
 	{% endif %}
 	{% if quiz.end %}
-	<p><strong>End Date:</strong> {{ quiz.end | date:"D, d M Y H:i" }}</p>
+	<p><strong>End Date:</strong> <i class="fa fa-clock-o"></i> {{ quiz.end | date:"D, d M Y H:i" }}</p>
+	{% endif %}
 </div>
-{% endif %}
 {% endblock %}

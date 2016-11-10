@@ -6,9 +6,6 @@
 <form action="" method="post">
 <fieldset class="form-group">
 	<legend class="my-2">Inscription Form: <a href="{% url 'event' event.pk %}">{{ event.title }}</a></legend>
-    {% if msg %}
-    <p class="msglist">{{ msg }}</p>
-    {% endif %}
     {% csrf_token %}
 
     {% for form in forms %}

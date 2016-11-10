@@ -198,7 +198,7 @@ blockquote {
 }
 
 form {
-    padding: 50px;
+    padding: 0 50px;
     max-width: 1000px;
     margin: auto;
 }
@@ -227,8 +227,7 @@ form .helptext:before {
     content: '*';
 }
 
-.errorlist,
-.msglist {
+.errorlist {
     margin: 10px;
     border: solid 2px;
 }

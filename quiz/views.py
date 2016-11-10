@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.contrib.messages import error
 from django.views.generic.edit import FormView
 from django.utils import timezone
 
@@ -16,6 +17,7 @@ def quiz(request, quiz_pk=None, quiz_title=None, member_pk=None,
         quiz = get_object_or_404(Quiz, title=quiz_title)
     if (quiz.start and quiz.start > timezone.now()) or (
             quiz.end and quiz.end < timezone.now()):
+        error(request, 'Oops! Quiz is closed.')
         return render(request, "quiz/inactive.html", {"quiz": quiz})
 
     if member_pk:

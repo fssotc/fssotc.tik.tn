@@ -2,6 +2,7 @@ import datetime
 
 from .forms import InscriptionForm, MemberForm
 from db.models import Member, Inscription
+from django.contrib.messages import error, info, success
 from django.forms import inlineformset_factory
 from django.views.generic.edit import FormView
 from django.shortcuts import render
@@ -17,26 +18,24 @@ class InscriptionView(FormView):
 
 
 def inscription(request):
-    msg = ''
     if request.method == 'POST':
         try:
             member = Member.objects.get(email=request.POST['email'])
-            msg = 'Account inscription updated!'
         except:
             member = Member()
-            msg = 'New Account created!'
         member_form = MemberForm(request.POST, instance=member)
         inscription_form = InscriptionForm(request.POST)
         if any(insc.is_current() for insc in Inscription.objects.filter(member=member)):
-            msg = 'User already inscripted for current session!'
+            info(request, 'Already inscripted on the current session!')
         elif member_form.is_valid() and inscription_form.is_valid():
             member = member_form.save()
             inscription = inscription_form.save(commit=False)
             inscription.member = member
             inscription.session = Inscription.current_session()
             inscription.save()
+            success(request, 'Inscription created!')
         else:
-            msg = 'Error when creating inscription!'
+            error(request, 'Error when creating inscription!')
     else:
         member_form = MemberForm()
         inscription_form = InscriptionForm()
@@ -44,7 +43,6 @@ def inscription(request):
     return render(request, 'inscription/index.html', {
         'member_form': member_form,
         'inscription_form': inscription_form,
-        'msg': msg
     })
 
 

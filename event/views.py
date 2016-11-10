@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from .forms import InscriptionForm, MemberForm
 from db.models import Member, Inscription, Event
+from django.contrib.messages import error, info, success
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormView
 from django.shortcuts import render, get_object_or_404
@@ -10,7 +11,6 @@ from .models import Register
 
 
 def register(request, event_id):
-    msg = ''
     event = get_object_or_404(Event, pk=event_id)
     if event.end and event.end < timezone.now():
         return render(request, 'event/ended.html', {'event': event})
@@ -30,15 +30,14 @@ def register(request, event_id):
             insc.member = member
             insc.session = Inscription.current_session()
             insc.save()
-            created = True
         if insc:
             try:
                 Register.objects.create(member=member, event=event)
-                msg = 'You have successfully registered'
+                success(request, 'You have successfully registered')
             except:
-                msg = 'You has already registred!'
+                info(request, 'You has already registred!')
         else:
-            msg = 'Error when registering!'
+            error(request, 'Error when registering!')
     else:
         member_form = MemberForm()
         inscription_form = InscriptionForm()
@@ -48,7 +47,6 @@ def register(request, event_id):
         'inscription_form': inscription_form,
         'forms': [member_form, inscription_form],
         'event': event,
-        'msg': msg
     })
 
 
