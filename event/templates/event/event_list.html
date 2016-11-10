@@ -28,7 +28,7 @@
 			{{ evt.start|date:"j F H:i" }} - {{ evt.end|date:"j F H:i" }}
 			{% endif %}
 			{% else %}
-			{% if evt.start.hour == 23 and evt.start.hour == 0 %}
+			{% if evt.start.hour == 0 and evt.start.hour == 0 %}
 			{{ evt.start|date:"l, j M" }}
 			{% else %}
 			{{ evt.start|date:"l, j M H:i" }}

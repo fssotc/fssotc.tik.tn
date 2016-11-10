@@ -35,13 +35,13 @@
 			<p class="card-text"><small>
                     {% if evt.is_passed %}<span class="text-danger">Ended</span> - {% endif %}
 			{% if evt.end %}
-			  {% if evt.start.hour == 23 and evt.start.minute == 0 and evt.end.hour == 23 and evt.end.minute == 0 %}
+			  {% if evt.start.hour == 0 and evt.start.minute == 0 and evt.end.hour == 0 and evt.end.minute == 0 %}
 			{{ evt.start|date:"l, M j" }} - {{ evt.end|date:"l, M j" }}
 			  {% else %}
 			{{ evt.start|date:"j F H:i" }} - {{ evt.end|date:"j F H:i" }}
 			  {% endif %}
 			{% else %}
-			  {% if evt.start.hour == 23 and evt.start.hour == 0 %}
+			  {% if evt.start.hour == 0 and evt.start.hour == 0 %}
 			{{ evt.start|date:"l, j M" }}
 			  {% else %}
 			{{ evt.start|date:"l, j M H:i" }}

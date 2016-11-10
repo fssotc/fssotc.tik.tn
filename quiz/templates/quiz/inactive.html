@@ -7,10 +7,10 @@
 		<strong>Oops!</strong> Quiz is closed.
 	</div>
 	{% if quiz.start %}
-	<p><strong>Start Date:</strong> {{ quiz.start | date:"D, d M Y H:i (e)" }}</p>
+	<p><strong>Start Date:</strong> {{ quiz.start | date:"D, d M Y H:i" }}</p>
 	{% endif %}
 	{% if quiz.end %}
-	<p><strong>End Date:</strong> {{ quiz.end | date:"D, d M Y H:i (e)" }}</p>
+	<p><strong>End Date:</strong> {{ quiz.end | date:"D, d M Y H:i" }}</p>
 </div>
 {% endif %}
 {% endblock %}

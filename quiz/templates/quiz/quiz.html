@@ -16,7 +16,7 @@
 
     <div class="my-2 clearfix">
 	    {% if form.instance.quiz.end %}
-	    <span class="tag tag-pill tag-danger float-xs-left">End: {{ form.instance.quiz.end | date:"D, d M Y H:i (e)" }}</span>
+	    <span class="tag tag-pill tag-danger float-xs-left">End: {{ form.instance.quiz.end | date:"D, d M Y H:i" }}</span>
 	    {% endif %}
          <span class="tag tag-pill tag-primary float-xs-right">Score: {{ score }} / {{ form.max_score }}</span>
     </div>
