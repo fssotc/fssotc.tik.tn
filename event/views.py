@@ -64,12 +64,14 @@ class EventDetail(DetailView):
 
 @permission_required('event.change_register')
 def register_list(request, event_id=None):
-    registers = Register.objects.filter(event__id=event_id).order_by(
-        'member__name')
-    others = Inscription.objects.filter(
-        session=Inscription.current_session()).order_by('member__name')
+    registers = list(Register.objects.filter(event__id=event_id).order_by(
+        'member__name'))
+    others = list(Inscription.objects.filter(
+        session=Inscription.current_session()).order_by('member__name'))
+    registers_insc = [r.inscription for r in registers]
+    others = [other for other in others if other not in registers_insc]
     return render(request, 'event/register_list.html', {
         'register_list': registers,
         'other_list': others,
-        'event': registers.first().event,
+        'event': registers[0].event,
     })

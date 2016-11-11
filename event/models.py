@@ -18,24 +18,29 @@ class Register(models.Model):
         return self.member.email
     get_member_email.short_description = 'email'
 
+    @property
+    def inscription(self):
+        try:
+            return self.member.inscription_set.get(session=Session.current_session())
+        except:
+            return self.member.inscription_set.all().order_by('-session')[0]
+
     def get_member_university(self):
-        return self.member.inscription_set.all().\
-            order_by('-session')[0].university
+        return self.inscription.university
     get_member_university.short_description = 'University'
     get_member_university.admin_order_field = 'member__inscription__university'
 
     def get_member_education(self):
-        return self.member.inscription_set.all().\
-            order_by('-session')[0].education
+        return self.inscription.education
     get_member_education.short_description = 'education'
     get_member_education.admin_order_field = 'member__inscription__education'
 
     def get_member_year(self):
-        return self.member.inscription_set.all().order_by('-session')[0].year
+        return self.inscription.year
     get_member_year.short_description = 'year'
 
     def inscription_paid(self):
-        return self.member.inscription_set.all().order_by('-session')[0].confirmed
+        return self.inscription.confirmed
     inscription_paid.short_description = 'Inscription Paid'
     inscription_paid.boolean = True
 
