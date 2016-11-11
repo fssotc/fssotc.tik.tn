@@ -1,7 +1,7 @@
 {% extends 'website/layout.html' %}
 {% block pagetitle %}Fss Open Tech Club Members{% endblock %}
 {% block content_section %}
-<section class="container members">
+<section class="members">
   <h3>Members</h3>
   <br />
   <table class="table table-hover table-sm">
@@ -33,7 +33,7 @@
     </tbody>
   </table>
 </section>
-<section class="container admins">
+<section class="admins">
 	<h3>Admins</h3>
   <br />
   <table class="table table-hover table-sm">
@@ -66,11 +66,5 @@
       {% endfor %}
     </tbody>
   </table>
-<!--
-	<pre class="lang-sh"><code class="language-sh" lang="sh">
-$ ls Admins
-ls: Admins: not found
-	</code></pre>
--->
 </section>
 {%endblock %}

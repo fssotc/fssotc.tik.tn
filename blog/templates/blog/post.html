@@ -6,16 +6,16 @@
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&skin=default"></script>
 {% endblock %}
 {% block content_section %}
-<nav class="container">
+<nav>
     <ol class="breadcrumb">
-        <li><a href="/">Home</a>
+        <li class="breadcrumb-item"><a href="/">Home</a>
         </li>
-        <li><a href="/blog/">Blog</a>
+        <li class="breadcrumb-item"><a href="/blog/">Blog</a>
         </li>
-	<li class="active">{% autoescape off %}{{ post.title }}{% endautoescape %}</li>
+	<li class="breadcrumb-item active">{% autoescape off %}{{ post.title }}{% endautoescape %}</li>
     </ol>
 </nav>
-<section class="container">
+<section>
     <article>
 
 	{% autoescape off %}

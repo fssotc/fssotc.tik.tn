@@ -4,11 +4,11 @@
 {% block content_section %}
 <form action="" method="post" class="inscription_form">
 <fieldset class="form-group">
-<legend class="my-2">Inscription Form:</legend>
+    <legend><p>Inscription Form:</p></legend>
     {% csrf_token %}
     {{ member_form.as_p }}
     {{ inscription_form.as_p }}
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Submit" class="btn btn-primary" />
 </fieldset>
 </form>
 {% endblock %}

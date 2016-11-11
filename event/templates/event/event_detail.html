@@ -2,9 +2,7 @@
 {% load staticfiles%}
 {% block pagetitle %}Events | Fss Open Tech Club{% endblock %}
 {% block content_section %}
-<div class="container mt-3">
-    <div>
-    <h1>{{ event.title }}</h1>
+    <p><h1>{{ event.title }}</h1></p>
     <p class="lead">{{ event.description }}</p>
     <p><strong>Address:</strong> <i class="fa fa-map-marker"></i> {{ event.place }}</p>
     {% if event.start %}
@@ -36,7 +34,4 @@
     {% if not event.is_passed %}
     <p><a class="btn btn-outline-success" href="{% url 'register' event.pk %}">Register</a></p>
     {% endif %}
-    </div>
-    <br />
-</div>
 {% endblock %}

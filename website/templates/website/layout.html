@@ -45,20 +45,20 @@
             </ul>
         </header>
 
+	{% block full_content_section %}
+	<section class="container">
+		{% if messages %}
+		<div class="messages">
+		    {% for message in messages %}
+		    <div role="alert" class="alert {% if message.tags == 'error' %} alert-danger {% else %} alert-{{ message.tags }} {% endif %}">{{ message }}</div>
+		    {% endfor %}
+		</div>
+		{% endif %}
 
-<div class="container">
-{% if messages %}
-<div class="messages">
-    {% for message in messages %}
-    <div role="alert" class="alert {% if message.tags == 'error' %} alert-danger {% else %} alert-{{ message.tags }} {% endif %}">{{ message }}</div>
-    {% endfor %}
-</div>
-{% endif %}
-
-</div>
         {% block content_section %}{% endblock %}
 
-    </div>
+	</section>
+	{% endblock %}
     <footer id="contact" class="container-fuild navbar">
         <ul class="nav nav-inline ext-links">
             <li>

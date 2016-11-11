@@ -5,7 +5,7 @@
 <div>
 <form action="" method="post">
 <fieldset class="form-group">
-	<legend class="my-2">Inscription Form: <a href="{% url 'event' event.pk %}">{{ event.title }}</a></legend>
+	<legend><p>Inscription Form: <a href="{% url 'event' event.pk %}">{{ event.title }}</a></p></legend>
     {% csrf_token %}
 
     {% for form in forms %}

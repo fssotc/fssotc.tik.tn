@@ -2,8 +2,8 @@
 {% load staticfiles%}
 {% block pagetitle %}Events | Fss Open Tech Club{% endblock %}
 {% block content_section %}
-        <section id="events" class="container">
-            <h4 class="my-2">Events</h4>
+        <section id="events">
+		<p><h4>Events:</h4></p>
 	    {% for evt in event_list %}
 	    <!-- {% cycle 0 1 2 as mod %} -->
 	    {% if mod == 0 %}
