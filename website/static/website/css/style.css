@@ -112,7 +112,26 @@ header .nav a:hover {
 header .navbar-brand {
     letter-spacing: 4.2px;
     line-height: 1.5;
-    text-transform: uppercase
+    text-transform: uppercase;
+    font-weight: 900;
+    color: #231f20;
+    height: 2.3em;
+}
+.navbar-brand span {
+    height: 100%;
+    vertical-align: middle;
+}
+.navbar-brand .brand-fss {
+    display: none;
+}
+.navbar-brand .brand-open {
+    color: #002d3c;
+}
+.navbar-brand .brand-tech {
+    color: #32bcd1;
+}
+.navbar-brand .brand-club {
+    color: #bcd031;
 }
 
 section {
