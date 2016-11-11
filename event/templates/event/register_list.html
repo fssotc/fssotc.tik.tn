@@ -21,7 +21,7 @@
 	</tr>
         {% for register in register_list %}
         <tr>
-            <td>{{ register.member }}</td>
+            <td class="text-capitalize">{{ register.member }}</td>
             <td>{{ register.get_member_email }}</td>
             <td>{{ register.get_member_university }}</td>
             <td>{{ register.get_member_education }}</td>
@@ -35,7 +35,7 @@
 	</tr>
         {% for other in other_list %}
         <tr>
-            <td>{{ other.member }}</td>
+            <td class="text-capitalize">{{ other.member }}</td>
             <td>{{ other.member.email }}</td>
             <td>{{ other.university }}</td>
             <td>{{ other.education }}</td>
