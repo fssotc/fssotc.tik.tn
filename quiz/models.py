@@ -6,8 +6,10 @@ from db.models import Member
 
 class Quiz(models.Model):
     title = models.CharField(max_length=200, db_index=True)
-    start = models.DateTimeField(blank=True, null=True)
-    end = models.DateTimeField(blank=True, null=True)
+    start = models.DateTimeField(blank=True, null=True,
+                                 verbose_name="Quiz Start Date (UTC)")
+    end = models.DateTimeField(blank=True, null=True,
+                               verbose_name="Quiz End Date (UTC)")
 
     def __str__(self):
         return self.title

@@ -6,6 +6,7 @@ from django.db.models.query_utils import Q
 from django.core.exceptions import ValidationError
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 
 # Create your models here.
 
@@ -181,14 +182,18 @@ class Event(models.Model):
                                   blank=True)
     place = models.CharField(max_length=80,
                              default='Faculty of Sciences of Sfax, Amphi A9')
-    start = models.DateTimeField()
-    end = models.DateTimeField(blank=True, null=True)
+    start = models.DateTimeField(verbose_name="Event Start Time (UTC)")
+    end = models.DateTimeField(blank=True, null=True,
+                               verbose_name="Event End Time (UTC)")
     is_ours = models.BooleanField()
     price = models.PositiveSmallIntegerField(
         default=0,
         verbose_name="Price (-5 for members)")
 
     objects = EventManager()
+
+    def get_absolute_url(self):
+        return reverse('event', kwargs={'pk': self.pk})
 
     def is_passed(self):
         if self.end is not None:

@@ -5,6 +5,7 @@ from db.models import Event, Member
 class Register(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    paid = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ("member", "event")
@@ -31,3 +32,13 @@ class Register(models.Model):
     def get_member_year(self):
         return self.member.inscription_set.all().order_by('-session')[0].year
     get_member_year.short_description = 'year'
+
+    def inscription_paid(self):
+        return self.member.inscription_set.all().order_by('-session')[0].confirmed
+    inscription_paid.short_description = 'Inscription Paid'
+    inscription_paid.boolean = True
+
+    def has_paid(self):
+        return self.event.price == 0 or self.paid
+    has_paid.short_description = "Event Paid"
+    has_paid.boolean = True
