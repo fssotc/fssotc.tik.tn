@@ -1,0 +1,32 @@
+{% extends 'website/layout.html' %}
+{% load staticfiles %}
+{% block pagetitle %}Registers List | Fss Open Tech Club{% endblock %}
+{% block full_content_section %}
+<h3>{{ register_list.first.event }}</h3>
+<table class="table table-hover table-sm table-bordered small">
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Email</th>
+            <th>Univ</th>
+            <th>dipl</th>
+            <th>Y</th>
+            <th>Insc</th>
+            <th>Evt</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for register in register_list %}
+        <tr>
+            <td>{{ register.member }}</td>
+            <td>{{ register.get_member_email }}</td>
+            <td>{{ register.get_member_university }}</td>
+            <td>{{ register.get_member_education }}</td>
+            <td>{{ register.get_member_year }}</td>
+            <td>{% if register.inscription_paid %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
+            <td>{% if register.has_paid %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

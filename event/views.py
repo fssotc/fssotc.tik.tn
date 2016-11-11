@@ -7,6 +7,7 @@ from django.contrib.messages import error, info, success
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormView
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Register
 
 
@@ -59,3 +60,14 @@ class EventList(ListView):
 class EventDetail(DetailView):
     model = Event
     template_name = 'event/event_detail.html'
+
+
+class RegisterList(PermissionRequiredMixin, ListView):
+    permission_required = 'event.change_register'
+    model = Register
+    ordering = 'member__name'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['register_list'] = Register.objects.filter(event__pk=self.kwargs['event_id'])
+        return context

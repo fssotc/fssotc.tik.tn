@@ -1,5 +1,6 @@
 from django.db import models
 from db.models import Event, Member
+from django.shortcuts import reverse
 
 
 class Register(models.Model):
@@ -42,3 +43,6 @@ class Register(models.Model):
         return self.event.price == 0 or self.paid
     has_paid.short_description = "Event Paid"
     has_paid.boolean = True
+
+    def get_absolute_url(self):
+        return reverse('registers', kwargs={'event_id': self.event_id})
