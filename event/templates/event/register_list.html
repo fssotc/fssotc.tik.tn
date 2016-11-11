@@ -2,8 +2,8 @@
 {% load staticfiles %}
 {% block pagetitle %}Registers List | Fss Open Tech Club{% endblock %}
 {% block full_content_section %}
-<h3>{{ register_list.first.event }}</h3>
-<table class="table table-hover table-sm table-bordered small">
+<h3>{{ event.title }}</h3>
+<table class="table table-hover table-sm table-bordered">
     <thead>
         <tr>
             <th>Member</th>
@@ -16,6 +16,9 @@
         </tr>
     </thead>
     <tbody>
+	<tr>
+		<td colspan="7" class="text-xs-center"><strong>Registered</strong></td>
+	</tr>
         {% for register in register_list %}
         <tr>
             <td>{{ register.member }}</td>
@@ -25,6 +28,20 @@
             <td>{{ register.get_member_year }}</td>
             <td>{% if register.inscription_paid %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
             <td>{% if register.has_paid %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
+        </tr>
+        {% endfor %}
+	<tr>
+		<td colspan="7" class="text-xs-center"><strong>Others</strong></td>
+	</tr>
+        {% for other in other_list %}
+        <tr>
+            <td>{{ other.member }}</td>
+            <td>{{ other.member.email }}</td>
+            <td>{{ other.university }}</td>
+            <td>{{ other.education }}</td>
+            <td>{{ other.year }}</td>
+            <td>{% if other.confirmed %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
+	    <td>{% if event.price == 0 %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
         </tr>
         {% endfor %}
     </tbody>
