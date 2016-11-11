@@ -114,8 +114,7 @@ class Inscription(models.Model):
                                  max_length=3, blank=True)
     year = models.CharField(verbose_name="Année", choices=YEAR_CHOICES,
                             max_length=1, blank=True)
-    confirmed = models.BooleanField(default=False)
-    dreamspark_key = models.BooleanField(default=False)
+    confirmed = models.BooleanField(default=False, verbose_name="Fees paid")
     member_card = models.BooleanField(default=False)
 
     class Meta:
@@ -160,9 +159,6 @@ Facebook: fb.me/fssotc
 E-mail: fssotc@gmail.com
 GitHub: github.com/fssotc""")
     '''
-
-    # if "dreamspark_key" in update_fields:
-    # FIXME: email dreamspark key
 
 
 class EventManager(models.Manager):

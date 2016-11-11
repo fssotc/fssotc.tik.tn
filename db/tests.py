@@ -35,7 +35,6 @@ class MemberTestCase(TestCase):
         self.assertEqual(str(ins1), '2015-2016')
         self.assertEqual(str(ins2), '2016-2017')
         self.assertEqual(ins1.confirmed, False)
-        self.assertEqual(ins1.dreamspark_key, False)
         self.assertEqual(ins1.member_card, False)
 
     def test_member_is_new(self):
