@@ -140,15 +140,14 @@ class Inscription(models.Model):
 @receiver(post_save, sender=Inscription)
 def inscription_confirmation(sender, instance, created, raw, using,
                              update_fields, **kwargs):
+    '''
     if created and instance.member:
         from .email import send_mails
         send_mails([instance.member.email],
                    "Welcome to Fss Open Tech Club!",
                    """Welcome Fss Open Tech Club member,
 
-- You need to create an account at github.com to access Fss OTC projects.
-- Please confirm your email address and your GitHub account by sending your
-GitHub username to fssotc@gmail.com.
+Please confirm your email address by replying to this email.
 
 Sincerely,
 
@@ -160,6 +159,7 @@ Website: mtcfss.azurewebsites.net
 Facebook: fb.me/fssotc
 E-mail: fssotc@gmail.com
 GitHub: github.com/fssotc""")
+    '''
 
     # if "dreamspark_key" in update_fields:
     # FIXME: email dreamspark key
