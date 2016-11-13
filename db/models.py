@@ -25,6 +25,9 @@ class Member(models.Model):
     birthday = models.DateField(blank=True, null=True,
                                 verbose_name="Date de naissance")
 
+    class Meta:
+        ordering = ('name', 'family_name')
+
     def is_new(self):
         today = date.today()
         if today.month < 9:
