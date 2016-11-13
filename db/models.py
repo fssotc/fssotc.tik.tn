@@ -1,8 +1,6 @@
 from datetime import date
-from django.utils import timezone
 
 from django.db import models
-from django.db.models.query_utils import Q
 from django.core.exceptions import ValidationError
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -160,58 +158,3 @@ Facebook: fb.me/fssotc
 E-mail: fssotc@gmail.com
 GitHub: github.com/fssotc""")
     '''
-
-
-class EventManager(models.Manager):
-
-    def comming(self):
-        return self.get_queryset().filter(Q(start__gte=date.today()) |
-                                          Q(end__gte=date.today()))
-
-
-class Event(models.Model):
-    EVENT_TYPES = (
-        ('con', 'conference'),
-        ('cha', 'challenge'),
-        ('tra', 'training'),
-        ('tlk', 'talk'),
-    )
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    event_type = models.CharField(max_length=3, choices=EVENT_TYPES,
-                                  blank=True)
-    place = models.CharField(max_length=80,
-                             default='Faculty of Sciences of Sfax, Amphi A9')
-    start = models.DateTimeField(verbose_name="Event Start Time (UTC)")
-    end = models.DateTimeField(blank=True, null=True,
-                               verbose_name="Event End Time (UTC)")
-    is_ours = models.BooleanField()
-    price = models.PositiveSmallIntegerField(
-        default=0,
-        verbose_name="Price (-5 for members)")
-
-    objects = EventManager()
-
-    def get_absolute_url(self):
-        return reverse('event', kwargs={'pk': self.pk})
-
-    def is_passed(self):
-        if self.end is not None:
-            end = self.end
-        else:
-            end = self.start
-        return end < timezone.now()
-
-    is_passed.boolean = True
-
-    def __str__(self):
-        return self.title
-
-
-class EventLink(models.Model):
-    title = models.CharField(max_length=40)
-    link = models.URLField()
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.title

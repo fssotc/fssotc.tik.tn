@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Member, Inscription, Event, EventLink
+from .models import Member, Inscription
 from .filters import InscriptionSessionFilter, MemberInscriptionSessionFilter
 from event.admin import RegisterAdmin
 from quiz.admin import SubmissionAdmin
@@ -8,11 +8,6 @@ from quiz.admin import SubmissionAdmin
 class InscriptionInline(admin.TabularInline):
     model = Inscription
     extra = 1
-
-
-class EventLinkInline(admin.TabularInline):
-    model = EventLink
-    extra = 2
 
 
 @admin.register(Member)
@@ -24,14 +19,6 @@ class MemberAdmin(admin.ModelAdmin):
     list_filter = ('inscription__education', MemberInscriptionSessionFilter,)
 
 
-@admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
-    inlines = [EventLinkInline]
-    list_display = ('title', 'start', 'end', 'place', 'is_passed')
-    search_fields = ['title', 'place', 'start', 'end']
-    list_filter = ('is_ours', 'event_type', 'place')
-
-
 @admin.register(Inscription)
 class InscriptionAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'member', 'confirmed',
@@ -39,9 +26,6 @@ class InscriptionAdmin(admin.ModelAdmin):
     list_filter = ('university', 'education', 'year', 'confirmed',
                    'member_card', InscriptionSessionFilter, 'role')
     list_editable = ('confirmed', 'member_card')
-
-
-admin.site.register(EventLink)  # TODO: use class instead
 
 
 def email_members(admin_model, request, queryset):

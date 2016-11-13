@@ -1,6 +1,7 @@
 from django.views.generic import DetailView, ListView
 from django.shortcuts import render
-from db.models import Event, Member, Inscription
+from db.models import Member, Inscription
+from event.models import Event
 
 # Create your views here.
 

@@ -2,13 +2,13 @@ import datetime
 from django.utils import timezone
 
 from .forms import InscriptionForm, MemberForm
-from db.models import Member, Inscription, Event
+from db.models import Member, Inscription
 from django.contrib.messages import error, info, success
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormView
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import permission_required
-from .models import Register
+from .models import Register, Event
 
 
 def register(request, event_id):

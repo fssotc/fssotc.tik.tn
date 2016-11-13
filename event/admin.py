@@ -1,6 +1,22 @@
 from django.contrib import admin
-from .models import Register
-from db.models import Member, Event
+from .models import Register, Event, EventLink
+from db.models import Member
+
+
+class EventLinkInline(admin.TabularInline):
+    model = EventLink
+    extra = 2
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    inlines = [EventLinkInline]
+    list_display = ('title', 'start', 'end', 'place', 'is_passed')
+    search_fields = ['title', 'place', 'start', 'end']
+    list_filter = ('is_ours', 'event_type', 'place')
+
+
+admin.site.register(EventLink)  # TODO: use class instead
 
 
 @admin.register(Register)
