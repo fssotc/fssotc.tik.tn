@@ -1,6 +1,9 @@
 from django.contrib import admin
 from .models import Member, Inscription
-from .filters import InscriptionSessionFilter, MemberInscriptionSessionFilter
+from .filters import (
+    InscriptionSessionFilter, MemberInscriptionSessionFilter,
+    MemberFieldsDuplicationFilter
+)
 from event.admin import RegisterAdmin
 from quiz.admin import SubmissionAdmin
 
@@ -16,7 +19,8 @@ class MemberAdmin(admin.ModelAdmin):
     inlines = [InscriptionInline]
     search_fields = ['name', 'family_name', 'inscription__education',
                      'inscription__university']
-    list_filter = ('inscription__education', MemberInscriptionSessionFilter,)
+    list_filter = ('inscription__education', MemberInscriptionSessionFilter,
+                   MemberFieldsDuplicationFilter)
 
 
 @admin.register(Inscription)

@@ -1,8 +1,9 @@
 from django.test import TestCase
 from datetime import date, timedelta
 from .models import (
-    Member, Inscription, Event, EventLink, inscription_confirmation
+    Member, Inscription, inscription_confirmation
 )
+from event.models import Event, EventLink
 from django.utils import timezone
 from django.db.models.signals import post_save
 
