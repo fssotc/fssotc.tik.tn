@@ -47,3 +47,32 @@ class MemberFieldsDuplicationFilter(admin.SimpleListFilter):
             return queryset.filter(birthday__in=n)
         if self.value() == 'family_name':
             return queryset.filter(family_name__in=n)
+
+
+class InscriptionTypeFilter(admin.SimpleListFilter):
+    title = 'inscription type'
+    parameter_name = 'inscription_type'
+
+    def lookups(self, request, queryset):
+        return (
+            ('new', 'New Inscription'),
+            ('renew', 'Renew Inscription (Inscripted Last Year)'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() is not None:
+            if ('session' not in request.GET):
+                from django.contrib.messages import warning
+                warning(request, '"Inscription Type" filter needs "Session" '
+                        'filter to be specified!')
+                return
+            session = request.GET['session']
+            inscps = Inscription.objects.filter(session__lt=session).\
+                values('member_id').\
+                annotate(Count('session')).order_by().\
+                filter(session__count__gt=0)
+            members = [inscp['member_id'] for inscp in inscps]
+        if self.value() == 'new':
+            return queryset.exclude(member_id__in=members)
+        if self.value() == 'renew':
+            return queryset.filter(member_id__in=members)

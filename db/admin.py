@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Member, Inscription
 from .filters import (
     InscriptionSessionFilter, MemberInscriptionSessionFilter,
-    MemberFieldsDuplicationFilter
+    MemberFieldsDuplicationFilter, InscriptionTypeFilter
 )
 from event.admin import RegisterAdmin
 from quiz.admin import SubmissionAdmin
@@ -28,7 +28,8 @@ class InscriptionAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'member', 'confirmed',
                     'member_card', 'is_current')
     list_filter = ('university', 'education', 'year', 'confirmed',
-                   'member_card', InscriptionSessionFilter, 'role')
+                   'member_card', InscriptionSessionFilter, 'role',
+                   InscriptionTypeFilter)
     list_editable = ('confirmed', 'member_card')
 
 
