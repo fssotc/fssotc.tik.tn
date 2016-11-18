@@ -66,8 +66,8 @@ class EventDetail(DetailView):
 def register_list(request, event_id=None):
     registers = list(Register.objects.filter(event__id=event_id).order_by(
         'member__name'))
-    event = registers[0] if len(registers) else get_object_or_404(Event,
-                                                                  pk=event_id)
+    event = registers[0].event if len(registers) else \
+        get_object_or_404(Event, pk=event_id)
     others = list(Inscription.objects.filter(
         session=Inscription.current_session()).order_by('member__name'))
     registers_insc = [r.inscription for r in registers]
