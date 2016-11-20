@@ -77,6 +77,10 @@ class Register(models.Model):
         return self.member.email
     get_member_email.short_description = 'email'
 
+    def get_member_cin(self):
+        return self.member.cin
+    get_member_cin.short_description = 'CIN'
+
     @property
     def inscription(self):
         try:
