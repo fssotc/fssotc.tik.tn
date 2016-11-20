@@ -15,10 +15,10 @@ class InscriptionInline(admin.TabularInline):
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'phone', 'email')
+    list_display = ('__str__', 'phone', 'email', 'cin')
     inlines = [InscriptionInline]
     search_fields = ['name', 'family_name', 'inscription__education',
-                     'inscription__university']
+                     'inscription__university', 'cin']
     list_filter = ('inscription__education', MemberInscriptionSessionFilter,
                    MemberFieldsDuplicationFilter)
 

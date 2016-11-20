@@ -6,7 +6,7 @@ class InscriptionForm(forms.ModelForm):
 
     class Meta:
         model = Inscription
-        fields = ('university', 'education', 'year', 'inscription_num')
+        fields = ('university', 'education', 'year')
 
 
 class MemberForm(forms.ModelForm):
@@ -14,5 +14,5 @@ class MemberForm(forms.ModelForm):
 
     class Meta:
         model = Member
-        fields = ('name', 'family_name', 'email', 'phone', 'address',
+        fields = ('name', 'family_name', 'email', 'phone', 'cin', 'address',
                   'username', 'birthday')

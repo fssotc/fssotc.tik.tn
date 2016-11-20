@@ -6,7 +6,7 @@ class MemberForm(forms.ModelForm):
 
     class Meta:
         model = Member
-        fields = ('name', 'family_name', 'email', 'phone')
+        fields = ('name', 'family_name', 'email', 'phone', 'cin')
 
 
 class InscriptionForm(forms.ModelForm):

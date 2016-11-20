@@ -24,6 +24,7 @@ class Member(models.Model):
                                 verbose_name="GitHub username")
     birthday = models.DateField(blank=True, null=True,
                                 verbose_name="Date de naissance")
+    cin = models.CharField(max_length=8, blank=True, null=True, unique=True)
 
     class Meta:
         ordering = ('name', 'family_name')
@@ -104,10 +105,6 @@ class Inscription(models.Model):
     date = models.DateField(auto_now_add=True)
     session = models.CharField(choices=SESSIONS, default=SESSIONS[-1][1],
                                max_length=9)
-    inscription_num = models.DecimalField(
-        verbose_name="Inscription Num", null=True, blank=True, max_digits=10,
-        decimal_places=0, help_text="Seulement pour les étudiants du FSS pour "
-        "le service culturel de la faculté.")
     university = models.CharField(verbose_name="Institution / University",
                                   choices=UNIVERSITY_CHOICES,
                                   max_length=7, blank=True)
