@@ -24,7 +24,7 @@ class Member(models.Model):
                                 verbose_name="GitHub username")
     birthday = models.DateField(blank=True, null=True,
                                 verbose_name="Date de naissance")
-    cin = models.CharField(max_length=8, blank=True, null=True, unique=True)
+    cin = models.CharField(max_length=8, blank=True, null=True)
 
     class Meta:
         ordering = ('name', 'family_name')
@@ -50,6 +50,13 @@ class Member(models.Model):
                 m = m.exclude(id=self.id)
             if m.exists():
                 raise ValidationError("Username should be uniqe")
+        if self.cin:
+            # cin is unique if not empty
+            m = Member.objects.filter(cin__iexact=self.cin)
+            if self.id:
+                m = m.exclude(id=self.id)
+            if m.exists():
+                raise ValidationError("CIN should be uniqe")
 
     def __str__(self):
         return "%s %s" % (self.name, self.family_name)
