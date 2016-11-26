@@ -24,12 +24,12 @@
         <tr>
             <td class="text-capitalize">{{ register.member }}</td>
 	    <td class="text-xs-right">{{ register.get_member_cin }}</td>
-	    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	    <td></td>
 	    <td>{{ register.get_member_university }}</td>
 	    <td>{{ register.get_member_education }}</td>
 	    <td>{{ register.get_member_year }}</td>
-            <td>{% if register.inscription_paid %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
-            <td>{% if register.has_paid %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
+            <td>{% if register.inscription_paid %}<i class="fa fa-check"></i>{% endif %}</td>
+            <td>{% if register.has_paid %}<i class="fa fa-check"></i>{% endif %}</td>
         </tr>
         {% endfor %}
 	<tr>
@@ -38,13 +38,13 @@
         {% for other in other_list %}
         <tr>
             <td class="text-capitalize">{{ other.member }}</td>
-	    <td class="text-xs-right">{{ other.member.inscription }}</td>
-	    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	    <td class="text-xs-right">{% if other.member.cin %}{{ other.member.cin }}{% endif %}</td>
+	    <td></td>
 	    <td>{{ other.university }}</td>
 	    <td>{{ other.education }}</td>
 	    <td>{{ other.year }}</td>
-            <td>{% if other.confirmed %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
-	    <td>{% if event.price == 0 %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
+            <td>{% if other.confirmed %}<i class="fa fa-check"></i>{% endif %}</td>
+	    <td>{% if event.price == 0 %}<i class="fa fa-check"></i>{% endif %}</td>
         </tr>
         {% endfor %}
     </tbody>
