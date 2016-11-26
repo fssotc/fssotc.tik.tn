@@ -78,7 +78,7 @@ class Register(models.Model):
     get_member_email.short_description = 'email'
 
     def get_member_cin(self):
-        return self.member.cin
+        return self.member.cin or ''
     get_member_cin.short_description = 'CIN'
 
     @property

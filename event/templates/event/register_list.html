@@ -6,40 +6,43 @@
 <table class="table table-hover table-sm table-bordered">
     <thead>
         <tr>
-            <th>Member</th>
-            <th>Email</th>
-            <th>Univ</th>
-            <th>dipl</th>
-            <th>Y</th>
-            <th>Insc</th>
-            <th>Evt</th>
+            <th style="width:200px;">Member</th>
+	    <th style="width:120px;">CIN</th>
+	    <th>Signature</th>
+	    <th style="width:40px;">Univ</th>
+	    <th style="width:40px">Dip</th>
+	    <th style="width:25px">Y</th>
+            <th style="width:20px;">Ins</th>
+            <th style="width:20px;">Evt</th>
         </tr>
     </thead>
     <tbody>
 	<tr>
-		<td colspan="7" class="text-xs-center"><strong>Registered</strong></td>
+		<td colspan="8" class="text-xs-center"><strong>Registered</strong></td>
 	</tr>
         {% for register in register_list %}
         <tr>
             <td class="text-capitalize">{{ register.member }}</td>
-            <td>{{ register.get_member_email }}</td>
-            <td>{{ register.get_member_university }}</td>
-            <td>{{ register.get_member_education }}</td>
-            <td>{{ register.get_member_year }}</td>
+	    <td class="text-xs-right">{{ register.get_member_cin }}</td>
+	    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	    <td>{{ register.get_member_university }}</td>
+	    <td>{{ register.get_member_education }}</td>
+	    <td>{{ register.get_member_year }}</td>
             <td>{% if register.inscription_paid %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
             <td>{% if register.has_paid %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
         </tr>
         {% endfor %}
 	<tr>
-		<td colspan="7" class="text-xs-center"><strong>Others</strong></td>
+		<td colspan="8" class="text-xs-center"><strong>Others</strong></td>
 	</tr>
         {% for other in other_list %}
         <tr>
             <td class="text-capitalize">{{ other.member }}</td>
-            <td>{{ other.member.email }}</td>
-            <td>{{ other.university }}</td>
-            <td>{{ other.education }}</td>
-            <td>{{ other.year }}</td>
+	    <td class="text-xs-right">{{ other.member.inscription }}</td>
+	    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	    <td>{{ other.university }}</td>
+	    <td>{{ other.education }}</td>
+	    <td>{{ other.year }}</td>
             <td>{% if other.confirmed %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
 	    <td>{% if event.price == 0 %}<i class="fa fa-check"></i>{% else %}&nbsp;{% endif %}</td>
         </tr>
