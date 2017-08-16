@@ -24,3 +24,4 @@ local_settings.py
 .email_password.txt
 .dev.txt
 .production.txt
+settings_secret.py

@@ -1,31 +1,8 @@
 import os
-import deploy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = deploy.get_key()
-
-DEBUG = deploy.is_dev_env()
-
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '192.168.20.1',
-    'mtcfss.azurewebsites.net',
-    '.mtcfss.lan',
-    '.fssotc.lan',
-    'wpad',
-]
-INTERNAL_IPS = ('127.0.0.1',)
-
-ADMINS = (
-    ('lejenome', 'bmoez.j@gmail.com'),
-)
-
-DEFAULT_FROM_EMAIL = 'fssotc@gmail.com'
-
-MANAGERS = ADMINS
 
 INSTALLED_APPS = [
     'grappelli',
@@ -57,17 +34,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': None,
-        'OPTIONS': {
-            'MAX_ENTRIES': 1000
-        }
-    }
-}
 
 ROOT_URLCONF = 'project.urls'
 
@@ -88,15 +56,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -127,16 +86,8 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = BASE_DIR + '/upload/'
+MEDIA_URL = '/upload/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('\\', '/')
 
-# STATICFILES_DIRS = (
-# )
-
-WP_API_SITE_ID = '106661952'
-
-EMAIL_HOST = 'smtp.googlemail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'fssotc@gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_HOST_PASSWORD = deploy.get_email_password()
+from .settings_secret import *

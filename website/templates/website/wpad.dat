@@ -4,5 +4,5 @@ function FindProxyForURL(url, host) {
       dnsDomainIs(host, ".lan") || dnsDomainIs(host, "localhost"))
     return "DIRECT";
 
-  return "PROXY mtcfss.lan:3031";
+  return "PROXY djagora.lan:3031";
 }
