@@ -15,7 +15,7 @@ setup(
     author='Moez Bouhlel',
     author_email='bmoez.j@gmail.com',
     license='GPLv3',
-    url='http://mtcfss.azurewebsites.net/',
+    url='https://fssotc.tik.tn',
     include_package_data=True,
     install_requires=[
         'Django',

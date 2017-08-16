@@ -23,8 +23,8 @@ Cordialement,
 ---
 Open Tech Club - Faculty of Sciences of Sfax
 
-Phone: (+216) 28 204 299
-Website: mtcfss.azurewebsites.net
+Phone: (+216) 52 684 299
+Website: fssotc.tik.tn
 Facebook: fb.me/fssotc
 E-mail: fssotc@gmail.com
 GitHub: github.com/fssotc"""
