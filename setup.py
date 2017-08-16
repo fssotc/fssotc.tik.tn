@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name='fssotc-website',
-    version='0.2',
+    version='0.3',
     description='Fss Open Tech Club Website',
     long_description=read('README.md'),
     author='Moez Bouhlel',
