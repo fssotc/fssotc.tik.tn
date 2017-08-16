@@ -79,6 +79,31 @@
             </li>
         </ul>
     </footer>
+
     {% block scripts %}{% endblock %}
+
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['enableHeartBeatTimer']);
+      if (document.documentElement.dataset.userId) {
+        _paq.push(['setUserId', document.documentElement.dataset.userId]);
+      }
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u = "https://api.admin.tik.tn/p";
+        _paq.push(['setTrackerUrl', u]);
+        _paq.push(['setSiteId', 5]);
+        var d = document,
+          g = d.createElement('script'),
+          s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.defer = true;
+        g.async = true;
+        g.src = u;
+        s.parentNode.insertBefore(g, s);
+      })();
+
+    </script>
 </body>
 </html>
