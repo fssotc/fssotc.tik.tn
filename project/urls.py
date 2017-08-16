@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'', include('db.urls')),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG and settings.DEBUG_TOOLBAR_INSTALLED:
     import debug_toolbar
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),

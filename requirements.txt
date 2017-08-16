@@ -1,8 +1,8 @@
 decorators==0.1
 Django==1.11.4
 django-after-response==0.2.2
+django-bootstrap3==9.0.0
 django-csp==3.3
-django-debug-toolbar==1.6
 django-grappelli==2.8.2
 django-nested-admin==3.0.12
 django-wordpress-rest==0.1.3
