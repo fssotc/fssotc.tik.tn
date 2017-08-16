@@ -4,6 +4,7 @@ python:
 - '3.6'
 - nightly
 intall:
+- cp project/settings_secret.py.example project/settings_secret.py
 - pip install -q -r requirements.txt
 - pip install -q -e .
 script:
