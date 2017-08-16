@@ -146,7 +146,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 50214400  # 50 M
 
 
 DEBUG_TOOLBAR_CONFIG = {
-    'JQUERY_URL': '/static/samsar/vendor/jquery-3.2.1.min.js'
+    'JQUERY_URL': '/static/website/vendor/jquery-3.2.1.min.js'
 }
 
 
