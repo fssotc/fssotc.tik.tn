@@ -110,6 +110,7 @@ CSP_DEFAULT_SRC = (
 )
 CSP_IMG_SRC = (
     "'self'",
+    "data:",
     "https://stats.g.doubleclick.net",
     "https://api.admin.tik.tn",
     "https://www.google-analytics.com",
@@ -121,11 +122,13 @@ CSP_SCRIPT_SRC = (
     "https://api.admin.tik.tn",
     "https://www.google-analytics.com",
     "https://pagead2.googlesyndication.com",
+    "https://cdn.rawgit.com",
 )
 CSP_STYLE_SRC = (
     "'self'",
     "'unsafe-inline'",
     "https://fonts.googleapis.com",
+    "https://cdn.rawgit.com",
 )
 CSP_OBJECT_SRC = (
     "'none'",
