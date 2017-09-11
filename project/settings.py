@@ -160,5 +160,5 @@ try:
     import sgbackend
     EMAIL_BACKEND = "sgbackend.SendGridBackend"
     SENDGRID_API_KEY = SENDGRID_API_KEY
-except ImportError, NameError:
+except (ImportError, NameError):
     pass
