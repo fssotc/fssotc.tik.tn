@@ -1,5 +1,5 @@
 decorators==0.1
-Django==1.11.4
+Django==1.11.5
 django-after-response==0.2.2
 django-bootstrap3==9.0.0
 django-csp==3.3

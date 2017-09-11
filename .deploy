@@ -1,0 +1,28 @@
+#!/bin/env bash
+
+# TODO:  dev, production
+ENV=${1:-dev}
+
+if [ ! -e "env/bin/activate" ]; then
+	python3 -m venv env
+fi
+source env/bin/activate
+
+if [ -e "package.json" ]; then
+	npm --production install
+fi
+
+if [ "$ENV" -eq "production" ]; then
+	pip3 install -r requirements/default.txt
+else
+	pip3 install -r requirements/dev.txt
+fi
+
+python3 manage.py migrate --noinput
+python3 manage.py collectstatic --clear --link --noinput
+
+if pidof uwsgi >/dev/null; then
+	kill -HUP $(pidof uwsgi) \
+		&& echo "Server reloaded" \
+		|| echo "Can not reload the server"
+fi

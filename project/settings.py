@@ -154,3 +154,11 @@ DEBUG_TOOLBAR_CONFIG = {
 
 
 from .settings_secret import *
+
+
+try:
+    import sgbackend
+    EMAIL_BACKEND = "sgbackend.SendGridBackend"
+    SENDGRID_API_KEY = SENDGRID_API_KEY
+except ImportError, NameError:
+    pass
