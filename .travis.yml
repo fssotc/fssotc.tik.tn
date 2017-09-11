@@ -3,9 +3,9 @@ python:
 - '3.5'
 - '3.6'
 - nightly
-intall:
-- pip install -q -r requirements.txt
-- pip install -q -e .
+install:
+- ./.deploy production
+- ./.deploy dev
 script:
 - cp project/settings_secret.py.example project/settings_secret.py
 - python manage.py test
