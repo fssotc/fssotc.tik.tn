@@ -24,8 +24,7 @@
     </p>
     {% endif %}
     {% if event.price %}
-    <p><strong>Price:</strong> <i class="fa fa-money"></i> {{ event.price }} DT
-        <small class="help form-text text-muted">* {{ event.price|add:-5 }} DT for members</small></p>
+    <p><strong>Price:</strong> <i class="fa fa-money"></i> {{ event.price }} DT</p>
     {% endif %}
     {% for lnk in event.eventlink_set.all %}
     <p><i class="fa fa-external-link"></i> <a href="{{ lnk.link }}" class="card-link">{{ lnk.title }}</a></p>
