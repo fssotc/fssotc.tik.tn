@@ -106,6 +106,7 @@ class Inscription(models.Model):
         ('2014-2015', '2014-2015'),
         ('2015-2016', '2015-2016'),
         ('2016-2017', '2016-2017'),
+        ('2017-2018', '2017-2018'),
     )
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     role = models.CharField(max_length=1, choices=ROLE, default='', blank=True)
