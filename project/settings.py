@@ -13,6 +13,7 @@ except ImportError:
 
 INSTALLED_APPS = [
     'grappelli',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
@@ -151,6 +153,9 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 50214400  # 50 M
 DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': '/static/website/vendor/jquery-3.2.1.min.js'
 }
+
+
+SITE_ID = 2
 
 
 from .settings_secret import *

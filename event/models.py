@@ -5,6 +5,8 @@ from django.db import models
 from django.db.models.query_utils import Q
 from db.models import Member
 from django.shortcuts import reverse
+from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
 
 
 class EventManager(models.Manager):
@@ -34,8 +36,10 @@ class Event(models.Model):
     price = models.PositiveSmallIntegerField(
         default=0,
         verbose_name="Price (-5 for members)")
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
 
     objects = EventManager()
+    on_site = CurrentSiteManager()
 
     def get_absolute_url(self):
         return reverse('event', kwargs={'pk': self.pk})

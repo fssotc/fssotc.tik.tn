@@ -12,17 +12,17 @@ from .models import Register, Event
 
 
 def register(request, event_id):
-    event = get_object_or_404(Event, pk=event_id)
+    event = get_object_or_404(Event, pk=event_id, site=request.site)
     if event.end and event.end < timezone.now():
         return render(request, 'event/ended.html', {'event': event})
     if request.method == 'POST':
         try:
             member = Member.objects.get(email=request.POST['email'])
-        except:
+        except Member.DoesNotExists:
             member = Member()
         member_form = MemberForm(request.POST, instance=member)
         inscription_form = InscriptionForm(request.POST)
-        insc = [insc for insc in Inscription.objects.filter(member=member)
+        insc = [insc for insc in Inscription.on_site.filter(member=member)
                 if insc.is_current()]
         insc = insc[0] if len(insc) == 1 else None
         if not insc and member_form.is_valid() and inscription_form.is_valid():
@@ -54,7 +54,7 @@ def register(request, event_id):
 class EventList(ListView):
     model = Event
     template_name = 'event/event_list.html'
-    queryset = Event.objects.order_by('-start')
+    queryset = Event.on_site.order_by('-start')
 
 
 class EventDetail(DetailView):
@@ -67,8 +67,8 @@ def register_list(request, event_id=None):
     registers = list(Register.objects.filter(event__id=event_id).order_by(
         'member__name'))
     event = registers[0].event if len(registers) else \
-        get_object_or_404(Event, pk=event_id)
-    others = list(Inscription.objects.filter(
+        get_object_or_404(Event, pk=event_id, site=request.site)
+    others = list(Inscription.on_site.filter(
         session=Inscription.current_session()).order_by('member__name'))
     registers_insc = [r.inscription for r in registers]
     others = [other for other in others if other not in registers_insc]

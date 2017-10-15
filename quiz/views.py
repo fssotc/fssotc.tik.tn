@@ -12,9 +12,9 @@ from db.models import Member
 def quiz(request, quiz_pk=None, quiz_title=None, member_pk=None,
          member_email=None):
     if quiz_pk:
-        quiz = get_object_or_404(Quiz, pk=quiz_pk)
+        quiz = get_object_or_404(Quiz, pk=quiz_pk, site=request.site)
     else:
-        quiz = get_object_or_404(Quiz, title=quiz_title)
+        quiz = get_object_or_404(Quiz, title=quiz_title, site=request.site)
     if (quiz.start and quiz.start > timezone.now()) or (
             quiz.end and quiz.end < timezone.now()):
         error(request, 'Oops! Quiz is closed.')
@@ -27,7 +27,7 @@ def quiz(request, quiz_pk=None, quiz_title=None, member_pk=None,
     elif request.method == 'POST':
         try:
             member = Member.objects.get(email=request.POST['email'])
-        except:
+        except Member.DoesNotExists:
             return HttpResponseForbidden()
     else:
         member = Member()
@@ -38,7 +38,7 @@ def quiz(request, quiz_pk=None, quiz_title=None, member_pk=None,
         if request.method == "GET":
             score = instance.score()
         submission_is_new = False
-    except:
+    except Submission.DoesNotExists:
         instance = Submission(quiz=quiz, member=member)
         submission_is_new = True
 

@@ -8,7 +8,7 @@ from event.models import Event
 
 def index(request):
     # FIXME: only no passed events
-    events = Event.objects.comming().order_by('start')
+    events = Event.objects.comming().filter(site=request.site).order_by('start')
     print(events.count())
     return render(request, 'website/index.html', {
         'events': events
@@ -24,11 +24,13 @@ class MemberList(ListView):
         context = super().get_context_data(**kwargs)
         members_insc = self.model.objects.filter(
             role__exact='', confirmed=True,
-            session=Inscription.current_session()
+            session=Inscription.current_session(),
+            site=self.request.site,
         ).order_by('member__name', 'member__family_name')
         context['member_list'] = members_insc
         admin_insc = self.model.objects.exclude(role__exact='').filter(
-            session=Inscription.current_session()
+            session=Inscription.current_session(),
+            site=self.request.site,
         ).order_by('role', 'member__name', 'member__family_name')
         context['admin_list'] = admin_insc
         return context

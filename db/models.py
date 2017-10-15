@@ -5,8 +5,55 @@ from django.core.exceptions import ValidationError
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
 
 # Create your models here.
+
+
+UNIVERSITY_CHOICES = (
+    ("FSS", "Faculté des Sciences de Sfax"),
+    ("ENIS", "Ecole Nationale des Ingénieurs de Sfax"),
+    ("ISIMS",
+     "Institut Supérieur d'Informatique et de Multimédia de Sfax"),
+    ("ENETCOM",
+     "Ecole Nationale d'electronique et de télécommunications de Sfax"),
+    ("FSEGS", "Faculté des Sciences Economiques et de Gestion de Sfax"),
+    ("IPEIS", "Institut Préparatoire aux Etudes d'Ingénieurs de Sfax"),
+    ("ISGIS", "Institut Supérieur de Gestion Industrielle de Sfax"),
+    ("IPSAS",
+     "Institut Polytechnique Privé des Sciences Avancées de Sfax"),
+    ("ISETS", "Institut Supérieur des Etudes Technologiques de Sfax"),
+    ("IIT", "Institut International de Technologie Sfax"),
+)
+
+
+class Club(models.Model):
+    short_name = models.CharField(max_length=10)
+    long_name = models.CharField(max_length=80)
+    description = models.CharField(max_length=255)
+    email = models.EmailField()
+    logo = models.ImageField(upload_to="clubs/logos")
+    phone = models.DecimalField(max_digits=8, decimal_places=0)
+    university = models.CharField(verbose_name="Institution / University",
+                                  choices=UNIVERSITY_CHOICES,
+                                  max_length=7, blank=True)
+
+    new_inscription_price = models.PositiveSmallIntegerField()
+    renew_inscription_price = models.PositiveSmallIntegerField()
+
+    address = models.CharField(max_length=150)
+    address_url = models.URLField(blank=True, null=True)
+
+    facebook_url = models.URLField(blank=True, null=True)
+    twitter_url = models.URLField(blank=True, null=True)
+    github_url = models.URLField(blank=True, null=True)
+    instagram_url = models.URLField(blank=True, null=True)
+
+    sites = models.ManyToManyField(Site)
+
+    def __str__(self):
+        return self.short_name
 
 
 class Member(models.Model):
@@ -18,13 +65,16 @@ class Member(models.Model):
     phone = models.DecimalField(max_digits=8, decimal_places=0,
                                 verbose_name="Phone", blank=True, null=True)
     address = models.CharField(
-        max_length=400, blank=True, null=True, verbose_name="Addresse",
+        max_length=255, blank=True, null=True, verbose_name="Addresse",
         help_text="Juste la Route (e.g: Rt Matar, Rt Sokra)")
     username = models.CharField(max_length=20, blank=True,
                                 verbose_name="GitHub username")
     birthday = models.DateField(blank=True, null=True,
                                 verbose_name="Date de naissance")
     cin = models.CharField(max_length=8, blank=True, null=True)
+    sites = models.ManyToManyField(Site)
+    objects = models.Manager()
+    on_site = CurrentSiteManager()
 
     class Meta:
         ordering = ('name', 'family_name')
@@ -73,21 +123,6 @@ class Inscription(models.Model):
         ('z', 'Admin'),
         ('', 'Member'),
     )
-    UNIVERSITY_CHOICES = (
-        ("FSS", "Faculté des Sciences de Sfax"),
-        ("ENIS", "Ecole Nationale des Ingénieurs de Sfax"),
-        ("ISIMS",
-         "Institut Supérieur d'Informatique et de Multimédia de Sfax"),
-        ("ENETCOM",
-         "Ecole Nationale d'electronique et de télécommunications de Sfax"),
-        ("FSEGS", "Faculté des Sciences Economiques et de Gestion de Sfax"),
-        ("IPEIS", "Institut Préparatoire aux Etudes d'Ingénieurs de Sfax"),
-        ("ISGIS", "Institut Supérieur de Gestion Industrielle de Sfax"),
-        ("IPSAS",
-         "Institut Polytechnique Privé des Sciences Avancées de Sfax"),
-        ("ISETS", "Institut Supérieur des Etudes Technologiques de Sfax"),
-        ("IIT", "Institut International de Technologie Sfax"),
-    )
     EDUCATION_CHOICES = (
         ("LF", "Licence Fondamentale"),
         ("LA", "Licence Appliqué"),
@@ -122,6 +157,9 @@ class Inscription(models.Model):
                             max_length=1, blank=True)
     confirmed = models.BooleanField(default=False, verbose_name="Fees paid")
     member_card = models.BooleanField(default=False)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
+    objects = models.Manager()
+    on_site = CurrentSiteManager()
 
     class Meta:
         unique_together = ("member", "session")

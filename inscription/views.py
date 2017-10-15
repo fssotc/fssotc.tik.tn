@@ -21,11 +21,11 @@ def inscription(request):
     if request.method == 'POST':
         try:
             member = Member.objects.get(email=request.POST['email'])
-        except:
+        except Member.DoesNotExists:
             member = Member()
         member_form = MemberForm(request.POST, instance=member)
         inscription_form = InscriptionForm(request.POST)
-        if any(insc.is_current() for insc in Inscription.objects.filter(member=member)):
+        if any(insc.is_current() for insc in Inscription.on_site.filter(member=member)):
             info(request, 'Already inscripted on the current session!')
         elif member_form.is_valid() and inscription_form.is_valid():
             member = member_form.save()

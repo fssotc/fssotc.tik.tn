@@ -22,6 +22,10 @@ class MemberAdmin(admin.ModelAdmin):
     list_filter = ('inscription__education', MemberInscriptionSessionFilter,
                    MemberFieldsDuplicationFilter)
 
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(sites=request.site)
+
 
 @admin.register(Inscription)
 class InscriptionAdmin(admin.ModelAdmin):
@@ -31,6 +35,10 @@ class InscriptionAdmin(admin.ModelAdmin):
                    'member_card', InscriptionSessionFilter, 'role',
                    InscriptionTypeFilter)
     list_editable = ('confirmed', 'member_card')
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(site=request.site)
 
 
 def email_members(admin_model, request, queryset):

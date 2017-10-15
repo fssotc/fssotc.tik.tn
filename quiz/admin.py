@@ -38,9 +38,17 @@ class QuizAdmin(nested_admin.NestedModelAdmin):
     list_display = ('__str__', 'questions_count', 'max_score')
     inlines = [QuestionInline]
 
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(site=request.site)
+
 
 @admin.register(Submission)
 class SubmissionAdmin(admin.ModelAdmin):
     list_display = ('quiz', 'member', 'score')
     list_filter = ('quiz', 'member')
     inlines = [AnswerInline]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(quiz__site=request.site)

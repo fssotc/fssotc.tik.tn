@@ -16,8 +16,9 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ['title', 'place', 'start', 'end']
     list_filter = ('is_ours', 'event_type', 'place')
 
-
-admin.site.register(EventLink)
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(site=request.site)
 
 
 @admin.register(Register)
@@ -26,3 +27,7 @@ class RegisterAdmin(admin.ModelAdmin):
                     'get_member_university', 'get_member_education',
                     'get_member_year', 'inscription_paid', 'has_paid')
     list_filter = ('event', 'member', RegisterPaidFilter)
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(event__site=request.site)

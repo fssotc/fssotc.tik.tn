@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.sites.models import Site
 
 from db.models import Member
 
@@ -10,6 +11,7 @@ class Quiz(models.Model):
                                  verbose_name="Quiz Start Date (UTC)")
     end = models.DateTimeField(blank=True, null=True,
                                verbose_name="Quiz End Date (UTC)")
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
