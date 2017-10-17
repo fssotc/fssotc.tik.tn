@@ -26,7 +26,7 @@ Open Tech Club - Faculty of Sciences of Sfax
 Phone: (+216) 52 684 299
 Website: fssotc.tik.tn
 Facebook: fb.me/fssotc
-E-mail: fssotc@gmail.com
+E-mail: fssotc@tik.tn
 GitHub: github.com/fssotc"""
         print(data)
         form = EmailForm(data)
