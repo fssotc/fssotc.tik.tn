@@ -12,53 +12,32 @@ logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-    args = '<site_id>'
     help = "loads data from the Wordpress.com API, for the given site_id"
 
-    option_list = BaseCommand.option_list + (
-        make_option('--purge',
-                    action='store_true',
-                    dest='purge',
-                    default=False,
-                    help='Purge data locally first.'),
-        make_option('--full',
-                    action='store_true',
-                    dest='full',
-                    default=False,
-                    help='Full sweep of posts (update and insert as needed).'),
-        make_option('--modified_after',
-                    type='string',
-                    dest='modified_after',
-                    default=None,
-                    help='Load posts modified after this date (iso format).'),
-        make_option('--type',
-                    type='choice',
-                    choices=['all', 'ref_data', 'attachment', 'post', 'page'],
-                    dest='type',
-                    default='all',
-                    help="The type of posts or information to update."),
-        make_option('--status',
-                    type='choice',
-                    choices=['publish', 'private', 'draft', 'pending', 'future', 'trash', 'any'],
-                    dest='status',
-                    default='publish',
-                    help="Update posts with a specific status, or 'any' status."),
-        make_option('--batch_size',
-                    type='int',
-                    dest='batch_size',
-                    default=None,
-                    help='Set the number of posts to load with each call to the WP API.'),
-    )
+    def add_arguments(self, parser):
+        parser.add_argument('site_id', nargs=1)
+        parser.add_argument(
+            '--purge',
+            action='store_true',
+            dest='purge',
+            default=False,
+            help='Purge data locally first.')
+        parser.add_argument(
+            '--full',
+            action='store_true',
+            dest='full',
+            default=False,
+            help='Full sweep of posts (update and insert as needed).')
 
     def handle(self, *args, **options):
         from wordpress import loading
 
-        site_id = args[0]
+        site_id = options['site_id'][0]
 
         purge_first = options.get("purge")
         full = options.get("full")
 
-        modified_after = options.get("modified_after")
+        modified_after = None
         if modified_after:
             # string to datetime
             modified_after = parse_datetime(modified_after) or parser.parse(modified_after)
@@ -66,9 +45,9 @@ class Command(BaseCommand):
             if timezone.is_naive(modified_after):
                 modified_after = timezone.make_aware(modified_after, timezone.get_current_timezone())
 
-        type = options.get("type")
-        status = options.get("status")
-        batch_size = options.get("batch_size")
+        type = 'all'
+        status = 'publish'
+        batch_size = None
 
         loader = loading.WPAPILoader(site_id=site_id)
         loader.load_site(purge_first=purge_first,

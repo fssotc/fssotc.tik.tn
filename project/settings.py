@@ -114,6 +114,7 @@ CSP_IMG_SRC = (
     "https://stats.g.doubleclick.net",
     "https://api.admin.tik.tn",
     "https://www.google-analytics.com",
+    "https://mtcfss.files.wordpress.com"
 )
 CSP_SCRIPT_SRC = (
     "'self'",
