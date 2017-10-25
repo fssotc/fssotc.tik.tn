@@ -4,6 +4,12 @@
 {% load staticfiles %}
 <script src="{% static 'blog/do_prettify.js' %}"></script>
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  Array.from(document.getElementsByClassName("adsbygoogle")).forEach(function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  });
+</script>
 {% endblock %}
 {% block content_section %}
 <nav>
@@ -15,6 +21,11 @@
 </nav>
 <section>
     {% autoescape off %}
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2482029926365022"
+     data-ad-slot="6455608003"
+     data-ad-format="auto"></ins>
     {% for post in post_list %}
     <article>
 
@@ -30,6 +41,11 @@
             </div>
         </div>
     </article>
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2482029926365022"
+     data-ad-slot="6455608003"
+     data-ad-format="auto"></ins>
     {% endfor %}
     {% endautoescape %}
     {% if is_paginated %}

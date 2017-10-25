@@ -107,6 +107,7 @@ MEDIA_URL = '/upload/'
 
 CSP_DEFAULT_SRC = (
     "'self'",
+    "https://securepubads.g.doubleclick.net",
 )
 CSP_IMG_SRC = (
     "'self'",
@@ -114,7 +115,8 @@ CSP_IMG_SRC = (
     "https://stats.g.doubleclick.net",
     "https://api.admin.tik.tn",
     "https://www.google-analytics.com",
-    "https://mtcfss.files.wordpress.com"
+    "https://mtcfss.files.wordpress.com",
+    "pagead2.googlesyndication.com",
 )
 CSP_SCRIPT_SRC = (
     "'self'",
@@ -124,6 +126,7 @@ CSP_SCRIPT_SRC = (
     "https://www.google-analytics.com",
     "https://pagead2.googlesyndication.com",
     "https://cdn.rawgit.com",
+    "https://adservice.google.com",
 )
 CSP_STYLE_SRC = (
     "'self'",
@@ -138,6 +141,7 @@ CSP_CONNECT_SRC = (
     "'self'",
     "https://api.admin.tik.tn",
     "https://pagead2.googlesyndication.com",
+    "https://csi.gstatic.com",
 )
 CSP_FRAME_SRC = (
     "https://googleads.g.doubleclick.net",
